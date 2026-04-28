@@ -53,7 +53,7 @@ export default function Home() {
           </ul>
         </nav>
       </header>
-
+ {/* Hero Section */}
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-primary to-[#14919b] text-white py-16 md:py-24 overflow-hidden">
         {/* Decorative circle */}
