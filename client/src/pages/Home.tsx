@@ -1,10 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { useLocation } from "wouter";
+import { useLocation } from "wouter"; //navegar entre o app
 
 /**
  * TeCuidaAÊ - Home Page
- * Design: Healthcare Modern - Teal + Cyan accent colors
- * Layout: Hero section with asymmetric design, feature cards grid
  */
 
 export default function Home() {
@@ -40,18 +38,18 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       {/* Header/Navigation */}
-      <header className="sticky top-0 z-50 bg-gradient-to-r from-primary to-[#14919b] text-white shadow-lg">
-        <nav className="container flex justify-between items-center py-4">
+      <header className="sticky top-0 z-50 bg-headerHome text-headerText shadow-lg">
+        <nav className="container flex justify-center items-center py-7 gap-10">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-primary font-bold text-lg">
-              🏥
-            </div>
-            <span className="text-xl font-bold">TeCuidaAÊ</span>
+            {/* Colocar a logo do projeto aqui*/}
           </div>
-          <ul className="hidden md:flex gap-8 text-sm font-medium">
-            <li><a href="#inicio" className="hover:text-secondary transition">Início</a></li>
-            <li><a href="#features" className="hover:text-secondary transition">Serviços</a></li>
-            <li><a href="#contato" className="hover:text-secondary transition">Contato</a></li>
+          <ul className="hidden md:flex gap-10 text-medium font-medium">
+            <li><a href="#home" className="hover:text-foreground transition">Início</a></li>
+            <li><a href="#chatbot" className="hover:text-foreground transition">Chatbot</a></li>
+            <li><a href="#maps" className="hover:text-foreground transition">Mapa</a></li>
+            <li><a href="#informations" className="hover:text-foreground transition">Informações</a></li>
+            {/*Deixar esse screening com cara de botão*/}
+            <li><a href="#screening" className="hover:text-foreground transition">Triagem</a></li>
           </ul>
         </nav>
       </header>

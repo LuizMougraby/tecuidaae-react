@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -15,6 +16,7 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  --color-headerText: var(--headerText);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -44,6 +46,8 @@
 
 :root {
   /* TeCuidaAÊ - Healthcare Modern Design */
+  --headerHome: #FFFFFF;
+  --headerText: #0059FF;
   --primary: #0D7377;
   --primary-foreground: #FFFFFF;
   --sidebar-primary: #0D7377;
@@ -81,7 +85,7 @@
 
 .dark {
   /* Dark mode - Healthcare Modern */
-  --primary: #14919b;
+  /* --primary: #14919b;
   --primary-foreground: #F8F9FA;
   --sidebar-primary: #14919b;
   --sidebar-primary-foreground: #F8F9FA;
@@ -112,7 +116,7 @@
   --sidebar-accent: #1F3F42;
   --sidebar-accent-foreground: #14FFEC;
   --sidebar-border: #404040;
-  --sidebar-ring: #14FFEC;
+  --sidebar-ring: #14FFEC; */
 }
 
 @layer base {
