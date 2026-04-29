@@ -10,7 +10,11 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --color-background: var(--background);
+  --color-backgroundSectionHome: var(--backgroundSectionHome);
+  --color-backgroundAlert: var(--backgroundAlert);
+  --color-backgroundInformativos: var(--backgroundInformativos);
   --color-foreground: var(--foreground);
+  --color-foregroundTriagem: var(--foregroundTriagem);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -59,7 +63,11 @@
   --chart-5: #4CAF50;
   --radius: 0.75rem;
   --background: #F8F9FA;
+  --backgroundSectionHome: #1A315B;
+  --backgroundAlert: #FE6363;
+  --backgroundInformativos: #049053;
   --foreground: #323232;
+  --foregroundTriagem: #FFFFFF;
   --card: #FFFFFF;
   --card-foreground: #323232;
   --popover: #FFFFFF;

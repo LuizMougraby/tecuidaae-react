@@ -10,64 +10,14 @@ export default function Home() {
 
   const features = [
     {
-      icon: "🤖",
-      title: "Chatbot Especializado",
-      description: "Tire dúvidas sobre sífilis, transmissão, sintomas e prevenção com nosso assistente virtual disponível 24h.",
-      href: "/chatbot",
+      title: "Encontre UBSs\npróximas a você!"
     },
     {
-      icon: "📍",
-      title: "Encontre UBSs",
-      description: "Localize unidades de saúde em Manaus que realizam atendimento para ISTs com informações atualizadas.",
-      href: "/mapa",
-    },
-    {
-      icon: "📚",
-      title: "Informações Validadas",
-      description: "Artigos revisados por infectologistas sobre sífilis, tratamento e cuidados durante a gravidez.",
-      href: "/informacoes",
-    },
-    {
-      icon: "✅",
-      title: "Triagem Rápida",
-      description: "Avalie seu risco em minutos com nosso questionário interativo e receba orientações personalizadas.",
-      href: "/triagem",
-    },
+      title: "Ache informações\nreais sobre a Sifílis!"
+    }
   ];
 
-  return (
-    <div className="min-h-screen flex flex-col bg-background">
-      {/* Header/Navigation */}
-      <header className="sticky top-0 z-50 bg-headerHome text-headerText shadow-lg">
-        <nav className="container flex justify-center items-center py-7 gap-10">
-          <div className="flex items-center gap-2">
-            {/* Colocar a logo do projeto aqui*/}
-          </div>
-          <ul className="hidden md:flex gap-10 text-medium font-medium">
-            <li><a href="#home" className="hover:text-foreground transition">Início</a></li>
-            <li><a href="#chatbot" className="hover:text-foreground transition">Chatbot</a></li>
-            <li><a href="#maps" className="hover:text-foreground transition">Mapa</a></li>
-            <li><a href="#informations" className="hover:text-foreground transition">Informações</a></li>
-            {/*Deixar esse screening com cara de botão*/}
-            <li><a href="#screening" className="hover:text-foreground transition">Triagem</a></li>
-          </ul>
-        </nav>
-      </header>
- {/* Hero Section */}
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-primary to-[#14919b] text-white py-16 md:py-24 overflow-hidden">
-        {/* Decorative circle */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-secondary opacity-10 rounded-full -mr-48 -mt-48"></div>
-        
-        <div className="container relative z-10">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              Cuidando da sua saúde em Manaus
-            </h1>
-            <p className="text-lg md:text-xl mb-8 opacity-95 leading-relaxed">
-              Informações confiáveis sobre sífilis, localização de UBSs e triagem de sintomas com base nos protocolos do Ministério da Saúde.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+  {/*<div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
               <Button
                 onClick={() => navigate("/triagem")}
                 className="bg-secondary text-primary hover:bg-opacity-90 font-semibold px-8 py-6 text-base"
@@ -82,49 +32,58 @@ export default function Home() {
                 💬 Falar com Especialista
               </Button>
             </div>
+*/}
+  return (
+    <div className="min-h-screen flex flex-col bg-background">
+      {/* Header/Navigation */}
+      <header className="sticky top-0 z-50 bg-headerHome text-headerText shadow-lg">
+        <nav className="container flex justify-center items-center py-7 gap-10">
+          <div className="flex items-center gap-2">
+            {/* Colocar a logo do projeto aqui*/}
           </div>
-        </div>
-      </section>
+          <ul className="hidden md:flex gap-10 text-medium font-medium">
+            <li><a href="#home" className="hover:text-foreground transition">Início</a></li>
+            <li><a href="#chatbot" className="hover:text-foreground transition">Chatbot</a></li>
+            <li><a href="#maps" className="hover:text-foreground transition">Mapa</a></li>
+            <li><a href="#informations" className="hover:text-foreground transition">Informações</a></li>
+            {/*Deixar esse screening com cara de botão*/}
+            <li><a href="#screening" className="text-foregroundTriagem">Triagem</a></li>
+          </ul>
+        </nav>
+      </header>
 
-      {/* Emergency Banner */}
-      <section className="bg-gradient-to-r from-destructive to-[#ee5a5a] text-white py-6">
-        <div className="container flex items-center justify-center gap-4 text-center md:text-left">
-          <span className="text-3xl">🚨</span>
-          <div>
-            <strong className="block">Em caso de emergência:</strong>
-            <p>Procure imediatamente a UBS mais próxima ou ligue 192 (SAMU)</p>
+      {/* Hero Section */}
+      <section className="relative bg-backgroundSectionHome text-white py-16 md:py-19 overflow-hidden flex items-center justify-center">
+        <div className="container relative z-10 text-center">
+          <div className="max-w-2xl mx-auto pl-7">
+            <h1 className="text-4xl font-semibold mb-6 text-center">
+              Cuidando da sua saúde em Manaus
+            </h1>
+            <p className="text-lg font-light md:text-xl mb-8">
+              Informações confiáveis sobre sífilis, localização de UBSs e triagem de sintomas com base nos protocolos do Ministério da Saúde
+            </p>
+            {/* Emergency Banner */}
+            <section className="bg-backgroundAlert text-white py-5 font-medium text-lg rounded-lg mt-13">
+              <div className="flex items-center justify-center gap-10 text-center">
+                <div>
+                  <p>Em caso de emergência: procure uma UBS ou disque 192</p>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="container py-16 md:py-24 flex-1">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-primary">
-          Como podemos te ajudar?
-        </h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Acesse nossos serviços para obter informações confiáveis e orientação profissional
-        </p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {features.map((feature, idx) => (
-            <button
-              key={idx}
-              onClick={() => navigate(feature.href)}
-              className="bg-card hover:shadow-lg hover:-translate-y-1 transition-all duration-300 rounded-xl p-8 text-left border border-border group"
+      <section id="features" className="w-full py-16 md:py-24 px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+          {features.map((feature, index) => (
+            <h1
+              key={index}
+              className="whitespace-pre-line bg-backgroundInformativos text-3xl text-white font-semibold text-center rounded-lg px-6 py-60 opacity-65"
             >
-              {/* Icon Circle */}
-              <div className="w-16 h-16 bg-gradient-to-br from-primary to-[#14919b] rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
-                {feature.icon}
-              </div>
-              
-              <h3 className="text-xl font-bold text-primary mb-3">
-                {feature.title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {feature.description}
-              </p>
-            </button>
+              {feature.title}
+            </h1>
           ))}
         </div>
       </section>
@@ -158,7 +117,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-          
+
           <div className="border-t border-gray-700 pt-8 text-center text-gray-400 text-sm">
             <p>&copy; 2024 TeCuidaAÊ - Prefeitura de Manaus. Todos os direitos reservados.</p>
             <p className="mt-2 text-xs">Fontes: Protocolo Clínico MS 2022 | Diretrizes OMS 2021 | FVS-AM</p>
