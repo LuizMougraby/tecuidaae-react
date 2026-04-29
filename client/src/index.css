@@ -13,8 +13,10 @@
   --color-backgroundSectionHome: var(--backgroundSectionHome);
   --color-backgroundAlert: var(--backgroundAlert);
   --color-backgroundInformativos: var(--backgroundInformativos);
+  --color-backgroundSections: var(--backgroundSections);
   --color-foreground: var(--foreground);
   --color-foregroundTriagem: var(--foregroundTriagem);
+  --color-foregroundFeatures3: var(--foregroundFeatures3);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -66,8 +68,10 @@
   --backgroundSectionHome: #1A315B;
   --backgroundAlert: #FE6363;
   --backgroundInformativos: #049053;
+  --backgroundSections: #F4F4F4;
   --foreground: #323232;
   --foregroundTriagem: #FFFFFF;
+  --foregroundFeatures3: #2FB07C;
   --card: #FFFFFF;
   --card-foreground: #323232;
   --popover: #FFFFFF;

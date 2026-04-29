@@ -17,6 +17,20 @@ export default function Home() {
     }
   ];
 
+  const features2 = [
+    {
+      title: "Conheça nosso chatbot\nespecializado!",
+      descricao: "Tire dúvidas sobre sifílis, transmissão, sintomas e prevenção com nosso assistente virtual, disponível 24h!"
+    }
+  ];
+
+  const features3 = [
+    {
+      title: "Já conhece nosso sistema\nde triagem?",
+      descricao: "Avalie seu risco em minutos, com nosso questionário iterativo, e receba informações personalizadas sobre seu estado de saúde!"
+    }
+  ];
+
   {/*<div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
               <Button
                 onClick={() => navigate("/triagem")}
@@ -75,15 +89,63 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="w-full py-16 md:py-24 px-4">
+      <section id="features" className="w-full py-16 md:py-2 px-20 mb-7">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
           {features.map((feature, index) => (
             <h1
               key={index}
-              className="whitespace-pre-line bg-backgroundInformativos text-3xl text-white font-semibold text-center rounded-lg px-6 py-60 opacity-65"
+              className="whitespace-pre-line bg-backgroundInformativos text-4xl text-white font-semibold text-center rounded-lg py-60 opacity-65"
             >
               {feature.title}
             </h1>
+          ))}
+        </div>
+      </section>
+
+      <section className="w-full px-20 mb-13">
+        <div className="bg-backgroundSections rounded-3xl p-12 px-15">
+          {features2.map((feature, index) => (
+            <div key={index} className="grid grid-cols-1 md:grid-cols-2 items-center gap-10 mt-10">
+              {/* esquerda */}
+              <div>
+                <h2 className="text-5xl font-bold text-headerText leading-tight">
+                  {feature.title}
+                </h2>
+                <button className="mt-17 bg-blue-600 text-white px-12 py-3 rounded-full text-lg font-semibold">
+                  Conheça!
+                </button>
+              </div>
+              {/* direita */}
+              <div>
+                <p className="text-2xl text-foreground opacity-70 leading-relaxed text-right">
+                  {feature.descricao}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="w-full px-20 mb-13">
+        <div className="bg-backgroundSections rounded-3xl p-12 px-15">
+          {features3.map((feature, index) => (
+            <div key={index} className="grid grid-cols-1 md:grid-cols-2 items-center gap-10 mt-10">
+              {/* esquerda */}
+              <div>
+                <p className="text-2xl text-foreground opacity-70 leading-relaxed text-left">
+                  {feature.descricao}
+                </p>
+              </div>
+              {/* direita */}
+              <div className="flex flex-col">
+                <h2 className="text-5xl font-bold text-foregroundFeatures3 leading-tight text-right">
+                  {feature.title}
+                </h2>
+                <button className="self-end mt-17 bg-foregroundFeatures3 text-white px-12 py-3 rounded-full text-lg font-semibold">
+                  Conheça!
+                </button>
+              </div>
+            </div>
           ))}
         </div>
       </section>
