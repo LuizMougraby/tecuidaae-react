@@ -80,23 +80,8 @@ export default function Triagem() {
   },
 ];
 
-  const handleAnswer = (value: string, points: number) => {
-    const newAnswers = { ...answers, [currentStep]: value };
-    setAnswers(newAnswers);
-
-    let newScore = 0;
-    Object.entries(newAnswers).forEach(([step, ans]) => {
-      const q = questions.find((q) => q.step === parseInt(step));
-      const option = q?.options.find((o) => o.value === ans);
-      if (option) newScore += option.points;
-    });
-    setRiskScore(newScore);
-
-    if (currentStep < totalSteps) {
-      setCurrentStep(currentStep + 1);
-    } else {
-      setShowResult(true);
-    }
+ const handleAnswer = (value: string) => {
+    setAnswers(prev => ({ ...prev, [currentStep]: value }));
   };
 
   const handlePrev = () => {
@@ -258,15 +243,21 @@ export default function Triagem() {
               </div>
 
               <div className="flex gap-4 mt-8">
-                <Button
-                  onClick={handlePrev}
-                  disabled={currentStep === 1}
-                  variant="outline"
-                  className="flex-1"
-                >
-                  Anterior
-                </Button>
-              </div>
+  <button
+    onClick={handlePrev}
+    disabled={currentStep === 1}
+    className="flex-1 border-2 border-gray-300 text-gray-600 py-3 rounded-full font-semibold hover:bg-gray-100 transition disabled:opacity-40 disabled:cursor-not-allowed"
+  >
+    Voltar
+  </button>
+  <button
+    onClick={() => answers[currentStep] && (currentStep < totalSteps ? setCurrentStep(s => s + 1) : setShowResult(true))}
+    disabled={!answers[currentStep]}
+    className="flex-1 bg-primary text-white py-3 rounded-full font-semibold hover:opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed"
+  >
+    {currentStep === totalSteps ? "Ver Resultado" : "Próximo"}
+  </button>
+</div>
             </div>
           )}
         </div>
