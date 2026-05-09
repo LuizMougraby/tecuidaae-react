@@ -112,7 +112,7 @@ export default function Triagem() {
   };
 
   const risk = getRiskLevel();
-  const progress = ((currentStep - 1) / totalSteps) * 100;
+  const progress = (currentStep / totalSteps) * 100;
 
   if (showResult) {
     return (
@@ -225,11 +225,11 @@ export default function Triagem() {
             </button>
             <h1 className="text-xl font-bold">Triagem de Sintomas</h1>
           </div>
-          <div className="w-full bg-white bg-opacity-20 rounded-full h-2">
+          <div className="w-full bg-white bg-opacity-20 rounded-full h-3">
             <div
-              className="bg-secondary h-2 rounded-full transition-all duration-300"
+              className="bg-secondary h-3 rounded-full transition-all duration-500"
               style={{ width: `${progress}%` }}
-            ></div>
+            />
           </div>
           <p className="text-sm mt-2 opacity-90">
             Etapa {currentStep} de {totalSteps}
