@@ -102,7 +102,7 @@ export default function Triagem() {
   if (showResult) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        <header className="bg-primary text-white p-4 shadow-lg">
+        <header className="bg-secondary text-white p-5 shadow-lg">
           <div className="container flex items-center gap-4">
             <button
               onClick={() => navigate("/")}
@@ -199,68 +199,80 @@ export default function Triagem() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <header className="bg-primary text-white p-4 shadow-lg">
-        <div className="container">
-          <div className="flex items-center gap-4 mb-4">
-            <button
-              onClick={() => navigate("/")}
-              className="text-2xl hover:opacity-80 transition"
-            >
-              ←
-            </button>
-            <h1 className="text-xl font-bold">Triagem de Sintomas</h1>
+      {/* Header */}
+      <header className="bg-[#6ADE8A] text-gray-900 p-6 shadow-lg">
+        <div className="container max-w-2xl mx-auto">
+          <div className="flex items-center gap-4 mb-1">
+            <button onClick={() => navigate("/")} className="text-2xl hover:opacity-80 transition">←</button>
+            <div>
+              <h1 className="text-2xl font-bold">Triagem</h1>
+              <p className="text-sm opacity-80">Avalie seu risco para sífilis em algumas perguntas rápidas</p>
+            </div>
           </div>
-          <div className="w-full bg-white bg-opacity-20 rounded-full h-3">
+          {/* Barra de progresso */}
+          <div className="w-full bg-white bg-opacity-20 rounded-full h-3 mt-4">
             <div
               className="bg-secondary h-3 rounded-full transition-all duration-500"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <p className="text-sm mt-2 opacity-90">
-            Etapa {currentStep} de {totalSteps}
-          </p>
         </div>
       </header>
 
-      <div className="flex-1 container py-12 flex items-center justify-center">
-        <div className="max-w-2xl w-full">
-          {currentQuestion && (
-            <div className="bg-card rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-primary mb-8">
-                {currentQuestion.question}
-              </h2>
+      {/* Card de perguntas */}
+      <div className="flex-1 container max-w-2xl mx-auto py-10">
+        {currentQuestion && (
+          <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100">
+            <p className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-1">
+              Pergunta {currentStep}
+            </p>
+            <h2 className="text-xl font-bold text-gray-800 mb-6">
+              {currentQuestion.question}
+            </h2>
 
-              <div className="space-y-3">
-                {currentQuestion.options.map((option) => (
-                  <button
-                    key={option.value}
-                    onClick={() => handleAnswer(option.value, option.points)}
-                    className="w-full p-4 border-2 border-border rounded-lg hover:border-primary hover:bg-primary hover:text-white transition text-left font-medium"
-                  >
-                    {option.label}
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex gap-4 mt-8">
-  <button
-    onClick={handlePrev}
-    disabled={currentStep === 1}
-    className="flex-1 border-2 border-gray-300 text-gray-600 py-3 rounded-full font-semibold hover:bg-gray-100 transition disabled:opacity-40 disabled:cursor-not-allowed"
-  >
-    Voltar
-  </button>
-  <button
-    onClick={() => answers[currentStep] && (currentStep < totalSteps ? setCurrentStep(s => s + 1) : setShowResult(true))}
-    disabled={!answers[currentStep]}
-    className="flex-1 bg-primary text-white py-3 rounded-full font-semibold hover:opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed"
-  >
-    {currentStep === totalSteps ? "Ver Resultado" : "Próximo"}
-  </button>
-</div>
+            {/* Opções lado a lado */}
+            <div className="flex flex-wrap gap-3 mb-8">
+              {currentQuestion.options.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() => handleAnswer(option.value)}
+                  className={
+                    answers[currentStep] === option.value
+  ? "px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-[#6ADE8A] bg-[#6ADE8A] text-white"
+  : "px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-gray-300 text-gray-700 hover:border-[#6ADE8A] hover:bg-[#6ADE8A] hover:text-white"
+                  }
+                >
+                  {option.label}
+                </button>
+              ))}
             </div>
-          )}
-        </div>
+
+            {/* Botões Voltar e Próximo */}
+            <div className="flex gap-4">
+              <button
+                onClick={handlePrev}
+                disabled={currentStep === 1}
+                className="flex-1 border-2 border-gray-300 text-gray-600 py-3 rounded-full font-semibold hover:bg-gray-100 transition disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                Voltar
+              </button>
+              <button
+                onClick={() => {
+                  if (!answers[currentStep]) return;
+                  if (currentStep < totalSteps) {
+                    setCurrentStep(s => s + 1);
+                  } else {
+                    setShowResult(true);
+                  }
+                }}
+                disabled={!answers[currentStep]}
+                className="flex-1 bg-primary text-white py-3 rounded-full font-semibold hover:opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                {currentStep === totalSteps ? "Ver Resultado" : "Próximo"}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
