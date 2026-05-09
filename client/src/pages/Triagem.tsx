@@ -13,52 +13,72 @@ export default function Triagem() {
   const [riskScore, setRiskScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
 
-  const totalSteps = 5;
+  const totalSteps = 7;
 
   const questions = [
-    {
-      step: 1,
-      question: "Você teve relação sexual sem proteção nos últimos 3 meses?",
-      options: [
-        { label: "Não", value: "nao", points: 0 },
-        { label: "Sim", value: "sim", points: 3 },
-        { label: "Já tive sífilis antes", value: "ja", points: 3 },
-      ],
-    },
-    {
-      step: 2,
-      question: "Você ou seu parceiro apresenta feridas nos genitais?",
-      options: [
-        { label: "Não", value: "nao", points: 0 },
-        { label: "Sim", value: "sim", points: 2 },
-      ],
-    },
-    {
-      step: 3,
-      question: "Você tem manchas na pele ou febre recente?",
-      options: [
-        { label: "Não", value: "nao", points: 0 },
-        { label: "Sim", value: "sim", points: 2 },
-      ],
-    },
-    {
-      step: 4,
-      question: "Você está grávida ou tentando engravidar?",
-      options: [
-        { label: "Não", value: "nao", points: 0 },
-        { label: "Sim", value: "sim", points: 3 },
-        { label: "Tentando", value: "tentando", points: 3 },
-      ],
-    },
-    {
-      step: 5,
-      question: "Você nunca fez teste de sífilis?",
-      options: [
-        { label: "Já fiz teste", value: "nao", points: 0 },
-        { label: "Nunca fiz", value: "sim", points: 3 },
-      ],
-    },
-  ];
+  {
+    step: 1,
+    question: "Você tem ou teve alguma ferida, úlcera ou bolha nos genitais, ânus ou boca?",
+    options: [
+      { label: "Sim, atualmente", value: "sim_atual", points: 3 },
+      { label: "Já tive, mas sumiu", value: "ja_tive", points: 2 },
+      { label: "Não, nunca tive", value: "nao", points: 0 },
+    ],
+  },
+  {
+    step: 2,
+    question: "Você teve relação sexual sem preservativo nos últimos 3 meses?",
+    options: [
+      { label: "Sim", value: "sim", points: 3 },
+      { label: "Não", value: "nao", points: 0 },
+      { label: "Já tive sífilis antes", value: "ja_tive", points: 3 },
+    ],
+  },
+  {
+    step: 3,
+    question: "Você apresenta manchas avermelhadas na pele, febre ou mal-estar recente?",
+    options: [
+      { label: "Sim", value: "sim", points: 2 },
+      { label: "Não", value: "nao", points: 0 },
+    ],
+  },
+  {
+    step: 4,
+    question: "Você ou seu parceiro(a) foi diagnosticado(a) com alguma IST recentemente?",
+    options: [
+      { label: "Sim", value: "sim", points: 3 },
+      { label: "Não", value: "nao", points: 0 },
+      { label: "Não sei", value: "nao_sei", points: 1 },
+    ],
+  },
+  {
+    step: 5,
+    question: "Você está grávida ou tentando engravidar?",
+    options: [
+      { label: "Sim, estou grávida", value: "gravida", points: 3 },
+      { label: "Estou tentando", value: "tentando", points: 2 },
+      { label: "Não", value: "nao", points: 0 },
+    ],
+  },
+  {
+    step: 6,
+    question: "Você já realizou algum teste para sífilis?",
+    options: [
+      { label: "Sim, e deu negativo", value: "negativo", points: 0 },
+      { label: "Sim, e deu positivo", value: "positivo", points: 3 },
+      { label: "Nunca fiz teste", value: "nunca", points: 2 },
+    ],
+  },
+  {
+    step: 7,
+    question: "Você tem múltiplos parceiros sexuais ou parceiro(a) com múltiplos parceiros?",
+    options: [
+      { label: "Sim", value: "sim", points: 2 },
+      { label: "Não", value: "nao", points: 0 },
+      { label: "Prefiro não responder", value: "nao_resp", points: 1 },
+    ],
+  },
+];
 
   const handleAnswer = (value: string, points: number) => {
     const newAnswers = { ...answers, [currentStep]: value };
