@@ -48,25 +48,25 @@ export default function Home() {
             </div>
 */}
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-background overflow-auto">
       {/* Header/Navigation */}
       <header className="sticky top-0 z-50 bg-headerHome text-headerText shadow-lg">
-        <nav className="container flex justify-center items-center py-7 gap-10">
-          <div className="flex items-center gap-2">
-            {/* Colocar a logo do projeto aqui*/}
-          </div>
-          <ul className="hidden md:flex gap-10 text-medium font-medium">
-  <li><a href="/" className="hover:text-foreground transition">Início</a></li>
-  <li><a href="/chatbot" className="hover:text-foreground transition">Chatbot</a></li>
-  <li><a href="/mapa" className="hover:text-foreground transition">Mapa</a></li>
-  <li><a href="/informacoes" className="hover:text-foreground transition">Informações</a></li>
-  <li><a href="/triagem" className="hover:text-foreground transition">Triagem</a></li>
-</ul>
-        </nav>
-      </header>
+  <nav className="container flex justify-center items-center py-7 gap-10">
+    <div className="flex items-center gap-2">
+      {/* Colocar a logo do projeto aqui*/}
+    </div>
+    <ul className="hidden md:flex gap-10 text-medium font-medium">
+      <li><a href="/" className="hover:text-foreground transition">Início</a></li>
+      <li><a href="/chatbot" className="hover:text-foreground transition">Chatbot</a></li>
+      <li><a href="/mapa" className="hover:text-foreground transition">Mapa</a></li>
+      <li><a href="/informacoes" className="hover:text-foreground transition">Informações</a></li>
+      <li><a href="/triagem" className="hover:text-foreground transition">Triagem</a></li>
+    </ul>
+  </nav>
+</header>
 
       {/* Hero Section */}
-      <section className="relative bg-backgroundSectionHome text-white py-16 md:py-19 overflow-hidden flex items-center justify-center">
+      <section className="relative bg-backgroundSectionHome text-white py-16 md:py-19 flex items-center justify-center">
         <div className="container relative z-10 text-center">
           <div className="max-w-2xl mx-auto pl-7">
             <h1 className="text-4xl font-semibold mb-6 text-center">
