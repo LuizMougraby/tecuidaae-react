@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
-import { Input } from "@/components/ui/input";
 
 interface Article {
   id: number;
@@ -64,6 +63,15 @@ const articles: Article[] = [
   },
 ];
 
+const categoryColors: Record<string, string> = {
+  Gravidez: "bg-pink-500",
+  Sintomas: "bg-orange-500",
+  Prevenção: "bg-blue-500",
+  Tratamento: "bg-purple-500",
+  Informações: "bg-teal-500",
+  Testes: "bg-yellow-500",
+};
+
 export default function Informacoes() {
   const [, navigate] = useLocation();
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -83,191 +91,132 @@ export default function Informacoes() {
     );
   }
 
+  const featured = filtered.find((a) => a.featured);
+  const rest = filtered.filter((a) => !a.featured);
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
-<<<<<<< HEAD
       <header className="bg-[#6ADE8A] p-6 shadow-lg relative">
-  <div className="container max-w-4xl mx-auto">
-    <div className="flex items-center">
-      <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-6">
-        ←
-      </button>
-      <div className="flex-1 text-center">
-        <h1 className="text-2xl font-bold text-white">Informações</h1>
-        <p className="text-xl text-white opacity-90">Tudo sobre Sífilis, desde a sua prevenção até tratamento, todas baseado nos protocolos do Ministério da Saúde e OMS</p>
-      </div>
-    </div>
-  </div>
-</header>
-=======
-      <header className="bg-primary text-white p-4 shadow-lg">
-        <div className="container flex items-center gap-4">
-          <button
-            onClick={() => navigate("/")}
-            className="text-2xl hover:opacity-80 transition"
-          >
-            ←
-          </button>
-          <div>
-            <h1 className="text-xl font-bold">Informações sobre Sífilis</h1>
-            <p className="text-sm opacity-90">Artigos validados por especialistas</p>
+        <div className="container max-w-4xl mx-auto">
+          <div className="flex items-center">
+            <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-6">
+              ←
+            </button>
+            <div className="flex-1 text-center">
+              <h1 className="text-2xl font-bold text-white">Informações</h1>
+              <p className="text-xl text-white opacity-90">Tudo sobre Sífilis, baseado nos protocolos do Ministério da Saúde</p>
+            </div>
           </div>
         </div>
       </header>
->>>>>>> 3f9267aacfe2a92b1acab96e27e1209fd610b2fb
 
       {selectedArticle ? (
-        <div className="flex-1 container py-8">
+        <div className="flex-1 container max-w-4xl mx-auto py-8">
           <button
             onClick={() => setSelectedArticle(null)}
-            className="mb-6 text-primary hover:underline font-medium"
+            className="mb-6 text-[#6ADE8A] hover:underline font-medium"
           >
             ← Voltar aos artigos
           </button>
-
-          <div className="bg-card rounded-lg p-8 shadow max-w-3xl">
+          <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 max-w-3xl">
             <div className="mb-4">
-              <span className="bg-secondary text-primary px-3 py-1 rounded-full text-sm font-medium">
+              <span className={`${categoryColors[selectedArticle.category] || "bg-gray-500"} text-white px-3 py-1 rounded-full text-sm font-medium`}>
                 {selectedArticle.category}
               </span>
             </div>
-
-            <h1 className="text-3xl font-bold text-primary mb-4">{selectedArticle.title}</h1>
-
-            <div className="text-sm text-muted-foreground mb-6 pb-6 border-b border-border">
-              Tempo de leitura: {selectedArticle.readTime} minutos
+            <h1 className="text-3xl font-bold text-gray-800 mb-4">{selectedArticle.title}</h1>
+            <div className="text-sm text-gray-400 mb-6 pb-6 border-b border-gray-100">
+              ⏱ {selectedArticle.readTime} min de leitura
             </div>
-
-            <div className="prose prose-sm max-w-none text-foreground leading-relaxed">
+            <div className="text-gray-700 leading-relaxed">
               <p>{selectedArticle.content}</p>
-
-              <div className="mt-8 p-4 bg-secondary bg-opacity-10 border border-secondary rounded-lg">
+              <div className="mt-8 p-4 bg-[#6ADE8A] bg-opacity-10 border border-[#6ADE8A] rounded-xl">
                 <p className="text-sm">
-                  <strong>Precisa de atendimento?</strong> Procure a UBS mais próxima de você ou ligue 192 em caso de emergência.
+                  <strong>Precisa de atendimento?</strong> Procure a UBS mais próxima ou ligue 192 em caso de emergência.
                 </p>
               </div>
             </div>
           </div>
         </div>
       ) : (
-<<<<<<< HEAD
         <div className="flex-1 container max-w-5xl mx-auto py-8">
-  {/* Barra de busca */}
-  <div className="mb-6">
-    <input
-      type="text"
-      placeholder="Buscar artigos (ex: sintomas, tratamento, gravidez...)"
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-      className="w-full px-5 py-3 rounded-full border-2 border-gray-200 focus:border-[#6ADE8A] focus:outline-none text-gray-700"
-    />
-  </div>
+          {/* Barra de busca */}
+          <div className="mb-6">
+            <input
+              type="text"
+              placeholder="Buscar artigos (ex: sintomas, tratamento, gravidez...)"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-5 py-3 rounded-full border-2 border-gray-200 focus:border-[#6ADE8A] focus:outline-none text-gray-700"
+            />
+          </div>
 
-  {/* Abas de categoria */}
-<div className="border-b-2 border-gray-200 mb-8">
-  <div className="flex flex-wrap gap-2 pb-3">
-    {categories.map((cat) => (
-      <button
-        key={cat}
-        onClick={() => setSelectedCategory(cat)}
-        className={`px-6 py-2 rounded-full font-semibold text-sm transition-all duration-200 ${
-          selectedCategory === cat
-            ? "bg-[#6ADE8A] text-white border-2 border-[#6ADE8A]"
-            : "bg-white text-[#6ADE8A] border-2 border-[#6ADE8A] hover:bg-[#6ADE8A] hover:text-white"
-        }`}
-      >
-        {cat === "all" ? "Todos" : cat}
-      </button>
-    ))}
-  </div>
-</div>
-
-  {/* Articles */}
-  <div className="lg:col-span-3">
-=======
-        <div className="flex-1 container py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
-            {/* Sidebar */}
-            <div className="lg:col-span-1">
-              <div className="bg-card rounded-lg p-6 shadow sticky top-4">
-                <h2 className="font-bold text-lg mb-4 text-primary">Filtros</h2>
-
-                {/* Search */}
-                <div className="mb-6">
-                  <label className="text-sm font-medium block mb-2">Buscar</label>
-                  <Input
-                    placeholder="Título ou conteúdo..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full"
-                  />
-                </div>
-
-                {/* Categories */}
-                <div>
-                  <label className="text-sm font-medium block mb-3">Categoria</label>
-                  <div className="space-y-2">
-                    {categories.map((cat) => (
-                      <button
-                        key={cat}
-                        onClick={() => setSelectedCategory(cat)}
-                        className={`w-full text-left px-3 py-2 rounded-lg transition text-sm ${
-                          selectedCategory === cat
-                            ? "bg-primary text-white font-medium"
-                            : "bg-muted text-foreground hover:bg-border"
-                        }`}
-                      >
-                        {cat === "all" ? "Todos" : cat}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
->>>>>>> 3f9267aacfe2a92b1acab96e27e1209fd610b2fb
-
-            {/* Articles */}
-            <div className="lg:col-span-3">
-              <div className="space-y-4">
-                {filtered.length === 0 ? (
-                  <div className="bg-card rounded-lg p-8 text-center">
-                    <p className="text-muted-foreground">Nenhum artigo encontrado.</p>
-                  </div>
-                ) : (
-                  filtered.map((article) => (
-                    <button
-                      key={article.id}
-                      onClick={() => setSelectedArticle(article)}
-                      className={`w-full text-left bg-card rounded-lg p-6 shadow hover:shadow-lg transition border border-border ${
-                        article.featured ? "border-secondary border-2" : ""
-                      }`}
-                    >
-                      <div className="flex justify-between items-start mb-3">
-                        <div>
-                          <h3 className="text-lg font-bold text-primary">{article.title}</h3>
-                          <p className="text-sm text-muted-foreground mt-1">{article.excerpt}</p>
-                        </div>
-                        {article.featured && (
-                          <span className="bg-secondary text-primary px-2 py-1 rounded text-xs font-bold whitespace-nowrap ml-4">
-                            DESTAQUE
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="flex justify-between items-center mt-4 pt-4 border-t border-border">
-                        <span className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded">
-                          {article.category}
-                        </span>
-                        <span className="text-xs text-muted-foreground">
-                          {article.readTime} min de leitura
-                        </span>
-                      </div>
-                    </button>
-                  ))
-                )}
-              </div>
+          {/* Abas de categoria */}
+          <div className="border-b-2 border-gray-200 mb-8">
+            <div className="flex flex-wrap gap-2 pb-3">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-6 py-2 rounded-full font-semibold text-sm transition-all duration-200 ${
+                    selectedCategory === cat
+                      ? "bg-[#6ADE8A] text-white border-2 border-[#6ADE8A]"
+                      : "bg-white text-[#6ADE8A] border-2 border-[#6ADE8A] hover:bg-[#6ADE8A] hover:text-white"
+                  }`}
+                >
+                  {cat === "all" ? "Todos" : cat}
+                </button>
+              ))}
             </div>
           </div>
+
+          {/* Artigo destaque */}
+          {featured && (
+            <button
+              onClick={() => setSelectedArticle(featured)}
+              className="w-full text-left bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-8 hover:shadow-xl transition"
+            >
+              <div className={`${categoryColors[featured.category] || "bg-gray-500"} p-10`} />
+              <div className="p-6">
+                <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold uppercase">
+                  DESTAQUE
+                </span>
+                <h2 className="text-2xl font-bold text-gray-800 mt-3 mb-2">{featured.title}</h2>
+                <p className="text-gray-500 mb-4">{featured.excerpt}</p>
+                <span className="text-[#6ADE8A] font-semibold">Ler artigo completo →</span>
+              </div>
+            </button>
+          )}
+
+          {/* Grid de artigos */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {rest.map((article) => (
+              <button
+                key={article.id}
+                onClick={() => setSelectedArticle(article)}
+                className="text-left bg-white rounded-2xl shadow border border-gray-100 overflow-hidden hover:shadow-lg transition"
+              >
+                <div className={`${categoryColors[article.category] || "bg-gray-500"} p-8`} />
+                <div className="p-5">
+                  <span className={`${categoryColors[article.category] || "bg-gray-500"} text-white px-3 py-1 rounded-full text-xs font-medium`}>
+                    {article.category}
+                  </span>
+                  <h3 className="text-lg font-bold text-gray-800 mt-3 mb-1">{article.title}</h3>
+                  <p className="text-sm text-gray-500 mb-4">{article.excerpt}</p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-gray-400">⏱ {article.readTime} min de leitura</span>
+                    <span className="text-[#6ADE8A] font-semibold text-sm">Saiba mais →</span>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {filtered.length === 0 && (
+            <div className="text-center py-12 text-gray-400">
+              Nenhum artigo encontrado.
+            </div>
+          )}
         </div>
       )}
     </div>
