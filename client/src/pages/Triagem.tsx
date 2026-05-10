@@ -203,38 +203,39 @@ export default function Triagem() {
         {/* Header */}
         <header className="bg-[#6ADE8A] p-6 shadow-lg relative">
           <div className="container max-w-4xl mx-auto">
-           <div className="flex items-center">
-  <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-6">
-    ←
-  </button>
-  <div className="flex-1 text-center">
+            <div className="flex items-center">
+              <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-6">
+                ←
+              </button>
+              <div className="flex-1 text-center">
                 <h1 className="text-2xl font-bold text-white">Triagem</h1>
-                <p className="text-sm text-white opacity-90">Avalie seu risco para sífilis em algumas perguntas rápidas</p>
+                <p className="text-2xl text-white opacity-90">Avalie seu risco para sífilis em algumas perguntas rápidas</p>
               </div>
             </div>
           </div>
         </header>
 
-        {/* Barra de progresso — fora do header */}
-<div className="flex justify-center mt-4 px-8">
-  <div className="w-full bg-gray-200 h-4 rounded-full overflow-hidden">
-    <div
-      className="bg-[#6ADE8A] h-4 rounded-full transition-all duration-500"
-      style={{ width: ` ${progress}%`  }}
-    />
-  </div>
-</div>
+        {/* Barra de progresso */}
+        <div className="flex justify-center mt-4 px-8">
+          <div className="w-full bg-gray-200 h-4 rounded-full overflow-hidden">
+            <div
+              className="bg-[#6ADE8A] h-4 rounded-full transition-all duration-500"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        </div>
+      </div>
 
       {/* Card de perguntas */}
-      <div className="flex-1 container max-w-2xl mx-auto py-10">
+      <div className="flex-1 container max-w-4xl mx-auto py-10">
         {currentQuestion && (
           <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100">
-            <p className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-1">
-              Pergunta {currentStep}
-            </p>
-            <h2 className="text-xl font-bold text-gray-800 mb-6">
-              {currentQuestion.question}
-            </h2>
+           <p className="text-base font-bold text-gray-500 uppercase tracking-wide mb-2">
+  Pergunta {currentStep}
+</p>
+<h2 className="text-xl font-normal text-gray-700 mb-8">
+  {currentQuestion.question}
+</h2>
 
             {/* Opções lado a lado */}
             <div className="flex flex-wrap gap-3 mb-8">
@@ -244,8 +245,8 @@ export default function Triagem() {
                   onClick={() => handleAnswer(option.value)}
                   className={
                     answers[currentStep] === option.value
-  ? "px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-[#6ADE8A] bg-[#6ADE8A] text-white"
-  : "px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-gray-300 text-gray-700 hover:border-[#6ADE8A] hover:bg-[#6ADE8A] hover:text-white"
+                      ? "px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-[#6ADE8A] bg-[#6ADE8A] text-white"
+                      : "px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-gray-300 text-gray-700 hover:border-[#6ADE8A] hover:bg-[#6ADE8A] hover:text-white"
                   }
                 >
                   {option.label}
@@ -272,7 +273,7 @@ export default function Triagem() {
                   }
                 }}
                 disabled={!answers[currentStep]}
-                className="flex-1 bg-primary text-white py-3 rounded-full font-semibold hover:opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed"
+                className="flex-1 bg-[#6ADE8A] text-white py-3 rounded-full font-semibold hover:opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 {currentStep === totalSteps ? "Ver Resultado" : "Próximo"}
               </button>
