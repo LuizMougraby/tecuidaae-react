@@ -85,6 +85,7 @@ export default function Informacoes() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+<<<<<<< HEAD
       <header className="bg-[#6ADE8A] p-6 shadow-lg relative">
   <div className="container max-w-4xl mx-auto">
     <div className="flex items-center">
@@ -98,6 +99,22 @@ export default function Informacoes() {
     </div>
   </div>
 </header>
+=======
+      <header className="bg-primary text-white p-4 shadow-lg">
+        <div className="container flex items-center gap-4">
+          <button
+            onClick={() => navigate("/")}
+            className="text-2xl hover:opacity-80 transition"
+          >
+            ←
+          </button>
+          <div>
+            <h1 className="text-xl font-bold">Informações sobre Sífilis</h1>
+            <p className="text-sm opacity-90">Artigos validados por especialistas</p>
+          </div>
+        </div>
+      </header>
+>>>>>>> 3f9267aacfe2a92b1acab96e27e1209fd610b2fb
 
       {selectedArticle ? (
         <div className="flex-1 container py-8">
@@ -133,6 +150,7 @@ export default function Informacoes() {
           </div>
         </div>
       ) : (
+<<<<<<< HEAD
         <div className="flex-1 container max-w-5xl mx-auto py-8">
   {/* Barra de busca */}
   <div className="mb-6">
@@ -166,6 +184,47 @@ export default function Informacoes() {
 
   {/* Articles */}
   <div className="lg:col-span-3">
+=======
+        <div className="flex-1 container py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+            {/* Sidebar */}
+            <div className="lg:col-span-1">
+              <div className="bg-card rounded-lg p-6 shadow sticky top-4">
+                <h2 className="font-bold text-lg mb-4 text-primary">Filtros</h2>
+
+                {/* Search */}
+                <div className="mb-6">
+                  <label className="text-sm font-medium block mb-2">Buscar</label>
+                  <Input
+                    placeholder="Título ou conteúdo..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full"
+                  />
+                </div>
+
+                {/* Categories */}
+                <div>
+                  <label className="text-sm font-medium block mb-3">Categoria</label>
+                  <div className="space-y-2">
+                    {categories.map((cat) => (
+                      <button
+                        key={cat}
+                        onClick={() => setSelectedCategory(cat)}
+                        className={`w-full text-left px-3 py-2 rounded-lg transition text-sm ${
+                          selectedCategory === cat
+                            ? "bg-primary text-white font-medium"
+                            : "bg-muted text-foreground hover:bg-border"
+                        }`}
+                      >
+                        {cat === "all" ? "Todos" : cat}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+>>>>>>> 3f9267aacfe2a92b1acab96e27e1209fd610b2fb
 
             {/* Articles */}
             <div className="lg:col-span-3">

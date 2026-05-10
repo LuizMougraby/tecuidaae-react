@@ -229,7 +229,11 @@ export default function Triagem() {
       {/* Card de perguntas */}
       <div className="flex-1 container max-w-4xl mx-auto py-10">
         {currentQuestion && (
+<<<<<<< HEAD
           <div className="bg-white rounded-2xl p-12 shadow-xl border border-gray-100 min-h-[500px] flex flex-col justify-center gap-8">
+=======
+          <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100">
+>>>>>>> 3f9267aacfe2a92b1acab96e27e1209fd610b2fb
            <p className="text-base font-bold text-gray-500 uppercase tracking-wide mb-2">
   Pergunta {currentStep}
 </p>
@@ -255,7 +259,11 @@ export default function Triagem() {
             </div>
 
             {/* Botões Voltar e Próximo */}
+<<<<<<< HEAD
             <div className="flex gap-4 mt-auto">
+=======
+            <div className="flex gap-4">
+>>>>>>> 3f9267aacfe2a92b1acab96e27e1209fd610b2fb
               <button
                 onClick={handlePrev}
                 disabled={currentStep === 1}
