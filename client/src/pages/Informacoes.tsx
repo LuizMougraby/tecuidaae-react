@@ -23,7 +23,7 @@ const articles: Article[] = [
   },
   {
     id: 2,
-    title: "O que é Sífilis? Entendendo a Doença",
+    title: "O que é Sífilis",
     category: "Conceitos Básicos",
     excerpt: "A sífilis é uma infecção causada pela bactéria Treponema pallidum. Conheça suas fases, sintomas e como ela afeta o organismo.",
     content: "A sífilis apresenta diferentes sintomas em cada estágio. Na fase primária, surge uma úlcera indolor. Na secundária, aparecem manchas na pele e febre. Na fase latente, não há sintomas visíveis.",
@@ -31,7 +31,7 @@ const articles: Article[] = [
   },
   {
     id: 3,
-    title: "Como se Proteger da Sífilis",
+    title: "Prevenção contra a Sífilis",
     category: "Prevenção",
     excerpt: "Prevenir a sífilis é simples e eficaz. Conheça os métodos de proteção, a importância do uso de preservativos e dos testes regulares.",
     content: "A prevenção é a melhor estratégia. Use camisinha em todas as relações sexuais, faça testes regularmente e converse com seus parceiros sobre saúde sexual.",
@@ -39,7 +39,7 @@ const articles: Article[] = [
   },
   {
     id: 4,
-    title: "Tratamento Passo a Passo",
+    title: "Tratamento contra a Sífilis",
     category: "Tratamento",
     excerpt: "O tratamento da sífilis é simples, gratuito e altamente eficaz. Entenda como funciona o tratamento com penicilina benzatina.",
     content: "O tratamento da sífilis é realizado com penicilina benzatina, disponível gratuitamente em todas as UBSs. É importante completar todo o tratamento e fazer acompanhamento médico.",
@@ -47,7 +47,7 @@ const articles: Article[] = [
   },
   {
     id: 5,
-    title: "Mitos e Verdades sobre Sífilis",
+    title: "Mitos e Verdades sobre a Sífilis",
     category: "Mitos vs Fatos",
     excerpt: "Existem muitas informações incorretas sobre a sífilis. Separamos os principais mitos e as verdades científicas sobre a doença.",
     content: "Mito: sífilis só afeta quem tem muitos parceiros. Verdade: qualquer pessoa sexualmente ativa pode contrair sífilis. Mito: dá para ver se alguém tem sífilis. Verdade: muitas pessoas não apresentam sintomas visíveis.",
@@ -178,15 +178,15 @@ export default function Informacoes() {
           )}
 
           {/* Grid de artigos */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {rest.map((article) => (
               <button
                 key={article.id}
                 onClick={() => setSelectedArticle(article)}
                 className="text-left bg-white rounded-2xl shadow border-2 border-[#6ADE8A] overflow-hidden hover:shadow-xl transition"
               >
-                <div className={`${categoryColors[article.category] || "bg-gray-500"} p-8`} />
-                <div className="p-5">
+                <div className={`${categoryColors[article.category] || "bg-gray-500"} p-12`} />
+                <div className="p-7">
                   <span className={`${categoryColors[article.category] || "bg-gray-500"} text-white px-3 py-1 rounded-full text-xs font-medium`}>
                     {article.category}
                   </span>
