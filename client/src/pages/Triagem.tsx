@@ -1,0 +1,286 @@
+import { useState } from "react";
+import { useLocation } from "wouter";
+import { Button } from "@/components/ui/button";
+
+interface Answer {
+  [key: number]: string;
+}
+
+export default function Triagem() {
+  const [, navigate] = useLocation();
+  const [currentStep, setCurrentStep] = useState(1);
+  const [answers, setAnswers] = useState<Answer>({});
+  const [riskScore, setRiskScore] = useState(0);
+  const [showResult, setShowResult] = useState(false);
+
+  const totalSteps = 7;
+
+  const questions = [
+  {
+    step: 1,
+    question: "Você tem ou teve alguma ferida, úlcera ou bolha nos genitais, ânus ou boca?",
+    options: [
+      { label: "Sim, atualmente", value: "sim_atual", points: 3 },
+      { label: "Já tive, mas sumiu", value: "ja_tive", points: 2 },
+      { label: "Não, nunca tive", value: "nao", points: 0 },
+    ],
+  },
+  {
+    step: 2,
+    question: "Você teve relação sexual sem preservativo nos últimos 3 meses?",
+    options: [
+      { label: "Sim", value: "sim", points: 3 },
+      { label: "Não", value: "nao", points: 0 },
+      { label: "Já tive sífilis antes", value: "ja_tive", points: 3 },
+    ],
+  },
+  {
+    step: 3,
+    question: "Você apresenta manchas avermelhadas na pele, febre ou mal-estar recente?",
+    options: [
+      { label: "Sim", value: "sim", points: 2 },
+      { label: "Não", value: "nao", points: 0 },
+    ],
+  },
+  {
+    step: 4,
+    question: "Você ou seu parceiro(a) foi diagnosticado(a) com alguma IST recentemente?",
+    options: [
+      { label: "Sim", value: "sim", points: 3 },
+      { label: "Não", value: "nao", points: 0 },
+      { label: "Não sei", value: "nao_sei", points: 1 },
+    ],
+  },
+  {
+    step: 5,
+    question: "Você está grávida ou tentando engravidar?",
+    options: [
+      { label: "Sim, estou grávida", value: "gravida", points: 3 },
+      { label: "Estou tentando", value: "tentando", points: 2 },
+      { label: "Não", value: "nao", points: 0 },
+    ],
+  },
+  {
+    step: 6,
+    question: "Você já realizou algum teste para sífilis?",
+    options: [
+      { label: "Sim, e deu negativo", value: "negativo", points: 0 },
+      { label: "Sim, e deu positivo", value: "positivo", points: 3 },
+      { label: "Nunca fiz teste", value: "nunca", points: 2 },
+    ],
+  },
+  {
+    step: 7,
+    question: "Você tem múltiplos parceiros sexuais ou parceiro(a) com múltiplos parceiros?",
+    options: [
+      { label: "Sim", value: "sim", points: 2 },
+      { label: "Não", value: "nao", points: 0 },
+      { label: "Prefiro não responder", value: "nao_resp", points: 1 },
+    ],
+  },
+];
+
+ const handleAnswer = (value: string) => {
+    setAnswers(prev => ({ ...prev, [currentStep]: value }));
+  };
+
+  const handlePrev = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const getRiskLevel = () => {
+    if (riskScore >= 7) return { level: "alto", icon: "🚨", title: "Risco Alto Detectado" };
+    if (riskScore >= 3) return { level: "moderado", icon: "⚠️", title: "Risco Moderado" };
+    return { level: "baixo", icon: "✅", title: "Baixo Risco" };
+  };
+
+  const risk = getRiskLevel();
+  const progress = (currentStep / totalSteps) * 100;
+
+  if (showResult) {
+    return (
+      <div className="min-h-screen flex flex-col bg-background">
+        <header className="bg-secondary text-white p-5 shadow-lg">
+          <div className="container flex items-center gap-4">
+            <button
+              onClick={() => navigate("/")}
+              className="text-2xl hover:opacity-80 transition"
+            >
+              ←
+            </button>
+            <h1 className="text-xl font-bold">Resultado da Triagem</h1>
+          </div>
+        </header>
+
+        <div className="flex-1 container py-12 flex items-center justify-center">
+          <div className="max-w-2xl w-full">
+            <div
+              className={`rounded-2xl p-8 text-center ${
+                risk.level === "alto"
+                  ? "bg-gradient-to-br from-destructive to-[#ee5a5a] text-white"
+                  : risk.level === "moderado"
+                  ? "bg-gradient-to-br from-warning to-[#FFB74D] text-white"
+                  : "bg-gradient-to-br from-success to-[#66BB6A] text-white"
+              }`}
+            >
+              <div className="text-6xl mb-4">{risk.icon}</div>
+              <h2 className="text-3xl font-bold mb-4">{risk.title}</h2>
+
+              {risk.level === "alto" && (
+                <div className="space-y-4 text-left">
+                  <p className="text-lg">
+                    Com base nas suas respostas, recomendamos que você procure atendimento médico urgentemente.
+                  </p>
+                  <div className="bg-white bg-opacity-20 rounded-lg p-4 space-y-2">
+                    <p className="font-bold">Ação Imediata:</p>
+                    <p>Dirija-se à UBS mais próxima hoje mesmo. O tratamento é gratuito e confidencial.</p>
+                  </div>
+                  <div className="bg-white bg-opacity-20 rounded-lg p-4 space-y-2">
+                    <p className="font-bold">Emergência:</p>
+                    <p>Se não puder ir pessoalmente, ligue para 192 (SAMU) ou procure o pronto-socorro.</p>
+                  </div>
+                </div>
+              )}
+
+              {risk.level === "moderado" && (
+                <div className="space-y-4 text-left">
+                  <p className="text-lg">
+                    Você apresenta alguns fatores de risco. Recomendamos fazer o teste de sífilis nas próximas 48 horas.
+                  </p>
+                  <div className="bg-white bg-opacity-20 rounded-lg p-4 space-y-2">
+                    <p className="font-bold">Teste Rápido:</p>
+                    <p>O teste é gratuito, rápido (resultado em 30 min) e disponível em todas as UBSs.</p>
+                  </div>
+                </div>
+              )}
+
+              {risk.level === "baixo" && (
+                <div className="space-y-4 text-left">
+                  <p className="text-lg">
+                    Pelas suas respostas, seu risco atual parece baixo. Continue com as práticas de prevenção.
+                  </p>
+                  <div className="bg-white bg-opacity-20 rounded-lg p-4 space-y-2">
+                    <p className="font-bold">Prevenção:</p>
+                    <p>Use camisinha em todas as relações e faça testes anuais se tiver vida sexual ativa.</p>
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-8 bg-white bg-opacity-20 rounded-lg p-4 text-sm">
+                <p className="font-bold mb-2">Aviso importante:</p>
+                <p>Esta triagem é apenas uma ferramenta de orientação inicial e não substitui o diagnóstico médico.</p>
+              </div>
+            </div>
+
+            <div className="flex gap-4 mt-8">
+              <Button
+                onClick={() => navigate("/mapa")}
+                className="flex-1 bg-primary text-white hover:bg-[#14919b]"
+              >
+                Encontrar UBS
+              </Button>
+              <Button
+                onClick={() => navigate("/")}
+                variant="outline"
+                className="flex-1"
+              >
+                Voltar ao Início
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const currentQuestion = questions.find((q) => q.step === currentStep);
+
+  return (
+    <div className="min-h-screen flex flex-col bg-background">
+      <div>
+        {/* Header */}
+        <header className="bg-[#6ADE8A] p-6 shadow-lg relative">
+          <div className="container max-w-4xl mx-auto">
+            <div className="flex items-center">
+              <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-6">
+                ←
+              </button>
+              <div className="flex-1 text-center">
+                <h1 className="text-2xl font-bold text-white">Triagem</h1>
+                <p className="text-2xl text-white opacity-90">Avalie seu risco para sífilis em algumas perguntas rápidas</p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Barra de progresso */}
+        <div className="flex justify-center mt-4 px-8">
+          <div className="w-full bg-gray-200 h-4 rounded-full overflow-hidden">
+            <div
+              className="bg-[#6ADE8A] h-4 rounded-full transition-all duration-500"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Card de perguntas */}
+      <div className="flex-1 container max-w-4xl mx-auto py-10">
+        {currentQuestion && (
+          <div className="bg-white rounded-2xl p-12 shadow-xl border border-gray-100 min-h-[500px] flex flex-col justify-center gap-8">
+           <p className="text-base font-bold text-gray-500 uppercase tracking-wide mb-2">
+  Pergunta {currentStep}
+</p>
+<h2 className="text-xl font-normal text-gray-700 mb-8">
+  {currentQuestion.question}
+</h2>
+
+            {/* Opções lado a lado */}
+            <div className="flex flex-wrap gap-3 mb-8">
+              {currentQuestion.options.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() => handleAnswer(option.value)}
+                  className={
+                    answers[currentStep] === option.value
+                      ? "px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-[#6ADE8A] bg-[#6ADE8A] text-white"
+                      : "px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-gray-300 text-gray-700 hover:border-[#6ADE8A] hover:bg-[#6ADE8A] hover:text-white"
+                  }
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Botões Voltar e Próximo */}
+            <div className="flex gap-4 mt-auto">
+              <button
+                onClick={handlePrev}
+                disabled={currentStep === 1}
+                className="flex-1 border-2 border-gray-300 text-gray-600 py-3 rounded-full font-semibold hover:bg-gray-100 transition disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                Voltar
+              </button>
+              <button
+                onClick={() => {
+                  if (!answers[currentStep]) return;
+                  if (currentStep < totalSteps) {
+                    setCurrentStep(s => s + 1);
+                  } else {
+                    setShowResult(true);
+                  }
+                }}
+                disabled={!answers[currentStep]}
+                className="flex-1 bg-[#6ADE8A] text-white py-3 rounded-full font-semibold hover:opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                {currentStep === totalSteps ? "Ver Resultado" : "Próximo"}
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
