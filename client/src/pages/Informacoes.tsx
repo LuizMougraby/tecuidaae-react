@@ -128,65 +128,69 @@ export default function Informacoes() {
           </div>
         </div>
       ) : (
-        <div className="flex-1 container max-w-5xl mx-auto py-8">
+        <div className="flex-1 w-full py-8 px-16">
           {/* Barra de busca */}
-          <div className="mb-6">
-            <input
-              type="text"
-              placeholder="Buscar artigos (ex: sintomas, tratamento, gravidez...)"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-5 py-3 rounded-full border-2 border-gray-200 focus:border-[#6ADE8A] focus:outline-none text-gray-700"
-            />
-          </div>
+          <div className="mb-8 px-4">
+  <input
+    type="text"
+    placeholder="Buscar artigos (ex: sintomas, tratamento, gravidez...)"
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+    className="w-full px-8 py-5 rounded-full border-2 border-gray-200 focus:border-[#6ADE8A] focus:outline-none text-gray-700 text-lg shadow-sm"
+  />
+</div>
 
           {/* Abas de categoria */}
-          <div className="border-b-2 border-gray-200 mb-8">
-            <div className="flex flex-wrap gap-2 pb-3">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-6 py-2 rounded-full font-semibold text-sm transition-all duration-200 ${
-                    selectedCategory === cat
-                      ? "bg-[#6ADE8A] text-white border-2 border-[#6ADE8A]"
-                      : "bg-white text-[#6ADE8A] border-2 border-[#6ADE8A] hover:bg-[#6ADE8A] hover:text-white"
-                  }`}
-                >
-                  {cat === "all" ? "Todos" : cat}
-                </button>
-              ))}
-            </div>
-          </div>
+          <div className="border-b-2 border-gray-200 mb-10">
+  <div className="flex justify-between pb-4 px-12">
+    {categories.map((cat) => (
+      <button
+        key={cat}
+        onClick={() => setSelectedCategory(cat)}
+        className={`flex-1 mx-2 py-3 rounded-full font-semibold text-base transition-all duration-200 ${
+          selectedCategory === cat
+            ? "bg-[#6ADE8A] text-white border-2 border-[#6ADE8A]"
+            : "bg-white text-[#6ADE8A] border-2 border-[#6ADE8A] hover:bg-[#6ADE8A] hover:text-white"
+        }`}
+      >
+        {cat === "all" ? "Todos" : cat}
+      </button>
+    ))}
+  </div>
+</div>
 
           {/* Artigo destaque */}
           {featured && (
             <button
-              onClick={() => setSelectedArticle(featured)}
-              className="w-full text-left bg-white rounded-2xl shadow-lg border-2 border-[#6ADE8A] overflow-hidden mb-8 hover:shadow-xl transition"
-            >
-              <div className={`${categoryColors[featured.category] || "bg-gray-500"} p-16`} />
-              <div className="p-8">
-                <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold uppercase">
-                  DESTAQUE
-                </span>
-                <h2 className="text-2xl font-bold text-gray-800 mt-3 mb-2">{featured.title}</h2>
-                <p className="text-gray-500 mb-4">{featured.excerpt}</p>
-                <span className="text-[#6ADE8A] font-semibold">Ler artigo completo →</span>
-              </div>
-            </button>
+  onClick={() => setSelectedArticle(featured)}
+  className="w-full text-left bg-white rounded-2xl shadow-lg border-2 border-[#6ADE8A] overflow-hidden mb-8 hover:shadow-xl transition"
+>
+  <div className="flex">
+    {/* Espaço reservado para imagem — lado esquerdo */}
+    <div className={`${categoryColors[featured.category] || "bg-[#6ADE8A]"} w-1/2 min-h-[280px]`} />
+    {/* Conteúdo — lado direito */}
+    <div className="w-1/2 p-8 flex flex-col justify-center">
+      <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold uppercase w-fit">
+        DESTAQUE
+      </span>
+      <h2 className="text-2xl font-bold text-gray-800 mt-3 mb-2">{featured.title}</h2>
+      <p className="text-gray-500 mb-4">{featured.excerpt}</p>
+      <span className="text-[#6ADE8A] font-semibold">Ler artigo completo →</span>
+    </div>
+  </div>
+</button>
           )}
 
           {/* Grid de artigos */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 auto-rows-fr">
             {rest.map((article) => (
               <button
                 key={article.id}
                 onClick={() => setSelectedArticle(article)}
                 className="text-left bg-white rounded-2xl shadow border-2 border-[#6ADE8A] overflow-hidden hover:shadow-xl transition"
               >
-                <div className={`${categoryColors[article.category] || "bg-gray-500"} p-12`} />
-                <div className="p-7">
+                <div className={`${categoryColors[article.category] || "bg-gray-500"} min-h-[200px]`} />
+                <div className="p-8">
                   <span className={`${categoryColors[article.category] || "bg-gray-500"} text-white px-3 py-1 rounded-full text-xs font-medium`}>
                     {article.category}
                   </span>
