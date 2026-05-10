@@ -199,25 +199,31 @@ export default function Triagem() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      {/* Header */}
-      <header className="bg-[#6ADE8A] text-gray-900 p-6 shadow-lg">
-        <div className="container max-w-2xl mx-auto">
-          <div className="flex items-center gap-4 mb-1">
-            <button onClick={() => navigate("/")} className="text-2xl hover:opacity-80 transition">←</button>
-            <div>
-              <h1 className="text-2xl font-bold">Triagem</h1>
-              <p className="text-sm opacity-80">Avalie seu risco para sífilis em algumas perguntas rápidas</p>
+      <div>
+        {/* Header */}
+        <header className="bg-[#6ADE8A] p-6 shadow-lg relative">
+          <div className="container max-w-4xl mx-auto">
+           <div className="flex items-center">
+  <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-6">
+    ←
+  </button>
+  <div className="flex-1 text-center">
+                <h1 className="text-2xl font-bold text-white">Triagem</h1>
+                <p className="text-sm text-white opacity-90">Avalie seu risco para sífilis em algumas perguntas rápidas</p>
+              </div>
             </div>
           </div>
-          {/* Barra de progresso */}
-          <div className="w-full bg-white bg-opacity-20 rounded-full h-3 mt-4">
-            <div
-              className="bg-secondary h-3 rounded-full transition-all duration-500"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        </div>
-      </header>
+        </header>
+
+        {/* Barra de progresso — fora do header */}
+<div className="flex justify-center mt-4 px-8">
+  <div className="w-full bg-gray-200 h-4 rounded-full overflow-hidden">
+    <div
+      className="bg-[#6ADE8A] h-4 rounded-full transition-all duration-500"
+      style={{ width: ` ${progress}%`  }}
+    />
+  </div>
+</div>
 
       {/* Card de perguntas */}
       <div className="flex-1 container max-w-2xl mx-auto py-10">
