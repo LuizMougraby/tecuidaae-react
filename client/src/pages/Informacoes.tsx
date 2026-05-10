@@ -167,14 +167,14 @@ export default function Informacoes() {
 >
   <div className="flex">
     {/* Espaço reservado para imagem — lado esquerdo */}
-    <div className={`${categoryColors[featured.category] || "bg-[#6ADE8A]"} w-1/2 min-h-[280px]`} />
+    <div className={`${categoryColors[featured.category] || "bg-[#6ADE8A]"} w-1/2 min-h-[350px]`} />
     {/* Conteúdo — lado direito */}
-    <div className="w-1/2 p-8 flex flex-col justify-center">
-      <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold uppercase w-fit">
+    <div className="w-1/2 p-10 flex flex-col justify-center gap-4">
+      <span className="bg-[#6ADE8A] text-white px-6 py-2 rounded-full text-base font-bold uppercase w-fit">
         DESTAQUE
       </span>
-      <h2 className="text-2xl font-bold text-gray-800 mt-3 mb-2">{featured.title}</h2>
-      <p className="text-gray-500 mb-4">{featured.excerpt}</p>
+      <h2 className="text-3xl font-bold text-gray-800 mt-3 mb-2">{featured.title}</h2>
+      <p className="text-lg gray-500 mb-4">{featured.excerpt}</p>
       <span className="text-[#6ADE8A] font-semibold">Ler artigo completo →</span>
     </div>
   </div>
@@ -182,23 +182,23 @@ export default function Informacoes() {
           )}
 
           {/* Grid de artigos */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 auto-rows-fr">
+          <div className="grid grid-cols-2 gap-8">
             {rest.map((article) => (
               <button
                 key={article.id}
                 onClick={() => setSelectedArticle(article)}
                 className="text-left bg-white rounded-2xl shadow border-2 border-[#6ADE8A] overflow-hidden hover:shadow-xl transition"
               >
-                <div className={`${categoryColors[article.category] || "bg-gray-500"} min-h-[200px]`} />
+                <div className={`${categoryColors[article.category] || "bg-gray-500"} min-h-[250px]`} />
                 <div className="p-8">
-                  <span className={`${categoryColors[article.category] || "bg-gray-500"} text-white px-3 py-1 rounded-full text-xs font-medium`}>
+                  <span className={`${categoryColors[article.category] || "bg-gray-500"} text-white px-6 py-2 rounded-full text-lg font-semibold w-fit`}>
                     {article.category}
                   </span>
-                  <h3 className="text-lg font-bold text-gray-800 mt-3 mb-1">{article.title}</h3>
-                  <p className="text-sm text-gray-500 mb-4">{article.excerpt}</p>
+                  <h3 className="text-2xl font-bold text-gray-800 mt-4 mb-2">{article.title}</h3>
+                  <p className="text-lg text-gray-500 mb-4">{article.excerpt}</p>
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-gray-400">⏱ {article.readTime} min de leitura</span>
-                    <span className="text-[#6ADE8A] font-semibold text-sm">Saiba mais →</span>
+                    <span className="text-sm text-gray-400">⏱ {article.readTime} min de leitura</span>
+                    <span className="text-[#6ADE8A] font-semibold text-base">Saiba mais →</span>
                   </div>
                 </div>
               </button>
