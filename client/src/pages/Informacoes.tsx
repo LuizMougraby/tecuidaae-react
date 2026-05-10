@@ -14,62 +14,52 @@ interface Article {
 const articles: Article[] = [
   {
     id: 1,
-    title: "Sífilis na Gravidez: Riscos e Prevenção",
-    category: "Gravidez",
-    excerpt: "Saiba como a sífilis pode afetar a gravidez e como se proteger.",
-    content: "A sífilis na gravidez é uma situação que requer atenção especial. Se não tratada, pode causar sérias complicações para o feto, incluindo aborto espontâneo, prematuridade e malformações congênitas. O tratamento com penicilina durante a gravidez é seguro e eficaz.",
+    title: "Sífilis na Gravidez: Protegendo Mães e Bebês",
+    category: "Tratamento",
+    excerpt: "A detecção precoce e o tratamento adequado durante o pré-natal são essenciais para prevenir a transmissão vertical da sífilis.",
+    content: "A sífilis na gravidez requer atenção especial. Se não tratada, pode causar complicações sérias para o bebê. O tratamento com penicilina durante a gravidez é seguro e eficaz.",
     readTime: 5,
     featured: true,
   },
   {
     id: 2,
-    title: "Sintomas da Sífilis: O que Você Precisa Saber",
-    category: "Sintomas",
-    excerpt: "Conheça os principais sintomas em cada estágio da doença.",
-    content: "A sífilis apresenta diferentes sintomas em cada estágio. Na fase primária, surge uma úlcera indolor. Na secundária, aparecem manchas na pele e febre. Na fase latente, não há sintomas visíveis, mas a bactéria permanece no corpo.",
+    title: "O que é Sífilis? Entendendo a Doença",
+    category: "Conceitos Básicos",
+    excerpt: "A sífilis é uma infecção causada pela bactéria Treponema pallidum. Conheça suas fases, sintomas e como ela afeta o organismo.",
+    content: "A sífilis apresenta diferentes sintomas em cada estágio. Na fase primária, surge uma úlcera indolor. Na secundária, aparecem manchas na pele e febre. Na fase latente, não há sintomas visíveis.",
     readTime: 4,
   },
   {
     id: 3,
-    title: "Prevenção de ISTs: Práticas Seguras",
+    title: "Como se Proteger da Sífilis",
     category: "Prevenção",
-    excerpt: "Dicas essenciais para prevenir infecções sexualmente transmissíveis.",
-    content: "A prevenção é a melhor estratégia. Use camisinha em todas as relações sexuais, faça testes regularmente, converse com seus parceiros sobre saúde sexual e procure atendimento médico se suspeitar de exposição.",
+    excerpt: "Prevenir a sífilis é simples e eficaz. Conheça os métodos de proteção, a importância do uso de preservativos e dos testes regulares.",
+    content: "A prevenção é a melhor estratégia. Use camisinha em todas as relações sexuais, faça testes regularmente e converse com seus parceiros sobre saúde sexual.",
     readTime: 3,
   },
   {
     id: 4,
-    title: "Tratamento da Sífilis: Protocolo do SUS",
+    title: "Tratamento Passo a Passo",
     category: "Tratamento",
-    excerpt: "Entenda como funciona o tratamento gratuito oferecido pelo SUS.",
-    content: "O tratamento da sífilis é realizado com penicilina benzatina, disponível gratuitamente em todas as UBSs. O medicamento é injetável e altamente eficaz. É importante completar todo o tratamento e fazer acompanhamento médico.",
+    excerpt: "O tratamento da sífilis é simples, gratuito e altamente eficaz. Entenda como funciona o tratamento com penicilina benzatina.",
+    content: "O tratamento da sífilis é realizado com penicilina benzatina, disponível gratuitamente em todas as UBSs. É importante completar todo o tratamento e fazer acompanhamento médico.",
     readTime: 5,
   },
   {
     id: 5,
-    title: "Transmissão de Sífilis: Como Ocorre",
-    category: "Informações",
-    excerpt: "Entenda os mecanismos de transmissão da sífilis.",
-    content: "A sífilis é transmitida principalmente por contato sexual direto com feridas infectadas. Também pode ser transmitida de mãe para filho durante a gravidez. Não é transmitida por abraços, beijos ou compartilhamento de objetos.",
-    readTime: 4,
-  },
-  {
-    id: 6,
-    title: "Testes de Sífilis: Tipos e Precisão",
-    category: "Testes",
-    excerpt: "Conheça os diferentes tipos de testes disponíveis.",
-    content: "Existem dois tipos principais de testes: o teste rápido (resultado em 30 minutos) e o teste de laboratório. Ambos são oferecidos gratuitamente nas UBSs. O diagnóstico precoce é fundamental para o sucesso do tratamento.",
-    readTime: 4,
+    title: "Mitos e Verdades sobre Sífilis",
+    category: "Mitos vs Fatos",
+    excerpt: "Existem muitas informações incorretas sobre a sífilis. Separamos os principais mitos e as verdades científicas sobre a doença.",
+    content: "Mito: sífilis só afeta quem tem muitos parceiros. Verdade: qualquer pessoa sexualmente ativa pode contrair sífilis. Mito: dá para ver se alguém tem sífilis. Verdade: muitas pessoas não apresentam sintomas visíveis.",
+    readTime: 5,
   },
 ];
 
 const categoryColors: Record<string, string> = {
-  Gravidez: "bg-pink-500",
-  Sintomas: "bg-orange-500",
-  Prevenção: "bg-blue-500",
-  Tratamento: "bg-purple-500",
-  Informações: "bg-teal-500",
-  Testes: "bg-yellow-500",
+  "Conceitos Básicos": "bg-[#6ADE8A]",
+  "Tratamento": "bg-[#6ADE8A]",
+  "Prevenção": "bg-[#6ADE8A]",
+  "Mitos vs Fatos": "bg-[#6ADE8A]",
 };
 
 export default function Informacoes() {
@@ -78,8 +68,7 @@ export default function Informacoes() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
-  const categories = ["all", "Gravidez", "Sintomas", "Prevenção", "Tratamento", "Informações", "Testes"];
-
+  const categories = ["all", "Conceitos Básicos", "Tratamento", "Prevenção", "Mitos vs Fatos"];
   let filtered = articles;
   if (selectedCategory !== "all") {
     filtered = filtered.filter((a) => a.category === selectedCategory);
@@ -174,10 +163,10 @@ export default function Informacoes() {
           {featured && (
             <button
               onClick={() => setSelectedArticle(featured)}
-              className="w-full text-left bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-8 hover:shadow-xl transition"
+              className="w-full text-left bg-white rounded-2xl shadow-lg border-2 border-[#6ADE8A] overflow-hidden mb-8 hover:shadow-xl transition"
             >
-              <div className={`${categoryColors[featured.category] || "bg-gray-500"} p-10`} />
-              <div className="p-6">
+              <div className={`${categoryColors[featured.category] || "bg-gray-500"} p-16`} />
+              <div className="p-8">
                 <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold uppercase">
                   DESTAQUE
                 </span>
@@ -194,7 +183,7 @@ export default function Informacoes() {
               <button
                 key={article.id}
                 onClick={() => setSelectedArticle(article)}
-                className="text-left bg-white rounded-2xl shadow border border-gray-100 overflow-hidden hover:shadow-lg transition"
+                className="text-left bg-white rounded-2xl shadow border-2 border-[#6ADE8A] overflow-hidden hover:shadow-xl transition"
               >
                 <div className={`${categoryColors[article.category] || "bg-gray-500"} p-8`} />
                 <div className="p-5">
