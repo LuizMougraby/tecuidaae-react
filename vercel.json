@@ -1,9 +1,9 @@
 {
     "version": 2,
     "buildCommand": "vite build",
-    "outputDirectory": "disti/public",
+    "outputDirectory": "dist/public",
     "framework": null,
     "rewrites": [
-        { "souce": "/(.*)", "destination": "/index.html"}
+        { "source": "/(.*)", "destination": "/index.html" }
     ]
 }
