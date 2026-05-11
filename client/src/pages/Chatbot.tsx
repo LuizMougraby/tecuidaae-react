@@ -20,7 +20,7 @@ const knowledgeBase: Record<string, { text: string; source: string }> = {
     text: "Primária: Geralmente aparece uma úlcera indolor nos genitais, ânus ou boca. Secundária: Manchas na pele, febre, mal-estar. Latente: Sem sintomas, mas a bactéria permanece.",
     source: "Protocolo Clínico MS, 2022",
   },
-  "como se proteger": {
+  "Prevenção": {
     text: "Use camisinha em todas as relações sexuais. Faça testes regularmente. Converse com parceiros sobre saúde sexual. Procure atendimento imediato em caso de exposição.",
     source: "Boletim Epidemiológico FVS-AM",
   },
@@ -115,10 +115,9 @@ export default function Chatbot() {
   };
 
   const quickReplies = [
-    "O que é sífilis?",
     "Sintomas",
     "Prevenção",
-    "Tratamento?",
+    "Tratamento",
     "Gravidez"
   ];
 
@@ -155,15 +154,38 @@ export default function Chatbot() {
         )}
 
         <div
-          className={`max-w-lg px-5 py-4 rounded-2xl shadow ${
+          className={`px-5 py-4 rounded-2xl shadow ${
             msg.isUser
-              ? "bg-[#0059FF] text-white rounded-br-none"
-              : "bg-[#6ADE8A] text-white rounded-bl-none"
+              ? "bg-[#0059FF] text-white rounded-br-none max-w-xl"
+              : "bg-[#6ADE8A] text-white rounded-bl-none max-w-lg"
           }`}
         >
-          <p className="whitespace-pre-wrap text-base leading-relaxed">
-            {msg.text}
-          </p>
+          {quickReplies.includes(msg.text) && msg.isUser ? (
+            <span className="px-4 py-2 rounded-full bg-white text-[#0059FF] text-base font-semibold inline-block">
+              {msg.text}
+            </span>
+          ) : (
+            <p className="whitespace-pre-wrap text-base leading-relaxed">
+              {msg.text}
+            </p>
+          )}
+          {/* Botões de opção dentro do balão do bot */}
+          {!msg.isUser && (
+            <div className="grid grid-cols-2 gap-2 mt-3">
+              {quickReplies.map((reply, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    setInput(reply);
+                    setTimeout(() => handleSend(), 100);
+                  }}
+                  className="px-4 py-2 rounded-full bg-white text-[#6ADE8A] text-base font-semibold hover:bg-opacity-90 transition"
+                >
+                  {reply}
+                </button>
+              ))}
+            </div>
+          )}
           {msg.source && (
             <p className="text-xs opacity-70 mt-2 border-t border-opacity-30 pt-1">
               Fonte: {msg.source}
