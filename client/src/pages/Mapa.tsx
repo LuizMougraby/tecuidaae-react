@@ -12,6 +12,8 @@ interface UBS {
   penicillin: boolean;
   rating: number;
   saturday: boolean;
+  lat: number;
+  lng: number;
 }
 
 const ubsData: UBS[] = [
@@ -26,6 +28,8 @@ const ubsData: UBS[] = [
     penicillin: true,
     rating: 4.5,
     saturday: true,
+    lat: -3.0244,
+    lng: -60.0662,
   },
   {
     id: 2,
@@ -38,6 +42,8 @@ const ubsData: UBS[] = [
     penicillin: true,
     rating: 4.2,
     saturday: false,
+    lat: -3.0244,
+    lng: -60.0701,
   },
   {
     id: 3,
@@ -50,6 +56,8 @@ const ubsData: UBS[] = [
     penicillin: false,
     rating: 3.8,
     saturday: true,
+    lat: -3.0833,
+    lng: -59.9833,
   },
   {
     id: 4,
@@ -62,6 +70,8 @@ const ubsData: UBS[] = [
     penicillin: true,
     rating: 4.0,
     saturday: false,
+    lat: -3.1167,
+    lng: -60.0833,
   },
   {
     id: 5,
@@ -74,6 +84,8 @@ const ubsData: UBS[] = [
     penicillin: true,
     rating: 4.7,
     saturday: true,
+    lat: -3.1019,
+    lng: -60.0250,
   },
   {
     id: 6,
@@ -86,6 +98,8 @@ const ubsData: UBS[] = [
     penicillin: true,
     rating: 4.3,
     saturday: true,
+    lat: -3.1189,
+    lng: -60.0156,
   },
 ];
 
