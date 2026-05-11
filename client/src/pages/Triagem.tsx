@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
+import { useTriagemDB } from "@/hooks/useTriagemDB";
 
 interface Answer {
   [key: number]: string;
@@ -12,6 +13,7 @@ export default function Triagem() {
   const [answers, setAnswers] = useState<Answer>({});
   const [riskScore, setRiskScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
+  const { salvarResultado } = useTriagemDB();
 
   const totalSteps = 7;
 
@@ -264,14 +266,29 @@ export default function Triagem() {
                 Voltar
               </button>
               <button
-                onClick={() => {
-                  if (!answers[currentStep]) return;
-                  if (currentStep < totalSteps) {
-                    setCurrentStep(s => s + 1);
-                  } else {
-                    setShowResult(true);
-                  }
-                }}
+                onClick={async () => {
+  if (!answers[currentStep]) return;
+  if (currentStep < totalSteps) {
+    setCurrentStep(s => s + 1);
+  } else {
+    const totalScore = Object.entries(answers).reduce((acc, [step, value]) => {
+      const question = questions.find(q => q.step === Number(step));
+      const option = question?.options.find(o => o.value === value);
+      return acc + (option?.points ?? 0);
+    }, 0);
+    setRiskScore(totalScore);
+
+    const nivel = totalScore >= 7 ? "alto" : totalScore >= 3 ? "moderado" : "baixo";
+
+    await salvarResultado({
+      respostas: answers,
+      riscoScore: totalScore,
+      riscoNivel: nivel,
+    });
+
+    setShowResult(true);
+  }
+}}
                 disabled={!answers[currentStep]}
                 className="flex-1 bg-[#6ADE8A] text-white py-3 rounded-full font-semibold hover:opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed"
               >
