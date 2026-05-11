@@ -124,25 +124,19 @@ export default function Chatbot() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#e0f7fa] to-[#b2ebf2]">
       {/* Header */}
-      <header className="bg-primary text-white p-4 shadow-lg">
-        <div className="container flex items-center gap-4">
-          <button
-            onClick={() => navigate("/")}
-            className="text-2xl hover:opacity-80 transition"
-          >
-            ←
-          </button>
-          <div className="flex items-center gap-3 flex-1">
-            <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-primary text-xl font-bold">
-              🤖
-            </div>
-            <div>
-              <h1 className="text-xl font-bold">Assistente de Saúde</h1>
-              <p className="text-sm opacity-90">Disponível 24h</p>
-            </div>
-          </div>
-        </div>
-      </header>
+      <header className="bg-[#6ADE8A] p-6 shadow-lg relative">
+  <div className="container max-w-4xl mx-auto">
+    <div className="flex items-center">
+      <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-6">
+        ←
+      </button>
+      <div className="flex-1 text-center">
+        <h1 className="text-2xl font-bold text-white">ChatBot</h1>
+        <p className="text-base text-white opacity-90">Seu assistente virtual está aqui! Pergunte, e ele irá tirar suas dúvidas!</p>
+      </div>
+    </div>
+  </div>
+</header>
 
       {/* Messages Container */}
       <div className="flex-1 container py-6 overflow-y-auto">
