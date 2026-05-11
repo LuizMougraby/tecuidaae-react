@@ -1,5 +1,15 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+
+delete (L.Icon.Default.prototype as any)._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+});
 
 interface UBS {
   id: number;
@@ -146,38 +156,23 @@ export default function Mapa() {
       </header>
 
       <div className="flex-1 w-full py-8 px-16">
-        {/* Barra de busca */}
-        <div className="mb-8 px-4">
-          <input
-            type="text"
-            placeholder="Buscar UBS por nome ou bairro..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-8 py-5 rounded-full border-2 border-gray-200 focus:border-[#6ADE8A] focus:outline-none text-gray-700 text-lg shadow-sm"
-          />
-        </div>
 
-        {/* Filtros de região */}
-        <div className="border-b-2 border-gray-200 mb-8">
-          <div className="flex justify-between pb-4 px-12">
-            {regions.map((region) => (
-              <button
-                key={region.value}
-                onClick={() => setSelectedRegion(region.value)}
-                className={`flex-1 mx-2 py-3 rounded-full font-semibold text-base transition-all duration-200 ${
-                  selectedRegion === region.value
-                    ? "bg-[#1A315B] text-white border-2 border-[#1A315B]"
-                    : "bg-white text-[#1A315B] border-2 border-[#1A315B] hover:bg-[#1A315B] hover:text-white"
-                }`}
-              >
-                {region.label}
-              </button>
-            ))}
+       
+        {/* Layout lado a lado */}
+      <div className="flex flex-1 px-2 gap-6 pb-8">
+       {/* Lista de UBSs — lado esquerdo */}
+        <div className="w-1/2 flex flex-col">
+          <div className="bg-[#1A315B] rounded-2xl p-4 mb-4">
+            <p className="text-white font-medium mb-3">Clique em uma UBS para ver mais detalhes!</p>
+            <input
+              type="text"
+              placeholder="Buscar UBS..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-5 py-3 rounded-full bg-white border-2 border-white focus:border-[#6ADE8A] focus:outline-none text-gray-700"
+            />
           </div>
-        </div>
-
-        {/* Lista de UBSs */}
-        <div className="space-y-6">
+          <div className="space-y-4 overflow-y-auto max-h-[900px] pr-2">
           {filtered.length === 0 ? (
             <div className="bg-white rounded-2xl p-8 text-center shadow border border-gray-100">
               <p className="text-gray-400">Nenhuma UBS encontrada com esses critérios.</p>
@@ -245,6 +240,34 @@ export default function Mapa() {
               </div>
             ))
           )}
+        </div>
+        </div>
+
+        {/* Mapa — lado direito */}
+        <div className="w-1/2 rounded-2xl overflow-hidden shadow-lg border-2 border-[#1A315B]" style={{ height: "900px" }}>
+          <MapContainer
+            center={[-3.1019, -60.0250]}
+            zoom={12}
+            style={{ height: "100%", width: "100%" }}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            />
+            {filtered.map((ubs) => (
+              <Marker key={ubs.id} position={[ubs.lat, ubs.lng]}>
+                <Popup>
+                  <div className="p-2">
+                    <p className="font-bold text-[#1A315B]">{ubs.name}</p>
+                    <p className="text-sm">{ubs.address}</p>
+                    <p className="text-sm">📞 {ubs.phone}</p>
+                    <p className="text-sm">🕐 {ubs.hours}</p>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
+          </MapContainer>
+        </div>
         </div>
       </div>
     </div>
