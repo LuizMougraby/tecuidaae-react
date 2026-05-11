@@ -1,9 +1,9 @@
 {
-    "builds": [
-        {
-            "src": "package.json",
-            "use": "overcel/static-build",
-            "config": { "distDir": "dist" }
-        }
+    "version": 2,
+    "buldiCommand": "vite build",
+    "outputDirectory": "disti/public",
+    "framework": null,
+    "rewrites": [
+        { "souce": "/(.*)", "destination": "/index.html"}
     ]
 }
