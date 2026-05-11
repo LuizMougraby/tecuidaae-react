@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
-import { Input } from "@/components/ui/input";
 
 interface UBS {
   id: number;
@@ -97,10 +96,10 @@ export default function Mapa() {
 
   const regions = [
     { value: "all", label: "Todas" },
-    { value: "norte", label: "Norte" },
-    { value: "sul", label: "Sul" },
-    { value: "leste", label: "Leste" },
-    { value: "oeste", label: "Oeste" },
+    { value: "norte", label: "Zona Norte" },
+    { value: "sul", label: "Zona Sul" },
+    { value: "leste", label: "Zona Leste" },
+    { value: "oeste", label: "Zona Oeste" },
     { value: "centro", label: "Centro" },
   ];
 
@@ -117,136 +116,121 @@ export default function Mapa() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      {/* Header */}
       <header className="bg-[#1A315B] p-6 shadow-lg relative">
-  <div className="container max-w-4xl mx-auto">
-    <div className="flex items-center">
-      <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-6">
-        ←
-      </button>
-      <div className="flex-1 text-center">
-        <h1 className="text-2xl font-bold text-white">Mapa das UBSs</h1>
-        <p className="text-xl text-white opacity-90">Encontre seu local de atendimento mais próximo</p>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div className="container py-6 flex-1">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="bg-card rounded-lg p-6 shadow">
-              <h2 className="font-bold text-lg mb-4 text-primary">Filtros</h2>
-
-              {/* Search */}
-              <div className="mb-6">
-                <label className="text-sm font-medium block mb-2">Buscar</label>
-                <Input
-                  placeholder="Nome ou endereço..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full"
-                />
-              </div>
-
-              {/* Region Filter */}
-              <div>
-                <label className="text-sm font-medium block mb-3">Região</label>
-                <div className="space-y-2">
-                  {regions.map((region) => (
-                    <button
-                      key={region.value}
-                      onClick={() => setSelectedRegion(region.value)}
-                      className={`w-full text-left px-3 py-2 rounded-lg transition ${
-                        selectedRegion === region.value
-                          ? "bg-primary text-white font-medium"
-                          : "bg-muted text-foreground hover:bg-border"
-                      }`}
-                    >
-                      {region.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
+        <div className="container max-w-4xl mx-auto">
+          <div className="flex items-center">
+            <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-6">
+              ←
+            </button>
+            <div className="flex-1 text-center">
+              <h1 className="text-2xl font-bold text-white">Mapa das UBSs</h1>
+              <p className="text-xl text-white opacity-90">Encontre seu local de atendimento mais próximo</p>
             </div>
           </div>
+        </div>
+      </header>
 
-          {/* UBS List */}
-          <div className="lg:col-span-3">
-            <div className="space-y-4">
-              {filtered.length === 0 ? (
-                <div className="bg-card rounded-lg p-8 text-center">
-                  <p className="text-muted-foreground">Nenhuma UBS encontrada com esses critérios.</p>
-                </div>
-              ) : (
-                filtered.map((ubs) => (
-                  <div key={ubs.id} className="bg-card rounded-lg p-6 shadow hover:shadow-lg transition border border-border">
-                    <div className="flex justify-between items-start mb-3">
-                      <div>
-                        <h3 className="text-lg font-bold text-primary">{ubs.name}</h3>
-                        <p className="text-sm text-muted-foreground">{ubs.address}</p>
-                      </div>
-                      <div className="text-right">
-                        <div className="flex gap-1 justify-end">
-                          {Array(5).fill(0).map((_, i) => (
-                            <span key={i} className={i < Math.floor(ubs.rating) ? "text-yellow-400" : "text-gray-300"}>
-                              *
-                            </span>
-                          ))}
-                        </div>
-                        <p className="text-xs text-muted-foreground">({ubs.rating})</p>
-                      </div>
-                    </div>
+      <div className="flex-1 w-full py-8 px-16">
+        {/* Barra de busca */}
+        <div className="mb-8 px-4">
+          <input
+            type="text"
+            placeholder="Buscar UBS por nome ou bairro..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full px-8 py-5 rounded-full border-2 border-gray-200 focus:border-[#6ADE8A] focus:outline-none text-gray-700 text-lg shadow-sm"
+          />
+        </div>
 
-                    <div className="space-y-2 mb-4 text-sm">
-                      <p>
-                        <strong>Phone:</strong> <a href={`tel:${ubs.phone}`} className="text-primary hover:underline">{ubs.phone}</a>
-                      </p>
-                      <p>
-                        <strong>Hours:</strong> {ubs.hours}
-                      </p>
-                      {ubs.saturday && <p className="text-success"><strong>Check:</strong> Abre aos sábados</p>}
-                    </div>
+        {/* Filtros de região */}
+        <div className="border-b-2 border-gray-200 mb-8">
+          <div className="flex justify-between pb-4 px-12">
+            {regions.map((region) => (
+              <button
+                key={region.value}
+                onClick={() => setSelectedRegion(region.value)}
+                className={`flex-1 mx-2 py-3 rounded-full font-semibold text-base transition-all duration-200 ${
+                  selectedRegion === region.value
+                    ? "bg-[#1A315B] text-white border-2 border-[#1A315B]"
+                    : "bg-white text-[#1A315B] border-2 border-[#1A315B] hover:bg-[#1A315B] hover:text-white"
+                }`}
+              >
+                {region.label}
+              </button>
+            ))}
+          </div>
+        </div>
 
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {ubs.services.map((service, idx) => (
-                        <span key={idx} className="bg-secondary text-primary text-xs px-3 py-1 rounded-full">
-                          {service}
+        {/* Lista de UBSs */}
+        <div className="space-y-6">
+          {filtered.length === 0 ? (
+            <div className="bg-white rounded-2xl p-8 text-center shadow border border-gray-100">
+              <p className="text-gray-400">Nenhuma UBS encontrada com esses critérios.</p>
+            </div>
+          ) : (
+            filtered.map((ubs) => (
+              <div key={ubs.id} className="bg-white rounded-2xl p-8 shadow-lg border-2 border-[#1A315B] hover:shadow-xl transition">
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h3 className="text-2xl font-bold text-[#1A315B]">{ubs.name}</h3>
+                    <p className="text-base text-gray-500 mt-1">📍 {ubs.address}</p>
+                  </div>
+                  <div className="text-right">
+                    <div className="flex gap-1 justify-end">
+                      {Array(5).fill(0).map((_, i) => (
+                        <span key={i} className={i < Math.floor(ubs.rating) ? "text-yellow-400 text-xl" : "text-gray-300 text-xl"}>
+                          ★
                         </span>
                       ))}
                     </div>
-
-                    <div className={`p-3 rounded-lg text-sm mb-4 ${
-                      ubs.penicillin
-                        ? "bg-green-50 border border-success text-success"
-                        : "bg-red-50 border border-destructive text-destructive"
-                    }`}>
-                      {ubs.penicillin
-                        ? "OK - Penicilina disponível"
-                        : "WARNING - Estoque de penicilina crítico - Ligar antes"}
-                    </div>
-
-                    <div className="flex gap-2">
-                      <a
-                        href={`https://www.google.com/maps/search/${encodeURIComponent(ubs.address)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 bg-primary text-white text-center py-2 rounded-lg hover:bg-[#14919b] transition text-sm font-medium"
-                      >
-                        MAP - Como chegar
-                      </a>
-                      <a
-                        href={`tel:${ubs.phone}`}
-                        className="flex-1 bg-secondary text-primary text-center py-2 rounded-lg hover:bg-opacity-80 transition text-sm font-medium"
-                      >
-                        CALL - Ligar
-                      </a>
-                    </div>
+                    <p className="text-sm text-gray-400">({ubs.rating})</p>
                   </div>
-                ))
-              )}
-            </div>
-          </div>
+                </div>
+
+                <div className="space-y-2 mb-5 text-base">
+                  <p>📞 <a href={`tel:${ubs.phone}`} className="text-[#1A315B] hover:underline font-medium">{ubs.phone}</a></p>
+                  <p>🕐 {ubs.hours}</p>
+                  {ubs.saturday && <p className="text-[#6ADE8A] font-medium">✅ Abre aos sábados</p>}
+                </div>
+
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {ubs.services.map((service, idx) => (
+                    <span key={idx} className="bg-[#6ADE8A] text-white text-sm px-4 py-2 rounded-full font-medium">
+                      {service}
+                    </span>
+                  ))}
+                </div>
+
+                <div className={`p-4 rounded-xl text-base mb-5 font-medium ${
+                  ubs.penicillin
+                    ? "bg-green-50 border border-[#6ADE8A] text-green-700"
+                    : "bg-red-50 border border-red-400 text-red-700"
+                }`}>
+                  {ubs.penicillin
+                    ? "✅ Penicilina disponível"
+                    : "⚠️ Estoque de penicilina crítico — Ligar antes"}
+                </div>
+
+                <div className="flex gap-4">
+                  <a
+                    href={`https://www.google.com/maps/search/${encodeURIComponent(ubs.address)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 bg-[#1A315B] text-white text-center py-3 rounded-full hover:opacity-90 transition text-base font-semibold"
+                  >
+                    📍 Como chegar
+                  </a>
+                  <a
+                    href={`tel:${ubs.phone}`}
+                    className="flex-1 bg-[#6ADE8A] text-white text-center py-3 rounded-full hover:opacity-90 transition text-base font-semibold"
+                  >
+                    📞 Ligar
+                  </a>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>
