@@ -123,7 +123,7 @@ export default function Chatbot() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#e0f7fa] to-[#b2ebf2]">
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: "#1a315b"}}>
       {/* Header */}
       <header className="bg-[#6ADE8A] p-6 shadow-lg relative">
   <div className="container max-w-4xl mx-auto">
@@ -141,7 +141,7 @@ export default function Chatbot() {
 
       {/* Messages Container */}
       <div className="flex-1 w-full py-6 overflow-y-auto px-8">
-  <div className="space-y-6 max-w-4xl mx-auto">
+  <div className="rounded-3xl p-6 max-w-4xl mx-auto space-y-6" style={{ backgroundColor: "rgba(255,255,255,0.80)" }}>
     {messages.map((msg) => (
       <div
         key={msg.id}
@@ -221,27 +221,27 @@ export default function Chatbot() {
       </div>
 
       {/* Input Area */}
-      <div className="bg-white border-t border-border p-4">
-        <div className="container max-w-2xl mx-auto">
-          <div className="flex gap-2">
-            <Input
+      <div className="bg-white border-t border-gray-200 p-4">
+        <div className="w-full max-w-4xl mx-auto">
+          <div className="flex gap-3 items-center">
+            <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && handleSend()}
-              placeholder="Digite sua pergunta..."
-              className="flex-1"
+              placeholder="Digite/marque para conversar com o assistente virtual..."
               disabled={isTyping}
+              className="flex-1 px-6 py-4 rounded-full border-2 border-gray-200 focus:border-[#6ADE8A] focus:outline-none text-gray-700 text-base"
             />
-            <Button
+            <button
               onClick={handleSend}
               disabled={isTyping || !input.trim()}
-              className="bg-primary text-white hover:bg-[#14919b]"
+              className="w-14 h-14 rounded-full bg-[#6ADE8A] text-white flex items-center justify-center hover:opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed text-2xl"
             >
-              Enviar
-            </Button>
+              ➤
+            </button>
           </div>
         </div>
       </div>
-    </div>
+      </div>
   );
 }
