@@ -39,7 +39,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Olá! Sou o assistente de saúde do TeCuidaAÊ. Posso te ajudar com dúvidas sobre sífilis, prevenção e tratamento.",
+      text: "Olá, sou o assistente virtual. Como osso te ajudar?",
       isUser: false,
       timestamp: new Date(),
     },
@@ -116,9 +116,10 @@ export default function Chatbot() {
 
   const quickReplies = [
     "O que é sífilis?",
-    "Quais são os sintomas?",
-    "Como se proteger?",
-    "Qual é o tratamento?",
+    "Sintomas",
+    "Prevenção",
+    "Tratamento?",
+    "Gravidez"
   ];
 
   return (
@@ -139,37 +140,51 @@ export default function Chatbot() {
 </header>
 
       {/* Messages Container */}
-      <div className="flex-1 container py-6 overflow-y-auto">
-        <div className="space-y-4 max-w-2xl mx-auto">
-          {messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`flex ${msg.isUser ? "justify-end" : "justify-start"}`}
-            >
-              <div
-                className={`max-w-xs lg:max-w-md xl:max-w-lg px-4 py-3 rounded-lg ${
-                  msg.isUser
-                    ? "bg-secondary text-primary rounded-br-none"
-                    : "bg-white text-foreground rounded-bl-none shadow"
-                }`}
-              >
-                <p className="whitespace-pre-wrap text-sm leading-relaxed">
-                  {msg.text}
-                </p>
-                {msg.source && (
-                  <p className="text-xs opacity-70 mt-2 border-t border-opacity-30 pt-1">
-                    Fonte: {msg.source}
-                  </p>
-                )}
-                <p className="text-xs opacity-60 mt-1">
-                  {msg.timestamp.toLocaleTimeString("pt-BR", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </p>
-              </div>
-            </div>
-          ))}
+      <div className="flex-1 w-full py-6 overflow-y-auto px-8">
+  <div className="space-y-6 max-w-4xl mx-auto">
+    {messages.map((msg) => (
+      <div
+        key={msg.id}
+        className={`flex items-end gap-3 ${msg.isUser ? "justify-end" : "justify-start"}`}
+      >
+        {/* Bolinha do bot */}
+        {!msg.isUser && (
+          <div className="w-10 h-10 rounded-full bg-[#6ADE8A] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+            
+          </div>
+        )}
+
+        <div
+          className={`max-w-lg px-5 py-4 rounded-2xl shadow ${
+            msg.isUser
+              ? "bg-[#0059FF] text-white rounded-br-none"
+              : "bg-[#6ADE8A] text-white rounded-bl-none"
+          }`}
+        >
+          <p className="whitespace-pre-wrap text-base leading-relaxed">
+            {msg.text}
+          </p>
+          {msg.source && (
+            <p className="text-xs opacity-70 mt-2 border-t border-opacity-30 pt-1">
+              Fonte: {msg.source}
+            </p>
+          )}
+          <p className="text-xs opacity-60 mt-2">
+            {msg.timestamp.toLocaleTimeString("pt-BR", {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </p>
+        </div>
+
+        {/* Bolinha do usuário */}
+        {msg.isUser && (
+          <div className="w-10 h-10 rounded-full bg-[#0059FF] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+            
+          </div>
+        )}
+      </div>
+    ))}
 
           {isTyping && (
             <div className="flex justify-start">
@@ -187,26 +202,23 @@ export default function Chatbot() {
         </div>
       </div>
 
-      {/* Quick Replies */}
-      {!isTyping && messages.length > 1 && (
-        <div className="container py-4 max-w-2xl mx-auto">
-          <p className="text-sm text-muted-foreground mb-2">Perguntas rápidas:</p>
-          <div className="grid grid-cols-2 gap-2">
-            {quickReplies.map((reply, idx) => (
-              <button
-                key={idx}
-                onClick={() => {
-                  setInput(reply);
-                  setTimeout(() => handleSend(), 100);
-                }}
-                className="text-xs bg-white text-primary border border-primary rounded-lg px-3 py-2 hover:bg-primary hover:text-white transition"
-              >
-                {reply}
-              </button>
-            ))}
-          </div>
+      {/* Botões rápidos — sempre visíveis */}
+      <div className="w-full px-8 py-4 border-b border-gray-200 bg-white">
+        <div className="flex flex-wrap gap-3">
+          {quickReplies.map((reply, idx) => (
+            <button
+              key={idx}
+              onClick={() => {
+                setInput(reply);
+                setTimeout(() => handleSend(), 100);
+              }}
+              className="px-5 py-2 rounded-full border-2 border-[#6ADE8A] text-[#6ADE8A] font-semibold text-sm hover:bg-[#6ADE8A] hover:text-white transition"
+            >
+              {reply}
+            </button>
+          ))}
         </div>
-      )}
+      </div>
 
       {/* Input Area */}
       <div className="bg-white border-t border-border p-4">
