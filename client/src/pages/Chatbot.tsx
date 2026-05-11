@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useMemo } from "react";
+import { useChatbotDB } from "@/hooks/useChatbotDB";
 
 interface Message {
   id: string;
@@ -47,6 +49,8 @@ export default function Chatbot() {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const sessionId = useMemo(() => crypto.randomUUID(), []);
+  const { salvarMensagem } = useChatbotDB(sessionId);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -109,7 +113,8 @@ export default function Chatbot() {
         source: (bestMatch as { text: string; source: string } | null)?.source,
       };
 
-      setMessages((prev) => [...prev, botMsg]);
+      setMessages(prev => [...prev, botMsg]);
+      salvarMensagem(userMsg.text, responseText);
       setIsTyping(false);
     }, 1500);
   };
