@@ -2,13 +2,24 @@ import express from "express";
 import { createServer } from "http";
 import path from "path";
 import { fileURLToPath } from "url";
+import { initializeDatabase } from "./db.js";
+import { router as apiRouter } from "./routes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function startServer() {
+  // Inicializa o banco de dados antes de subir o servidor
+  await initializeDatabase();
+
   const app = express();
   const server = createServer(app);
+
+  // Parse JSON body
+  app.use(express.json());
+
+  // Rotas da API
+  app.use("/api", apiRouter);
 
   // Serve static files from dist/public in production
   const staticPath =
