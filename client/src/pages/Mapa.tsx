@@ -117,20 +117,19 @@ export default function Mapa() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <header className="bg-primary text-white p-4 shadow-lg">
-        <div className="container flex items-center gap-4">
-          <button
-            onClick={() => navigate("/")}
-            className="text-2xl hover:opacity-80 transition"
-          >
-            ←
-          </button>
-          <div>
-            <h1 className="text-xl font-bold">Encontre UBSs em Manaus</h1>
-            <p className="text-sm opacity-90">Unidades de Saúde com atendimento para ISTs</p>
-          </div>
-        </div>
-      </header>
+      <header className="bg-[#1A315B] p-6 shadow-lg relative">
+  <div className="container max-w-4xl mx-auto">
+    <div className="flex items-center">
+      <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-6">
+        ←
+      </button>
+      <div className="flex-1 text-center">
+        <h1 className="text-2xl font-bold text-white">Mapa das UBSs</h1>
+        <p className="text-xl text-white opacity-90">Encontre seu local de atendimento mais próximo</p>
+      </div>
+    </div>
+  </div>
+</header>
 
       <div className="container py-6 flex-1">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
