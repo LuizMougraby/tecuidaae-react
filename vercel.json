@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "buldiCommand": "vite build",
+    "buildCommand": "vite build",
     "outputDirectory": "disti/public",
     "framework": null,
     "rewrites": [
