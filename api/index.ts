@@ -49,6 +49,41 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     return res.status(201).json({ id: result.id, createdAt: result.created_at });
   }
+// GET /api/admin/triagem-stats
+  if (req.method === "GET" && path === "/admin/triagem-stats") {
+    const stats = await sql`
+      SELECT risco_nivel, COUNT(*)::int AS total
+      FROM triagem_resultados
+      GROUP BY risco_nivel
+      ORDER BY total DESC
+    `;
+    return res.json(stats);
+  }
 
+  // GET /api/admin/chatbot-stats
+  if (req.method === "GET" && path === "/admin/chatbot-stats") {
+    const stats = await sql`
+      SELECT pergunta, COUNT(*)::int AS total
+      FROM chatbot_mensagens
+      GROUP BY pergunta
+      ORDER BY total DESC
+      LIMIT 10
+    `;
+    return res.json(stats);
+  }
+
+  // GET /api/admin/daily-stats
+  if (req.method === "GET" && path === "/admin/daily-stats") {
+    const stats = await sql`
+      SELECT 
+        TO_CHAR(created_at::date, 'DD/MM') AS data,
+        COUNT(*)::int AS total
+      FROM triagem_resultados
+      WHERE created_at >= NOW() - INTERVAL '7 days'
+      GROUP BY created_at::date
+      ORDER BY created_at::date ASC
+    `;
+    return res.json(stats);
+  }
   return res.status(404).json({ error: "Rota não encontrada." });
 }

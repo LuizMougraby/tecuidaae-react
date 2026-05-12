@@ -9,6 +9,7 @@ import Chatbot from "./pages/Chatbot";
 import Triagem from "./pages/Triagem";
 import Mapa from "./pages/Mapa";
 import Informacoes from "./pages/Informacoes";
+import Admin from "./pages/Admin"
 
 function Router() {
   return (
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/triagem" component={Triagem} />
       <Route path="/mapa" component={Mapa} />
       <Route path="/informacoes" component={Informacoes} />
+      <Route path="/admin" component={Admin} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
