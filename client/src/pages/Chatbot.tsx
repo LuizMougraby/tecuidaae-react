@@ -226,22 +226,16 @@ export default function Chatbot() {
           )}
 
           <div ref={messagesEndRef} />
-        </div>
-      </div>
 
-      
-
-      {/* Input Area */}
-      <div className="bg-white border-t border-gray-200 p-4">
-        <div className="w-full max-w-4xl mx-auto">
-          <div className="flex gap-3 items-center">
+          {/* Input Area — dentro do card */}
+          <div className="flex gap-3 items-center mt-4 pt-4 border-t border-gray-200">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && handleSend()}
-              placeholder="Digite/marque para conversar com o assistente virtual..."
+              placeholder="Digite/marque para conversar com o assistente virtual:"
               disabled={isTyping}
-              className="flex-1 px-6 py-4 rounded-full border-2 border-gray-200 focus:border-[#6ADE8A] focus:outline-none text-gray-700 text-base"
+              className="flex-1 px-6 py-4 rounded-full border-2 border-gray-200 focus:border-[#6ADE8A] focus:outline-none text-gray-700 text-base placeholder-[#0059FF]"
             />
             <button
               onClick={handleSend}
@@ -253,6 +247,6 @@ export default function Chatbot() {
           </div>
         </div>
       </div>
-      </div>
+    </div>
   );
 }
