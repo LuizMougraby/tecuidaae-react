@@ -229,23 +229,7 @@ export default function Chatbot() {
         </div>
       </div>
 
-      {/* Botões rápidos — sempre visíveis */}
-      <div className="w-full px-8 py-4 border-b border-gray-200 bg-white">
-        <div className="flex flex-wrap gap-3">
-          {quickReplies.map((reply, idx) => (
-            <button
-              key={idx}
-              onClick={() => {
-                setInput(reply);
-                setTimeout(() => handleSend(), 100);
-              }}
-              className="px-5 py-2 rounded-full border-2 border-[#6ADE8A] text-[#6ADE8A] font-semibold text-sm hover:bg-[#6ADE8A] hover:text-white transition"
-            >
-              {reply}
-            </button>
-          ))}
-        </div>
-      </div>
+      
 
       {/* Input Area */}
       <div className="bg-white border-t border-gray-200 p-4">
