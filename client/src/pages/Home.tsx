@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter"; //navegar entre o app
 import imgEncontreUBS from "@/assets/Encontre UBSs.jpg";
 import imgInformacoes from "@/assets/Ache informações reais.jpg";
+import logo from "@/assets/logo sem slogan.svg";
 
 /**
  * TeCuidaAÊ - Home Page
@@ -53,18 +54,20 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-background overflow-auto">
       {/* Header/Navigation */}
       <header className="sticky top-0 z-50 bg-headerHome text-headerText shadow-lg">
-  <nav className="container flex justify-center items-center py-7 gap-10">
-    <div className="flex items-center gap-2">
-      {/* Colocar a logo do projeto aqui*/}
-    </div>
-    <ul className="hidden md:flex gap-10 text-medium font-medium">
-      <li><a href="/" className="hover:text-foreground transition">Início</a></li>
-      <li><a href="/chatbot" className="hover:text-foreground transition">Chatbot</a></li>
-      <li><a href="/mapa" className="hover:text-foreground transition">Mapa</a></li>
-      <li><a href="/informacoes" className="hover:text-foreground transition">Informações</a></li>
-      <li><a href="/triagem" className="hover:text-foreground transition">Triagem</a></li>
-    </ul>
-  </nav>
+  <nav className="w-full flex justify-between items-center py-5 px-6">
+  {/* Logo — lado esquerdo */}
+  <div className="flex items-center gap-3 pl-2">
+    <img src={logo} alt="TeCuidaAÊ" className="h-16" />
+  </div>
+  {/* Links — lado direito */}
+  <ul className="hidden md:flex gap-14 text-lg font-medium pr-4">
+    <li><a href="/" className="hover:text-foreground transition">Início</a></li>
+    <li><a href="/chatbot" className="hover:text-foreground transition">Chatbot</a></li>
+    <li><a href="/mapa" className="hover:text-foreground transition">Mapa</a></li>
+    <li><a href="/informacoes" className="hover:text-foreground transition">Informações</a></li>
+    <li><a href="/triagem" className="hover:text-foreground transition">Triagem</a></li>
+  </ul>
+</nav>
 </header>
 
       {/* Hero Section */}

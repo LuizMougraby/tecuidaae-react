@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useTriagemDB } from "@/hooks/useTriagemDB";
+import imgtriagem from "@/assets/IMG-20260512-WA0026.jpg";
 
 interface Answer {
   [key: number]: string;
@@ -200,7 +201,7 @@ export default function Triagem() {
   const currentQuestion = questions.find((q) => q.step === currentStep);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col" style={{ backgroundImage: `url(${imgtriagem})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
       <div>
         {/* Header */}
         <header className="bg-[#6ADE8A] p-6 shadow-lg relative">
@@ -231,7 +232,7 @@ export default function Triagem() {
       {/* Card de perguntas */}
       <div className="flex-1 container max-w-4xl mx-auto py-10">
         {currentQuestion && (
-<div className="bg-white rounded-2xl p-12 shadow-xl border border-gray-100 min-h-[500px] flex flex-col justify-center gap-8">
+<div className="rounded-2xl p-12 shadow-xl min-h-[500px] flex flex-col justify-center gap-8" style={{ backgroundColor: "rgba(255,255,255,0.80)" }}>
            <p className="text-base font-bold text-gray-500 uppercase tracking-wide mb-2">
   Pergunta {currentStep}
 </p>
@@ -247,8 +248,8 @@ export default function Triagem() {
                   onClick={() => handleAnswer(option.value)}
                   className={
                     answers[currentStep] === option.value
-                      ? "px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-[#6ADE8A] bg-[#6ADE8A] text-white"
-                      : "px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-gray-300 text-gray-700 hover:border-[#6ADE8A] hover:bg-[#6ADE8A] hover:text-white"
+                      ? "px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-[#6ADE8A] bg-[#6ADE8A] text-white text-lg"
+                      : "px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-white bg-white text-gray-700 hover:border-[#6ADE8A] hover:bg-[#6ADE8A] hover:text-white text-lg"
                   }
                 >
                   {option.label}
@@ -261,7 +262,7 @@ export default function Triagem() {
               <button
                 onClick={handlePrev}
                 disabled={currentStep === 1}
-                className="flex-1 border-2 border-gray-300 text-gray-600 py-3 rounded-full font-semibold hover:bg-gray-100 transition disabled:opacity-40 disabled:cursor-not-allowed"
+                className="flex-1 border-2 border-white bg-white text-gray-600 py-3 rounded-full font-semibold text-lg hover:bg-opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 Voltar
               </button>
@@ -290,7 +291,7 @@ export default function Triagem() {
   }
 }}
                 disabled={!answers[currentStep]}
-                className="flex-1 bg-[#6ADE8A] text-white py-3 rounded-full font-semibold hover:opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed"
+                className="flex-1 bg-[#6ADE8A] text-white py-3 rounded-full font-semibold text-lg hover:opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 {currentStep === totalSteps ? "Ver Resultado" : "Próximo"}
               </button>
