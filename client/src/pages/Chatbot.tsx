@@ -145,7 +145,7 @@ export default function Chatbot() {
 
       {/* Messages Container */}
       <div className="flex-1 w-full py-6 overflow-y-auto px-8">
-  <div className="rounded-3xl p-6 max-w-4xl mx-auto space-y-6" style={{ backgroundColor: "rgba(255,255,255,0.80)" }}>
+  <div className="rounded-3xl p-8 w-full max-w-5xl mx-auto space-y-6 min-h-[600px] flex flex-col justify-between" style={{ backgroundColor: "rgba(255,255,255,0.80)" }}>
     {messages.map((msg) => (
       <div
         key={msg.id}
@@ -166,11 +166,11 @@ export default function Chatbot() {
           }`}
         >
           {quickReplies.includes(msg.text) && msg.isUser ? (
-            <span className="px-4 py-2 rounded-full bg-white text-[#0059FF] text-base font-semibold inline-block">
+            <span className="px-4 py-2 rounded-full bg-white text-[#0059FF] text-lg font-semibold inline-block">
               {msg.text}
             </span>
           ) : (
-            <p className="whitespace-pre-wrap text-base leading-relaxed">
+            <p className="whitespace-pre-wrap text-lg leading-relaxed">
               {msg.text}
             </p>
           )}

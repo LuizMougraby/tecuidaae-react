@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter"; //navegar entre o app
+import imgEncontreUBS from "@/assets/Encontre UBSs.jpg";
+import imgInformacoes from "@/assets/Ache informações reais.jpg";
 
 /**
  * TeCuidaAÊ - Home Page
@@ -66,7 +68,7 @@ export default function Home() {
 </header>
 
       {/* Hero Section */}
-      <section className="relative bg-backgroundSectionHome text-white py-16 md:py-19 flex items-center justify-center">
+      <section className="relative bg-backgroundSectionHome text-white pt-16 md:pt-19 md:pb-32 flex items-center justify-center" style={{borderRadius: "0 0 50% 50% / 0 0 80px 80px"}}>
         <div className="container relative z-10 text-center">
           <div className="max-w-2xl mx-auto pl-7">
             <h1 className="text-4xl font-semibold mb-6 text-center">
@@ -94,9 +96,15 @@ export default function Home() {
   <div
     key={index}
     onClick={() => navigate(index === 0 ? "/mapa" : "/informacoes")}
-    className="whitespace-pre-line bg-backgroundInformativos text-4xl text-white font-semibold text-center rounded-lg py-60 opacity-65 cursor-pointer hover:opacity-80 transition"
+    className="relative whitespace-pre-line text-4xl text-white font-semibold text-center rounded-lg py-60 cursor-pointer hover:opacity-90 transition overflow-hidden"
+    style={{
+      backgroundImage: `url(${index === 0 ? imgEncontreUBS : imgInformacoes})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }}
   >
-    {feature.title}
+    <div className="absolute inset-0 bg-black opacity-40 rounded-lg" />
+    <span className="relative z-10">{feature.title}</span>
   </div>
 ))}
         </div>
