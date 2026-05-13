@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useMemo } from "react";
 import { useChatbotDB } from "@/hooks/useChatbotDB";
+import imgChatbot from "@/assets/Encontre UBSs.jpg";
 
 interface Message {
   id: string;
@@ -127,7 +128,7 @@ export default function Chatbot() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: "#1a315b"}}>
+    <div className="min-h-screen flex flex-col" style={{ backgroundImage: `url(${imgChatbot})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
       {/* Header */}
       <header className="bg-[#6ADE8A] p-6 shadow-lg relative">
   <div className="container max-w-4xl mx-auto">
