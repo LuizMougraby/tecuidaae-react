@@ -1,5 +1,10 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
+import imgDestaque from "@/assets/Destaque.jpg";
+import imgConceitosBasicos from "@/assets/Conceitos Básicos.jpg";
+import imgPrevencao from "@/assets/Prevenção.jpg";
+import imgTratamento from "@/assets/Tratamento.jpg";
+import imgMitosFatos from "@/assets/Mitos vs Fatos.jpg";
 
 interface Article {
   id: number;
@@ -82,6 +87,13 @@ export default function Informacoes() {
 
   const featured = filtered.find((a) => a.featured);
   const rest = filtered.filter((a) => !a.featured);
+  const articleImages: Record<string, string> = {
+    "Gravidez": imgDestaque,
+    "Conceitos Básicos": imgConceitosBasicos,
+    "Prevenção": imgPrevencao,
+    "Tratamento": imgTratamento,
+    "Mitos vs Fatos": imgMitosFatos,
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -167,7 +179,7 @@ export default function Informacoes() {
 >
   <div className="flex">
     {/* Espaço reservado para imagem — lado esquerdo */}
-    <div className={`${categoryColors[featured.category] || "bg-[#6ADE8A]"} w-1/2 min-h-[350px]`} />
+    <div className="w-1/2 min-h-[350px]" style={{ backgroundImage: `url(${articleImages[featured.category]})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
     {/* Conteúdo — lado direito */}
     <div className="w-1/2 p-10 flex flex-col justify-center gap-4">
       <span className="bg-[#6ADE8A] text-white px-6 py-2 rounded-full text-base font-bold uppercase w-fit">
@@ -189,7 +201,7 @@ export default function Informacoes() {
                 onClick={() => setSelectedArticle(article)}
                 className="text-left bg-white rounded-2xl shadow border-2 border-[#6ADE8A] overflow-hidden hover:shadow-xl transition"
               >
-                <div className={`${categoryColors[article.category] || "bg-gray-500"} min-h-[250px]`} />
+                <div className="min-h-[250px]" style={{ backgroundImage: `url(${articleImages[article.category]})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
                 <div className="p-8">
                   <span className={`${categoryColors[article.category] || "bg-gray-500"} text-white px-6 py-2 rounded-full text-lg font-semibold w-fit`}>
                     {article.category}
