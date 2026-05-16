@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation } from "wouter";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
@@ -113,11 +113,42 @@ const ubsData: UBS[] = [
   },
 ];
 
+// Componente auxiliar para mover o mapa
+function MapController({ center }: { center: [number, number] | null }) {
+  const map = useMap();
+  useEffect(() => {
+    if (center) {
+      map.flyTo(center, 15, { animate: true, duration: 1.5 });
+    }
+  }, [center]);
+  return null;
+}
+
+// Calcula distância entre dois pontos em km
+function calcularDistancia(lat1: number, lng1: number, lat2: number, lng2: number): number {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLng/2) * Math.sin(dLng/2);
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
 export default function Mapa() {
   const [, navigate] = useLocation();
   const [selectedRegion, setSelectedRegion] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedUbs, setSelectedUbs] = useState<UBS | null>(null);
+  const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
+  const [mapCenter, setMapCenter] = useState<[number, number]>([-3.1019, -60.0250]);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => setUserLocation([pos.coords.latitude, pos.coords.longitude]),
+      () => console.log("Geolocalização não disponível")
+    );
+  }, []);
 
   const regions = [
     { value: "all", label: "Todas" },
@@ -156,7 +187,7 @@ export default function Mapa() {
         </div>
       </header>
 
-      <div className="flex-1 w-full py-8 px-16">
+      <div className="flex-1 w-full py-4 px-4">
 
        
         {/* Layout lado a lado */}
@@ -182,15 +213,21 @@ export default function Mapa() {
             filtered.map((ubs) => (
               <div
   key={ubs.id}
-  onClick={() => setSelectedUbs(ubs)}
-  className={`bg-white rounded-2xl p-10 shadow-lg border-4 hover:shadow-xl transition cursor-pointer min-h-[350px] flex flex-col justify-between ${
-    selectedUbs?.id === ubs.id ? "border-[#6ADE8A]" : "border-[#0059FF]"
-  }`}
+  onClick={() => { 
+  setSelectedUbs(ubs); 
+  setMapCenter([ubs.lat + 0.0001, ubs.lng + 0.0001]);
+  setTimeout(() => setMapCenter([ubs.lat, ubs.lng]), 100);
+}}
+className={`bg-white rounded-2xl p-10 shadow-lg border-4 hover:shadow-xl transition cursor-pointer min-h[350px] flex flex-col justify-between ${
+  selectedUbs?.id === ubs.id ? "border-[#6ADE8A]" : "border-[#0059FF]"
+}`}
 >
   {/* Nome e distância */}
   <div className="flex justify-between items-start mb-3">
     <h3 className="text-2xl font-bold text-[#0059FF]">{ubs.name}</h3>
-    <span className="text-base font-bold text-white bg-[#0059FF] px-4 py-2 rounded-full">-- km</span>
+    <span className="text-base font-bold text-white bg-[#0059FF] px-4 py-2 rounded-full">
+      {userLocation ? `${calcularDistancia(userLocation[0], userLocation[1], ubs.lat, ubs.lng).toFixed(1)} km` : "-- km"}
+    </span>
   </div>
 
   {/* Endereço e horário */}
@@ -224,6 +261,7 @@ export default function Mapa() {
             zoom={12}
             style={{ height: "100%", width: "100%" }}
           >
+            <MapController center={mapCenter} />
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
