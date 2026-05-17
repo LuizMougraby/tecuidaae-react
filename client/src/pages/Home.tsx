@@ -54,10 +54,10 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-background overflow-auto">
       {/* Header/Navigation */}
       <header className="sticky top-0 z-50 bg-headerHome text-headerText shadow-lg">
-  <nav className="w-full flex justify-between items-center py-5 px-6">
+  <nav className="w-full flex justify-between items-center py-2 px-6">
   {/* Logo — lado esquerdo */}
   <div className="flex items-center gap-3 pl-2">
-    <img src={logo} alt="TeCuidaAÊ" className="h-16" />
+    <img src={logo} alt="TeCuidaAÊ" className="h-28" />
   </div>
   {/* Links — lado direito */}
   <ul className="hidden md:flex gap-14 text-lg font-medium pr-4">
