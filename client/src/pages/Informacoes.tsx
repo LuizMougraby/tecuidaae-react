@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
 import imgDestaque from "@/assets/Destaque.jpg";
-import imgConceitosBasicos from "@/assets/Conceitos Básicos.jpg";
+import imgConceitosBasicos from "@/assets/Conceito Básico.jpg";
 import imgPrevencao from "@/assets/Prevenção.jpg";
 import imgTratamento from "@/assets/Tratamento.jpg";
-import imgMitosFatos from "@/assets/Mitos vs Fatos.jpg";
+import imgMitosFatos from "@/assets/Mistos vs Verdades.jpg";
+import imgSaudeMental from "@/assets/Saúde Mental.jpg";
+import imgTesteRapido from "@/assets/Teste Rápido.jpg";
 
 interface Article {
   id: number;
@@ -20,7 +22,7 @@ const articles: Article[] = [
   {
     id: 1,
     title: "Sífilis na Gravidez: Protegendo Mães e Bebês",
-    category: "Tratamento",
+    category: "Gravidez",
     excerpt: "A detecção precoce e o tratamento adequado durante o pré-natal são essenciais para prevenir a transmissão vertical da sífilis.",
     content: `A sífilis na gravidez é uma das situações que exige maior atenção médica. A bactéria Treponema pallidum pode ser transmitida da mãe para o bebê durante a gestação ou no parto, causando a chamada sifílis congênita.
     
@@ -148,7 +150,7 @@ VERDADE: A sífilis tem cura com tratamento adequado à base de penicilina, disp
   {
      id: 7,
     title: "Sífilis e Saúde Mental: O Impacto Emocional",
-    category: "Conceitos Básicos",
+    category: "Saúde Mental",
     excerpt: "Um diagnóstico de sífilis pode gerar ansiedade e estigma. Saiba como lidar com o impacto emocional e buscar apoio.",
     content: `Receber um diagnóstico de sífilis pode ser emocionalmente difícil. O estigma social em torno das ISTs frequentemente gera sentimentos de vergonha, culpa e ansiedade. É importante saber que você não está sozinho e que buscar ajuda é o caminho certo.
 
@@ -168,7 +170,7 @@ As UBSs oferecem atendimento sigiloso e humanizado. Profissionais de saúde est�
   {
     id: 8,
     title: "Teste Rápido para Sífilis: Como Funciona",
-    category: "Conceitos Básicos",
+    category: "Teste Rápido",
     excerpt: "O teste rápido para sífilis é gratuito, rápido e disponível em todas as UBSs. Saiba como funciona e por que fazê-lo.",
     content: `O teste rápido para sífilis é uma das ferramentas mais importantes no combate à doença. É simples, gratuito e o resultado sai em até 30 minutos.
 
@@ -191,10 +193,13 @@ Pessoas sexualmente ativas devem fazer o teste pelo menos uma vez por ano. Gesta
 ];
 
 const categoryColors: Record<string, string> = {
+  "Gravidez": "bg-[#6ADE8A]",
   "Conceitos Básicos": "bg-[#6ADE8A]",
   "Tratamento": "bg-[#6ADE8A]",
   "Prevenção": "bg-[#6ADE8A]",
   "Mitos vs Fatos": "bg-[#6ADE8A]",
+  "Saúde Mental": "bg-[#6ADE8A]",
+  "Teste Rápido": "bg-[#6ADE8A]",
 };
 
 export default function Informacoes() {
@@ -203,7 +208,7 @@ export default function Informacoes() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
-  const categories = ["all", "Conceitos Básicos", "Tratamento", "Prevenção", "Mitos vs Fatos"];
+  const categories = ["all", "Conceitos Básicos", "Tratamento", "Prevenção", "Mitos vs Fatos", "Saúde Mental", "Teste Rápido"];
   let filtered = articles;
   if (selectedCategory !== "all") {
     filtered = filtered.filter((a) => a.category === selectedCategory);
@@ -218,13 +223,15 @@ export default function Informacoes() {
   const featured = filtered.find((a) => a.featured);
   const rest = filtered.filter((a) => !a.featured);
   const articleImages: Record<string, string> = {
-    "Gravidez": imgDestaque,
-    "Conceitos Básicos": imgConceitosBasicos,
-    "Prevenção": imgPrevencao,
-    "Tratamento": imgTratamento,
-    "Mitos vs Fatos": imgMitosFatos,
-  };
+  "Gravidez": imgDestaque,
+  "Tratamento": imgTratamento,
+  "Conceitos Básicos": imgConceitosBasicos,
+  "Prevenção": imgPrevencao,
+  "Mitos vs Fatos": imgMitosFatos,
+  "Saúde Mental": imgSaudeMental,
+  "Teste Rápido": imgTesteRapido,
 
+};
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <header className="bg-[#6ADE8A] p-6 shadow-lg relative">
