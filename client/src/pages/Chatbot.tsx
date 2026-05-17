@@ -158,7 +158,7 @@ export default function Chatbot() {
       </button>
       <div className="flex-1 text-center">
         <h1 className="text-2xl font-bold text-white">ChatBot</h1>
-        <p className="text-base text-white opacity-90">Seu assistente virtual está aqui! Pergunte, e ele irá tirar suas dúvidas!</p>
+        <p className="text-xl text-white opacity-90">Seu assistente virtual está aqui! Pergunte, e ele irá tirar suas dúvidas!</p>
       </div>
     </div>
   </div>
