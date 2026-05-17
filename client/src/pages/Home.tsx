@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter"; //navegar entre o app
 import imgEncontreUBS from "@/assets/Encontre UBSs.jpg";
 import imgInformacoes from "@/assets/Ache informações reais.jpg";
-import logo from "@/assets/logo sem slogan.svg";
+import logo from "@/assets/Logo.svg"; 
 
 /**
  * TeCuidaAÊ - Home Page
