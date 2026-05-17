@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { useMemo } from "react";
 import { useChatbotDB } from "@/hooks/useChatbotDB";
 import imgChatbot from "@/assets/Encontre UBSs.jpg";
+import Groq from "groq-sdk";
 
 interface Message {
   id: string;
@@ -14,6 +15,10 @@ interface Message {
   source?: string;
 }
 
+const groq = new Groq({
+  apiKey: import.meta.env.VITE_GROQ_API_KEY,
+  dangerouslyAllowBrowser: true
+});
 const knowledgeBase: Record<string, { text: string; source: string }> = {
   "o que é sífilis": {
     text: "A sífilis é uma infecção sexualmente transmissível (IST) causada pela bactéria Treponema pallidum. Pode afetar várias partes do corpo e, se não tratada, pode causar sérios problemas de saúde.",
@@ -75,7 +80,7 @@ export default function Chatbot() {
     return matches / Math.max(words1.length, words2.length);
   };
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
 
     const userMsg: Message = {
@@ -89,35 +94,50 @@ export default function Chatbot() {
     setInput("");
     setIsTyping(true);
 
-    setTimeout(() => {
-      const processedText = input.toLowerCase();
-      let bestMatch: { text: string; source: string } | null = null;
-      let highestScore = 0;
+    const processedText = input.toLowerCase();
 
-      Object.entries(knowledgeBase).forEach(([key, value]) => {
-        const score = calculateSimilarity(processedText, key);
-        if (score > highestScore && score > 0.3) {
-          highestScore = score;
-          bestMatch = value;
-        }
+    try {
+      const completion = await groq.chat.completions.create({
+        messages: [
+          {
+            role: "system",
+            content: `Você é um assistente virtual de saúde pública especializado em sífilis.
+            Responda APENAS o que foi perguntado, de forma direta e objetiva.
+            Não adicione informações extras além do que foi perguntado.
+            Responda em português brasileiro, de forma clara e acolhedora.
+            Use no máximo 5 linhas na resposta.
+            Base suas respostas nos protocolos do Ministério da Saúde e OMS.
+            Não use markdown como ** ou * na resposta, use texto simples.`
+          },
+          { role: "user", content: input }
+        ],
+        model: "llama-3.3-70b-versatile",
+        max_tokens: 200,
       });
 
-      let responseText = bestMatch
-        ? (bestMatch as { text: string; source: string }).text
-        : "Desculpe, não entendi. Posso te ajudar com: O que é sífilis? Sintomas, Como se proteger, Tratamento, Sífilis na gravidez";
+      const responseText = completion.choices[0]?.message?.content || "Não consegui gerar uma resposta.";
 
       const botMsg: Message = {
         id: Date.now().toString(),
         text: responseText,
         isUser: false,
         timestamp: new Date(),
-        source: (bestMatch as { text: string; source: string } | null)?.source,
+        source: "Gemini AI — Baseado em protocolos do Ministério da Saúde e OMS",
       };
 
       setMessages(prev => [...prev, botMsg]);
       salvarMensagem(userMsg.text, responseText);
-      setIsTyping(false);
-    }, 1500);
+   } catch (error) {
+      console.error("Erro Gemini:", error);
+      const botMsg: Message = {
+        id: Date.now().toString(),
+        text: "Desculpe, ocorreu um erro. Tente novamente em instantes.",
+        isUser: false,
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, botMsg]);
+    }
+    setIsTyping(false);
   };
 
   const quickReplies = [
