@@ -150,23 +150,23 @@ export default function Chatbot() {
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundImage: `url(${imgChatbot})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
       {/* Header */}
-      <header className="bg-[#6ADE8A] p-6 shadow-lg relative">
+      <header className="bg-[#6ADE8A] p-4 sm:p-6 shadow-lg relative">
   <div className="container max-w-4xl mx-auto">
     <div className="flex items-center">
-      <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-6">
+      <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-4 sm:left-6 min-w-[48px] min-h-[48px] intems-center justify-center">
         ←
       </button>
-      <div className="flex-1 text-center">
-        <h1 className="text-2xl font-bold text-white">ChatBot</h1>
-        <p className="text-xl text-white opacity-90">Seu assistente virtual está aqui! Pergunte, e ele irá tirar suas dúvidas!</p>
+      <div className="flex-1 text-center px-12">
+        <h1 className="text-xl sm:tet-2xl font-bold text-white">ChatBot</h1>
+        <p className="text-sm sm:text-xl text-white opacity-90">Seu assistente virtual está aqui! Pergunte, e ele irá tirar suas dúvidas!</p>
       </div>
     </div>
   </div>
 </header>
 
       {/* Messages Container */}
-      <div className="flex-1 w-full py-6 overflow-y-auto px-8">
-  <div className="rounded-3xl p-8 w-full max-w-5xl mx-auto space-y-6 min-h-[600px] flex flex-col justify-between" style={{ backgroundColor: "rgba(255,255,255,0.80)" }}>
+      <div className="flex-1 w-full py-4 sm:p-6 overflow-y-auto px-2 sm:px-8">
+  <div className="rounded-3xl p-4 sm:p-8 w-full max-w-5xl mx-auto space-y-4 sm:space-y-6 min-h-[600px] flex flex-col justify-between" style={{ backgroundColor: "rgba(255,255,255,0.80)" }}>
     {messages.map((msg) => (
       <div
         key={msg.id}
@@ -180,21 +180,21 @@ export default function Chatbot() {
         )}
 
         <div
-          className={`px-5 py-4 rounded-2xl shadow ${
-            msg.isUser
-              ? "bg-[#0059FF] text-white rounded-br-none max-w-xl"
-              : "bg-[#6ADE8A] text-white rounded-bl-none max-w-lg"
-          }`}
-        >
-          {quickReplies.includes(msg.text) && msg.isUser ? (
-            <span className="px-4 py-2 rounded-full bg-white text-[#0059FF] text-lg font-semibold inline-block">
-              {msg.text}
-            </span>
-          ) : (
-            <p className="whitespace-pre-wrap text-lg leading-relaxed">
-              {msg.text}
-            </p>
-          )}
+  className={`px-4 py-3 sm:px-5 sm:py-4 rounded-2xl shadow ${
+    msg.isUser
+      ? "bg-[#0059FF] text-white rounded-br-none max-w-[75vw] sm:max-w-xl"
+      : "bg-[#6ADE8A] text-white rounded-bl-none max-w-[75vw] sm:max-w-lg"
+  }`}
+>
+  {quickReplies.includes(msg.text) && msg.isUser ? (
+    <span className="px-3 py-1 sm:px-4 sm:py-2 rounded-full bg-white text-[#0059FF] text-base sm:text-lg font-semibold inline-block">
+      {msg.text}
+    </span>
+  ) : (
+    <p className="whitespace-pre-wrap text-base sm:text-lg leading-relaxed">
+      {msg.text}
+    </p>
+  )}
           {/* Botões de opção dentro do balão do bot */}
           {!msg.isUser && (
             <div className="grid grid-cols-2 gap-2 mt-3">
@@ -249,15 +249,15 @@ export default function Chatbot() {
           <div ref={messagesEndRef} />
 
           {/* Input Area — dentro do card */}
-          <div className="flex gap-3 items-center mt-4 pt-4 border-t border-gray-200">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && handleSend()}
-              placeholder="Digite/marque para conversar com o assistente virtual:"
-              disabled={isTyping}
-              className="flex-1 px-6 py-4 rounded-full border-2 border-gray-200 focus:border-[#6ADE8A] focus:outline-none text-gray-700 text-base placeholder-[#0059FF]"
-            />
+          <div className="flex gap-2 sm:gap-3 items-center mt-4 pt-4 border-t border-gray-200">
+  <input
+    value={input}
+    onChange={(e) => setInput(e.target.value)}
+    onKeyPress={(e) => e.key === "Enter" && handleSend()}
+    placeholder="Digite sua dúvida..."
+    disabled={isTyping}
+    className="flex-1 px-4 py-3 sm:px-6 sm:py-4 rounded-full border-2 border-gray-200 focus:border-[#6ADE8A] focus:outline-none text-gray-700 text-sm sm:text-base placeholder-[#0059FF]"
+  />
             <button
               onClick={handleSend}
               disabled={isTyping || !input.trim()}
