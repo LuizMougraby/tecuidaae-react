@@ -234,19 +234,19 @@ export default function Informacoes() {
 };
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <header className="bg-[#6ADE8A] p-6 shadow-lg relative">
-        <div className="container max-w-4xl mx-auto">
-          <div className="flex items-center">
-            <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-6">
-              ←
-            </button>
-            <div className="flex-1 text-center">
-              <h1 className="text-2xl font-bold text-white">Informações</h1>
-              <p className="text-xl text-white opacity-90">Tudo sobre Sífilis, baseado nos protocolos do Ministério da Saúde</p>
-            </div>
-          </div>
-        </div>
-      </header>
+      <header className="bg-[#6ADE8A] p-4 sm:p-6 shadow-lg relative">
+  <div className="container max-w-4xl mx-auto">
+    <div className="flex items-center">
+      <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-4 sm:left-6 min-w-[48px] min-h-[48px] flex items-center justify-center">
+        ←
+      </button>
+      <div className="flex-1 text-center px-12">
+        <h1 className="text-xl sm:text-2xl font-bold text-white">Informações</h1>
+        <p className="text-sm sm:text-xl text-white opacity-90">Tudo sobre Sífilis, baseado nos protocolos do Ministério da Saúde</p>
+      </div>
+    </div>
+  </div>
+</header>
 
       {selectedArticle ? (
         <div className="flex-1 container max-w-4xl mx-auto py-8">
@@ -283,36 +283,36 @@ export default function Informacoes() {
           </div>
         </div>
       ) : (
-        <div className="flex-1 w-full py-8 px-16">
-          {/* Barra de busca */}
-          <div className="mb-8 px-4">
-  <input
-    type="text"
-    placeholder="Buscar artigos (ex: sintomas, tratamento, gravidez...)"
-    value={searchTerm}
-    onChange={(e) => setSearchTerm(e.target.value)}
-    className="w-full px-8 py-5 rounded-full border-2 border-gray-200 focus:border-[#6ADE8A] focus:outline-none text-gray-700 text-lg shadow-sm"
-  />
-</div>
-
-          {/* Abas de categoria */}
-          <div className="border-b-2 border-gray-200 mb-10">
-  <div className="flex justify-between pb-4 px-12">
-    {categories.map((cat) => (
-      <button
-        key={cat}
-        onClick={() => setSelectedCategory(cat)}
-        className={`flex-1 mx-2 py-3 rounded-full font-semibold text-base transition-all duration-200 ${
-          selectedCategory === cat
-            ? "bg-[#6ADE8A] text-white border-2 border-[#6ADE8A]"
-            : "bg-white text-[#6ADE8A] border-2 border-[#6ADE8A] hover:bg-[#6ADE8A] hover:text-white"
-        }`}
-      >
-        {cat === "all" ? "Todos" : cat}
-      </button>
-    ))}
+        <div className="flex-1 w-full py-6 px-4 sm:px-8 md:px-16">
+  {/* Barra de busca */}
+  <div className="mb-6">
+    <input
+      type="text"
+      placeholder="Buscar artigos..."
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      className="w-full px-5 py-3 sm:px-8 sm:py-5 rounded-full border-2 border-gray-200 focus:border-[#6ADE8A] focus:outline-none text-gray-700 text-base sm:text-lg shadow-sm"
+    />
   </div>
-</div>
+
+  {/* Abas de categoria */}
+  <div className="border-b-2 border-gray-200 mb-8">
+    <div className="flex overflow-x-auto gap-2 pb-4 scrollbar-hide">
+      {categories.map((cat) => (
+        <button
+          key={cat}
+          onClick={() => setSelectedCategory(cat)}
+          className={`flex-shrink-0 px-4 py-2 rounded-full font-semibold text-sm sm:text-base transition-all duration-200 min-h-[48px] ${
+            selectedCategory === cat
+              ? "bg-[#6ADE8A] text-white border-2 border-[#6ADE8A]"
+              : "bg-white text-[#6ADE8A] border-2 border-[#6ADE8A] hover:bg-[#6ADE8A] hover:text-white"
+          }`}
+        >
+          {cat === "all" ? "Todos" : cat}
+        </button>
+      ))}
+    </div>
+  </div>
 
           {/* Artigo destaque */}
           {featured && (
@@ -320,45 +320,43 @@ export default function Informacoes() {
   onClick={() => setSelectedArticle(featured)}
   className="w-full text-left bg-white rounded-2xl shadow-lg border-2 border-[#6ADE8A] overflow-hidden mb-8 hover:shadow-xl transition"
 >
-  <div className="flex">
-    {/* Espaço reservado para imagem — lado esquerdo */}
-    <div className="w-1/2 min-h-[350px]" style={{ backgroundImage: `url(${articleImages[featured.category]})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-    {/* Conteúdo — lado direito */}
-    <div className="w-1/2 p-10 flex flex-col justify-center gap-4">
-      <span className="bg-[#6ADE8A] text-white px-6 py-2 rounded-full text-base font-bold uppercase w-fit">
+  <div className="flex flex-col sm:flex-row">
+    <div className="w-full sm:w-1/2 min-h-[200px] sm:min-h-[350px]" style={{ backgroundImage: `url(${articleImages[featured.category]})`, backgroundSize: 'cover', backgroundPosition: 'top' }} />
+    <div className="w-full sm:w-1/2 p-6 sm:p-10 flex flex-col justify-center gap-3 sm:gap-4">
+      <span className="bg-[#6ADE8A] text-white px-4 py-1 sm:px-6 sm:py-2 rounded-full text-sm sm:text-base font-bold uppercase w-fit">
         DESTAQUE
       </span>
-      <h2 className="text-3xl font-bold text-gray-800 mt-3 mb-2">{featured.title}</h2>
-      <p className="text-lg gray-500 mb-4">{featured.excerpt}</p>
-      <span className="text-[#6ADE8A] font-semibold">Ler artigo completo →</span>
+      <h2 className="text-xl sm:text-3xl font-bold text-gray-800 mt-2 mb-1 sm:mt-3 sm:mb-2">{featured.title}</h2>
+      <p className="text-sm sm:text-lg text-gray-500 mb-2 sm:mb-4">{featured.excerpt}</p>
+      <span className="text-[#6ADE8A] font-semibold text-sm sm:text-base">Ler artigo completo →</span>
     </div>
   </div>
 </button>
           )}
 
           {/* Grid de artigos */}
-          <div className="grid grid-cols-2 gap-8">
-            {rest.map((article) => (
-              <button
-                key={article.id}
-                onClick={() => setSelectedArticle(article)}
-                className="text-left bg-white rounded-2xl shadow border-2 border-[#6ADE8A] overflow-hidden hover:shadow-xl transition"
-              >
-                <div className="min-h-[250px]" style={{ backgroundImage: `url(${articleImages[article.category]})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-                <div className="p-8">
-                  <span className={`${categoryColors[article.category] || "bg-gray-500"} text-white px-6 py-2 rounded-full text-lg font-semibold w-fit`}>
-                    {article.category}
-                  </span>
-                  <h3 className="text-2xl font-bold text-gray-800 mt-4 mb-2">{article.title}</h3>
-                  <p className="text-lg text-gray-500 mb-4">{article.excerpt}</p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-400">⏱ {article.readTime} min de leitura</span>
-                    <span className="text-[#6ADE8A] font-semibold text-base">Saiba mais →</span>
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
+  {rest.map((article) => (
+    <button
+      key={article.id}
+      onClick={() => setSelectedArticle(article)}
+      className="text-left bg-white rounded-2xl shadow border-2 border-[#6ADE8A] overflow-hidden hover:shadow-xl transition"
+    >
+      <div className="min-h-[180px] sm:min-h-[250px]" style={{ backgroundImage: `url(${articleImages[article.category]})`, backgroundSize: 'cover', backgroundPosition: article.category === 'Conceitos Básicos' ? 'center 10%' : 'center' }} />
+      <div className="p-4 sm:p-8">
+        <span className={`${categoryColors[article.category] || "bg-gray-500"} text-white px-4 py-1 sm:px-6 sm:py-2 rounded-full text-sm sm:text-lg font-semibold w-fit`}>
+          {article.category}
+        </span>
+        <h3 className="text-lg sm:text-2xl font-bold text-gray-800 mt-3 mb-2">{article.title}</h3>
+        <p className="text-sm sm:text-lg text-gray-500 mb-3 sm:mb-4">{article.excerpt}</p>
+        <div className="flex justify-between items-center">
+          <span className="text-xs sm:text-sm text-gray-400">⏱ {article.readTime} min de leitura</span>
+          <span className="text-[#6ADE8A] font-semibold text-sm sm:text-base">Saiba mais →</span>
+        </div>
+      </div>
+    </button>
+  ))}
+</div>
 
           {filtered.length === 0 && (
             <div className="text-center py-12 text-gray-400">
