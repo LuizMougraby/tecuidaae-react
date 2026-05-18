@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { useLocation } from "wouter"; //navegar entre o app
+import { useState } from "react";
+import { useLocation } from "wouter";
 import imgEncontreUBS from "@/assets/Encontre UBSs.jpg";
 import imgInformacoes from "@/assets/Ache informações reais.jpg";
 import logo from "@/assets/Logo.svg"; 
@@ -10,6 +10,7 @@ import logo from "@/assets/Logo.svg";
 
 export default function Home() {
   const [, navigate] = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const features = [
     {
@@ -54,64 +55,93 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-background overflow-auto">
       {/* Header/Navigation */}
       <header className="sticky top-0 z-50 bg-headerHome text-headerText shadow-lg">
-  <nav className="w-full flex justify-between items-center py-0 px-6 h-20">
-  {/* Logo — lado esquerdo */}
-  <div className="flex items-center gap-3 pl-2">
-    <img src={logo} alt="TeCuidaAÊ" className="h-28" />
-  </div>
-  {/* Links — lado direito */}
-  <ul className="hidden md:flex gap-14 text-lg font-medium pr-4">
-    <li><a href="/" className="hover:text-foreground transition">Início</a></li>
-    <li><a href="/chatbot" className="hover:text-foreground transition">Chatbot</a></li>
-    <li><a href="/mapa" className="hover:text-foreground transition">Mapa</a></li>
-    <li><a href="/informacoes" className="hover:text-foreground transition">Informações</a></li>
-    <li><a href="/triagem" className="hover:text-foreground transition">Triagem</a></li>
-  </ul>
-</nav>
-</header>
+        <nav className="w-full flex justify-between items-center px-4 sm:px-6 h-16 sm:h-20">
+          {/* Logo */}
+          <div className="flex items-center">
+            <img src={logo} alt="TeCuidaAÊ" className="h-16 sm:h-20" />
+          </div>
+          {/* Links — desktop */}
+          <ul className="hidden md:flex gap-8 lg:gap-14 text-base lg:text-lg font-medium pr-4">
+            <li><a href="/" className="hover:text-foreground transition py-2 inline-block">Início</a></li>
+            <li><a href="/chatbot" className="hover:text-foreground transition py-2 inline-block">Chatbot</a></li>
+            <li><a href="/mapa" className="hover:text-foreground transition py-2 inline-block">Mapa</a></li>
+            <li><a href="/informacoes" className="hover:text-foreground transition py-2 inline-block">Informações</a></li>
+            <li><a href="/triagem" className="hover:text-foreground transition py-2 inline-block">Triagem</a></li>
+          </ul>
+          {/* Hambúrguer — mobile */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+            className="md:hidden flex flex-col justify-center items-center gap-[5px] w-12 h-12 rounded-lg hover:bg-black/5"
+          >
+            <span className="block w-6 h-[2px] bg-headerText rounded transition-all duration-300"
+              style={{ transform: menuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }} />
+            <span className="block w-6 h-[2px] bg-headerText rounded transition-all duration-300"
+              style={{ opacity: menuOpen ? 0 : 1 }} />
+            <span className="block w-6 h-[2px] bg-headerText rounded transition-all duration-300"
+              style={{ transform: menuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }} />
+          </button>
+        </nav>
+        {/* Menu mobile dropdown */}
+        <div className="md:hidden overflow-hidden transition-all duration-300 bg-headerHome"
+          style={{ maxHeight: menuOpen ? "400px" : "0px" }}>
+          <ul className="flex flex-col border-t border-black/10">
+            {[
+              { label: "Início", href: "/" },
+              { label: "Chatbot", href: "/chatbot" },
+              { label: "Mapa", href: "/mapa" },
+              { label: "Informações", href: "/informacoes" },
+              { label: "Triagem", href: "/triagem" },
+            ].map((link) => (
+              <li key={link.href}>
+                <a href={link.href} onClick={() => setMenuOpen(false)}
+                  className="flex items-center px-6 text-headerText font-medium hover:bg-black/5 min-h-[48px]">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </header>
 
       {/* Hero Section */}
-      <section className="relative bg-backgroundSectionHome text-white pt-16 md:pt-19 md:pb-32 flex items-center justify-center" style={{borderRadius: "0 0 50% 50% / 0 0 80px 80px"}}>
-        <div className="container relative z-10 text-center">
-          <div className="max-w-2xl mx-auto pl-7">
-            <h1 className="text-4xl font-semibold mb-6 text-center">
-              Cuidando da sua saúde em Manaus
-            </h1>
-            <p className="text-lg font-light md:text-xl mb-8">
-              Informações confiáveis sobre sífilis, localização de UBSs e triagem de sintomas com base nos protocolos do Ministério da Saúde
-            </p>
-            {/* Emergency Banner */}
-            <section className="bg-backgroundAlert text-white py-5 font-medium text-lg rounded-lg mt-13">
-              <div className="flex items-center justify-center gap-10 text-center">
-                <div>
-                  <p>Em caso de emergência: procure uma UBS ou disque 192</p>
-                </div>
-              </div>
-            </section>
-          </div>
-        </div>
+      <section className="relative bg-backgroundSectionHome text-white pt-10 pb-14 md:pt-16 md:pb-32 flex items-center justify-center" style={{borderRadius: "0 0 50% 50% / 0 0 60px 60px"}}>
+  <div className="container relative z-10 text-center">
+    <div className="max-w-2xl mx-auto px-4">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 text-center">
+        Cuidando da sua saúde em Manaus
+      </h1>
+      <p className="text-sm sm:text-base font-light md:text-xl mb-6">
+        Informações confiáveis sobre sífilis, localização de UBSs e triagem de sintomas com base nos protocolos do Ministério da Saúde
+      </p>
+      {/* Emergency Banner */}
+      <section className="bg-backgroundAlert text-white py-4 px-4 font-medium text-sm sm:text-base rounded-lg mt-6">
+        <p>Em caso de emergência: procure uma UBS ou disque 192</p>
       </section>
+    </div>
+  </div>
+</section>
 
       {/* Features Section */}
-      <section id="features" className="w-full py-16 md:py-2 px-20 mb-7">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-          {features.map((feature, index) => (
-  <div
-    key={index}
-    onClick={() => navigate(index === 0 ? "/mapa" : "/informacoes")}
-    className="relative whitespace-pre-line text-4xl text-white font-semibold text-center rounded-lg py-60 cursor-pointer hover:opacity-90 transition overflow-hidden"
-    style={{
-      backgroundImage: `url(${index === 0 ? imgEncontreUBS : imgInformacoes})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-    }}
-  >
-    <div className="absolute inset-0 bg-black opacity-40 rounded-lg" />
-    <span className="relative z-10">{feature.title}</span>
+      <section id="features" className="w-full py-8 md:py-2 px-4 sm:px-8 md:px-20 mb-7">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 w-full">
+    {features.map((feature, index) => (
+      <div
+        key={index}
+        onClick={() => navigate(index === 0 ? "/mapa" : "/informacoes")}
+        className="relative whitespace-pre-line text-2xl sm:text-3xl md:text-4xl text-white font-semibold text-center rounded-lg py-32 sm:py-44 md:py-60 cursor-pointer hover:opacity-90 transition overflow-hidden"
+        style={{
+          backgroundImage: `url(${index === 0 ? imgEncontreUBS : imgInformacoes})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="absolute inset-0 bg-black opacity-40 rounded-lg" />
+        <span className="relative z-10 px-4">{feature.title}</span>
+      </div>
+    ))}
   </div>
-))}
-        </div>
-      </section>
+</section>
 
       <section className="w-full px-20 mb-13">
         <div className="bg-backgroundSections rounded-3xl p-12 px-15">
