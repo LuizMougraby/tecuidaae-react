@@ -143,64 +143,60 @@ export default function Home() {
   </div>
 </section>
 
-      <section className="w-full px-20 mb-13">
-        <div className="bg-backgroundSections rounded-3xl p-12 px-15">
-          {features2.map((feature, index) => (
-            <div key={index} className="grid grid-cols-1 md:grid-cols-2 items-center gap-10 mt-10">
-              {/* esquerda */}
-              <div>
-                <h2 className="text-5xl font-bold text-headerText leading-tight">
-                  {feature.title}
-                </h2>
-                <button
-  onClick={() => navigate("/chatbot")}
-  className="mt-17 bg-blue-600 text-white px-12 py-3 rounded-full text-lg font-semibold cursor-pointer hover:opacity-90 transition"
->
-  Conheça!
-</button>
-              </div>
-              {/* direita */}
-              <div>
-                <p className="text-2xl text-foreground opacity-70 leading-relaxed text-right">
-                  {feature.descricao}
-                </p>
-              </div>
-            </div>
-          ))}
+      <section className="w-full px-4 sm:px-8 md:px-20 mb-8 md:mb-13">
+  <div className="bg-backgroundSections rounded-3xl p-6 sm:p-10 md:p-12">
+    {features2.map((feature, index) => (
+      <div key={index} className="grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:gap-10 mt-4 md:mt-10">
+        <div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-headerText leading-tight whitespace-pre-line">
+            {feature.title}
+          </h2>
+          <button
+            onClick={() => navigate("/chatbot")}
+            className="mt-6 md:mt-17 bg-blue-600 text-white px-10 py-3 rounded-full text-base md:text-lg font-semibold cursor-pointer hover:opacity-90 transition min-h-[48px]"
+          >
+            Conheça!
+          </button>
         </div>
-      </section>
+        <div>
+          <p className="text-base sm:text-lg md:text-2xl text-foreground opacity-70 leading-relaxed md:text-right mt-4 md:mt-0">
+            {feature.descricao}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
 
-      <section className="w-full px-20 mb-13">
-        <div className="bg-backgroundSections rounded-3xl p-12 px-15">
-          {features3.map((feature, index) => (
-            <div key={index} className="grid grid-cols-1 md:grid-cols-2 items-center gap-10 mt-10">
-              {/* esquerda */}
-              <div>
-                <p className="text-2xl text-foreground opacity-70 leading-relaxed text-left">
-                  {feature.descricao}
-                </p>
-              </div>
-              {/* direita */}
-              <div className="flex flex-col">
-                <h2 className="text-5xl font-bold text-foregroundFeatures3 leading-tight text-right">
-                  {feature.title}
-                </h2>
-                <button
-  onClick={() => navigate("/triagem")}
-  className="self-end mt-17 bg-foregroundFeatures3 text-white px-12 py-3 rounded-full text-lg font-semibold cursor-pointer hover:opacity-90 transition"
->
-  Conheça!
-</button>
-              </div>
-            </div>
-          ))}
+<section className="w-full px-4 sm:px-8 md:px-20 mb-8 md:mb-13">
+  <div className="bg-backgroundSections rounded-3xl p-6 sm:p-10 md:p-12">
+    {features3.map((feature, index) => (
+      <div key={index} className="grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:gap-10 mt-4 md:mt-10">
+        <div className="order-2 md:order-1">
+          <p className="text-base sm:text-lg md:text-2xl text-foreground opacity-70 leading-relaxed mt-4 md:mt-0">
+            {feature.descricao}
+          </p>
         </div>
-      </section>
+        <div className="flex flex-col order-1 md:order-2">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foregroundFeatures3 leading-tight md:text-right whitespace-pre-line">
+            {feature.title}
+          </h2>
+          <button
+            onClick={() => navigate("/triagem")}
+            className="self-start md:self-end mt-6 md:mt-17 bg-foregroundFeatures3 text-white px-10 py-3 rounded-full text-base md:text-lg font-semibold cursor-pointer hover:opacity-90 transition min-h-[48px]"
+          >
+            Conheça!
+          </button>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
 
       {/* Footer */}
-      <footer id="contato" className="bg-[#323232] text-white py-12 mt-auto">
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <footer id="contato" className="bg-[#323232] text-white py-8 md:py-12 mt-auto">
+  <div className="container px-4 sm:px-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8">
             <div>
               <h4 className="text-secondary font-bold mb-4">TeCuidaAÊ</h4>
               <p className="text-gray-400 text-sm leading-relaxed">
