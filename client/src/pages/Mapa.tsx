@@ -173,89 +173,84 @@ export default function Mapa() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       {/* Header */}
-      <header className="bg-[#1A315B] p-6 shadow-lg relative">
-        <div className="container max-w-4xl mx-auto">
-          <div className="flex items-center">
-            <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-6">
-              ←
-            </button>
-            <div className="flex-1 text-center">
-              <h1 className="text-2xl font-bold text-white">Mapa das UBSs</h1>
-              <p className="text-xl text-white opacity-90">Encontre seu local de atendimento mais próximo</p>
-            </div>
-          </div>
-        </div>
-      </header>
+      <header className="bg-[#1A315B] p-4 sm:p-6 shadow-lg relative">
+  <div className="container max-w-4xl mx-auto">
+    <div className="flex items-center">
+      <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-4 sm:left-6 min-w-[48px] min-h-[48px] flex items-center justify-center">
+        ←
+      </button>
+      <div className="flex-1 text-center px-12">
+        <h1 className="text-xl sm:text-2xl font-bold text-white">Mapa das UBSs</h1>
+        <p className="text-sm sm:text-xl text-white opacity-90">Encontre seu local de atendimento mais próximo</p>
+      </div>
+    </div>
+  </div>
+</header>
 
-      <div className="flex-1 w-full py-4 px-4">
-
-       
-        {/* Layout lado a lado */}
-      <div className="flex flex-1 px-2 gap-6 pb-8">
-       {/* Lista de UBSs — lado esquerdo */}
-        <div className="w-1/2 flex flex-col">
-          <div className="bg-[#1A315B] rounded-2xl p-4 mb-4">
-            <p className="text-white font-medium mb-3">Clique em uma UBS para ver mais detalhes!</p>
-            <input
-              type="text"
-              placeholder="Buscar UBS..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-5 py-3 rounded-full bg-white border-2 border-white focus:border-[#6ADE8A] focus:outline-none text-gray-700"
-            />
-          </div>
-          <div className="space-y-4 overflow-y-auto max-h-[900px] pr-2">
+      <div className="flex-1 w-full py-4 px-2 sm:px-4">
+  {/* Layout empilhado no mobile, lado a lado no desktop */}
+  <div className="flex flex-row flex-1 px-0 sm:px-2 gap-2 sm:gap-6 pb-8">
+    {/* Lista de UBSs */}
+    <div className="w-1/2 flex flex-col">
+      <div className="bg-[#1A315B] rounded-2xl p-4 mb-4">
+        <p className="text-white font-medium mb-3 text-sm sm:text-base">Clique em uma UBS para ver mais detalhes!</p>
+        <input
+          type="text"
+          placeholder="Buscar UBS..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full px-4 py-3 rounded-full bg-white border-2 border-white focus:border-[#6ADE8A] focus:outline-none text-gray-700 text-sm sm:text-base"
+        />
+      </div>
+      <div className="space-y-3 overflow-y-auto max-h-[400px] pr-2">
           {filtered.length === 0 ? (
-            <div className="bg-white rounded-2xl p-8 text-center shadow border border-gray-100">
-              <p className="text-gray-400">Nenhuma UBS encontrada com esses critérios.</p>
+            <div className="bg-white rounded-2xl p-4 text-center shadow border border-gray-100">
+              <p className="text-gray-400 text-sm">Nenhuma UBS encontrada com esses critérios.</p>
             </div>
           ) : (
             filtered.map((ubs) => (
               <div
-  key={ubs.id}
-  onClick={() => { 
-  setSelectedUbs(ubs); 
-  setMapCenter([ubs.lat + 0.0001, ubs.lng + 0.0001]);
-  setTimeout(() => setMapCenter([ubs.lat, ubs.lng]), 100);
-}}
-className={`bg-white rounded-2xl p-10 shadow-lg border-4 hover:shadow-xl transition cursor-pointer min-h[350px] flex flex-col justify-between ${
-  selectedUbs?.id === ubs.id ? "border-[#6ADE8A]" : "border-[#0059FF]"
-}`}
->
-  {/* Nome e distância */}
-  <div className="flex justify-between items-start mb-3">
-    <h3 className="text-2xl font-bold text-[#0059FF]">{ubs.name}</h3>
-    <span className="text-base font-bold text-white bg-[#0059FF] px-4 py-2 rounded-full">
-      {userLocation ? `${calcularDistancia(userLocation[0], userLocation[1], ubs.lat, ubs.lng).toFixed(1)} km` : "-- km"}
-    </span>
-  </div>
-
-  {/* Endereço e horário */}
-  <p className="text-lg text-gray-700 mb-1"> {ubs.address}</p>
-  <p className="text-lg text-gray-700 mb-3"> {ubs.hours}</p>
-
-  {/* Serviços com borda azul */}
-  <div className="flex flex-wrap gap-2 mb-3">
-    {ubs.services.map((service, idx) => (
-      <span key={idx} className="border-2 border-[#0059FF] text-[#0059FF] text-base px-4 py-2 rounded-lg font-medium">
-        {service}
-      </span>
-    ))}
-  </div>
-
-  {/* Status aberto */}
-  <div className="flex items-center gap-2 mt-3">
-    <span className="w-3 h-3 rounded-full bg-[#6ADE8A]"></span>
-    <span className="text-sm font-medium text-[#6ADE8A]">Aberto agora</span>
-  </div>
-</div>
+                key={ubs.id}
+                onClick={() => {
+                  setSelectedUbs(ubs);
+                  setMapCenter([ubs.lat + 0.0001, ubs.lng + 0.0001]);
+                  setTimeout(() => setMapCenter([ubs.lat, ubs.lng]), 100);
+                }}
+                className={`bg-white rounded-2xl p-3 sm:p-6 shadow-lg border-4 hover:shadow-xl transition cursor-pointer flex flex-col justify-between ${
+                  selectedUbs?.id === ubs.id ? "border-[#6ADE8A]" : "border-[#0059FF]"
+                }`}
+              >
+                {/* Nome e distância */}
+                <div className="flex justify-between items-start mb-2 gap-2">
+                  <h3 className="text-sm sm:text-xl font-bold text-[#0059FF] leading-tight">{ubs.name}</h3>
+                  <span className="text-xs sm:text-sm font-bold text-white bg-[#0059FF] px-2 py-1 rounded-full whitespace-nowrap">
+                    {userLocation ? `${calcularDistancia(userLocation[0], userLocation[1], ubs.lat, ubs.lng).toFixed(1)} km` : "-- km"}
+                  </span>
+                </div>
+                {/* Endereço e horário */}
+                <p className="text-xs sm:text-base text-gray-700 mb-1">{ubs.address}</p>
+                <p className="text-xs sm:text-base text-gray-700 mb-2">{ubs.hours}</p>
+                {/* Serviços */}
+                <div className="flex flex-wrap gap-1 sm:gap-2 mb-2">
+                  {ubs.services.map((service, idx) => (
+                    <span key={idx} className="border-2 border-[#0059FF] text-[#0059FF] text-xs sm:text-sm px-2 py-1 rounded-lg font-medium">
+                      {service}
+                    </span>
+                  ))}
+                </div>
+                {/* Status aberto */}
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#6ADE8A]"></span>
+                  <span className="text-xs font-medium text-[#6ADE8A]">Aberto agora</span>
+                </div>
+              </div>
             ))
           )}
         </div>
         </div>
 
         {/* Mapa — lado direito */}
-        <div className="w-1/2 rounded-2xl overflow-hidden shadow-lg border-2 border-[#1A315B]" style={{ height: "900px" }}>
+        <div className="w-1/2 rounded-2xl overflow-hidden shadow-lg border-2 border-[#1A315B]" style={{ height: "500px" }}>
           <MapContainer
             center={[-3.1019, -60.0250]}
             zoom={12}
