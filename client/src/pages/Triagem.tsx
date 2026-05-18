@@ -104,21 +104,23 @@ export default function Triagem() {
 
   if (showResult) {
     return (
-      <div className="min-h-screen flex flex-col bg-background">
-        <header className="bg-secondary text-white p-5 shadow-lg">
-          <div className="container flex items-center gap-4">
-            <button
-              onClick={() => navigate("/")}
-              className="text-2xl hover:opacity-80 transition"
-            >
-              ←
-            </button>
-            <h1 className="text-xl font-bold">Resultado da Triagem</h1>
+      <div className="min-h-screen flex flex-col" style={{ backgroundImage: `url(${imgtriagem})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <header className="bg-[#6ADE8A] p-6 shadow-lg relative">
+          <div className="container max-w-4xl mx-auto">
+            <div className="flex items-center">
+              <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-90 transition absolute left-6">
+                ←
+              </button>
+              <div className="flex-1 text-center">
+                <h1 className="text-2xl font-bold text-white">Resultado da Triagem</h1>
+                <p className="text-xl text-white opacity-90">Baseado nas suas respostas</p>
+              </div>
+            </div>
           </div>
         </header>
 
         <div className="flex-1 container py-12 flex items-center justify-center">
-          <div className="max-w-2xl w-full">
+          <div className="max-w-2xl w-full rounded-3xl p-6" style={{ backgroundColor: "rgba(255,255,255,0.85)" }}>
             <div
               className={`rounded-2xl p-8 text-center ${
                 risk.level === "alto"
@@ -132,65 +134,95 @@ export default function Triagem() {
               <h2 className="text-3xl font-bold mb-4">{risk.title}</h2>
 
               {risk.level === "alto" && (
-                <div className="space-y-4 text-left">
-                  <p className="text-lg">
-                    Com base nas suas respostas, recomendamos que você procure atendimento médico urgentemente.
-                  </p>
-                  <div className="bg-white bg-opacity-20 rounded-lg p-4 space-y-2">
-                    <p className="font-bold">Ação Imediata:</p>
-                    <p>Dirija-se à UBS mais próxima hoje mesmo. O tratamento é gratuito e confidencial.</p>
-                  </div>
-                  <div className="bg-white bg-opacity-20 rounded-lg p-4 space-y-2">
-                    <p className="font-bold">Emergência:</p>
-                    <p>Se não puder ir pessoalmente, ligue para 192 (SAMU) ou procure o pronto-socorro.</p>
-                  </div>
-                </div>
-              )}
+  <div className="space-y-4 text-left">
+    <p className="text-xl">Com base nas suas respostas, você apresenta sinais de alto risco. Procure atendimento médico o quanto antes.</p>
+    <div className="bg-white bg-opacity-40 rounded-lg p-4 space-y-2 text-gray-800">
+      <p className="font-bold text-lg"> Ação Imediata:</p>
+      <p className="text-base">Dirija-se à UBS mais próxima hoje mesmo. O tratamento é gratuito, confidencial e altamente eficaz.</p>
+    </div>
+    <div className="bg-white bg-opacity-40 rounded-lg p-4 space-y-2 text-gray-800">
+      <p className="font-bold text-lg"> Emergência:</p>
+      <p className="text-base">Se não puder ir pessoalmente, ligue 192 (SAMU) ou procure o pronto-socorro mais próximo.</p>
+    </div>
+    <div className="bg-white bg-opacity-40 rounded-lg p-4 space-y-2 text-gray-800">
+      <p className="font-bold txt-lg"> Tratamento:</p>
+      <p className="text-base">A sífilis tem cura! O tratamento com penicilina benzatina é gratuito no SUS e muito eficaz quando iniciado cedo.</p>
+    </div>
+    <div className="bg-white bg-opacity-40 rounded-lg p-4 space-y-2 text-gray-800">
+      <p className="font-bold text-lg"> Parceiro(a):</p>
+      <p className="text-base">Informe seu parceiro(a) para que ele(a) também seja testado(a) e tratado(a) se necessário.</p>
+    </div>
+  </div>
+)}
 
               {risk.level === "moderado" && (
-                <div className="space-y-4 text-left">
-                  <p className="text-lg">
-                    Você apresenta alguns fatores de risco. Recomendamos fazer o teste de sífilis nas próximas 48 horas.
-                  </p>
-                  <div className="bg-white bg-opacity-20 rounded-lg p-4 space-y-2">
-                    <p className="font-bold">Teste Rápido:</p>
-                    <p>O teste é gratuito, rápido (resultado em 30 min) e disponível em todas as UBSs.</p>
-                  </div>
-                </div>
-              )}
+  <div className="space-y-4 text-left">
+    <p className="text-xl">Você apresenta alguns fatores de risco. Recomendamos fazer o teste de sífilis nas próximas 48 horas.</p>
+    <div className="bg-white bg-opacity-40 rounded-lg p-4 space-y-2 text-gray-800">
+      <p className="font-bold text-lg"> Teste Rápido:</p>
+      <p>O teste é gratuito, resultado em 30 minutos e disponível em todas as UBSs. Não precisa de agendamento.</p>
+    </div>
+    <div className="bg-white bg-opacity-40 rounded-lg p-4 space-y-2 text-gray-800">
+      <p className="font-bold text-lg"> Prevenção:</p>
+      <p className="text-base">Use preservativo em todas as relações sexuais até confirmar seu estado de saúde.</p>
+    </div>
+    <div className="bg-white bg-opacity-40 rounded-lg p-4 space-y-2 text-gray-800">
+      <p className="font-bold text-lg"> Parceiro(a):</p>
+      <p className="text-base">Converse com seu parceiro(a) sobre saúde sexual e incentive-o(a) a fazer o teste também.</p>
+    </div>
+    <div className="bg-white bg-opacity-40 rounded-lg p-4 space-y-2 text-gray-800">
+      <p className="font-bold text-lg"> Acompanhamento:</p>
+      <p className="text-base">Mesmo que o teste dê negativo, mantenha o acompanhamento médico regular e repita o teste a cada 6 meses.</p>
+    </div>
+  </div>
+)}
 
               {risk.level === "baixo" && (
-                <div className="space-y-4 text-left">
-                  <p className="text-lg">
-                    Pelas suas respostas, seu risco atual parece baixo. Continue com as práticas de prevenção.
-                  </p>
-                  <div className="bg-white bg-opacity-20 rounded-lg p-4 space-y-2">
-                    <p className="font-bold">Prevenção:</p>
-                    <p>Use camisinha em todas as relações e faça testes anuais se tiver vida sexual ativa.</p>
-                  </div>
-                </div>
-              )}
-
-              <div className="mt-8 bg-white bg-opacity-20 rounded-lg p-4 text-sm">
-                <p className="font-bold mb-2">Aviso importante:</p>
-                <p>Esta triagem é apenas uma ferramenta de orientação inicial e não substitui o diagnóstico médico.</p>
+  <div className="space-y-4 text-left">
+    <p className="text-xl">Ótima notícia! Suas respostas indicam baixo risco. Continue mantendo hábitos saudáveis de prevenção.</p>
+    <div className="bg-white bg-opacity-40 rounded-lg p-4 space-y-2 text-gray-800">
+      <p className="font-bold text-lg"> Continue Assim:</p>
+      <p className="text-base">Use preservativo em todas as relações sexuais, incluindo sexo oral e anal.</p>
+    </div>
+    <div className="bg-white bg-opacity-40 rounded-lg p-4 space-y-2 text-gray-800">
+      <p className="font-bold text-lg"> Teste Regular:</p>
+      <p className="text-base">Faça o teste para sífilis pelo menos uma vez por ano se tiver vida sexual ativa. É gratuito nas UBSs.</p>
+    </div>
+    <div className="bg-white bg-opacity-40 rounded-lg p-4 space-y-2 text-gray-800">
+      <p className="font-bold text-lg"> Diálogo:</p>
+      <p className="text-base">Converse abertamente com seus parceiros sobre saúde sexual e ISTs.</p>
+    </div>
+    <div className="bg-white bg-opacity-40 rounded-lg p-4 space-y-2 text-gray-800">
+      <p className="font-bold text-lg"> Informação:</p>
+      <p className="text-base">Acesse nossa página de Informações para aprender mais sobre prevenção e sintomas da sífilis.</p>
+    </div>
+  </div>
+)}
+              <div className="mt-8 bg-white bg-opacity-20 rounded-lg p-4 space-y-2 text-gray-800">
+                <p className="font-bold text-lg">Aviso importante:</p>
+                <p className="text-base">Esta triagem é apenas uma ferramenta de orientação inicial e não substitui o diagnóstico médico.</p>
               </div>
             </div>
 
             <div className="flex gap-4 mt-8">
-              <Button
+              <button
                 onClick={() => navigate("/mapa")}
-                className="flex-1 bg-primary text-white hover:bg-[#14919b]"
+                className="flex-1 bg-[#6ADE8A] text-white py-3 rounded-full font-semibold text-lg hover:opacity-90 transition"
               >
-                Encontrar UBS
-              </Button>
-              <Button
+                 Encontrar UBS
+              </button>
+              <button
+                onClick={() => { setShowResult(false); setCurrentStep(1); setAnswers({}); setRiskScore(0); }}
+                className="flex-1 bg-white text-[#6ADE8A] border-2 border-[#6ADE8A] py-3 rounded-full font-semibold text-lg hover:bg-[#6ADE8A] hover:text-white transition"
+              >
+                 Refazer Triagem
+              </button>
+              <button
                 onClick={() => navigate("/")}
-                variant="outline"
-                className="flex-1"
+                className="flex-1 bg-white text-gray-600 border-2 border-gray-300 py-3 rounded-full font-semibold text-lg hover:bg-gray-100 transition"
               >
-                Voltar ao Início
-              </Button>
+                 Voltar ao Início
+              </button>
             </div>
           </div>
         </div>
