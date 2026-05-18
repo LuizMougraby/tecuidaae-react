@@ -123,12 +123,12 @@ export default function Triagem() {
           <div className="max-w-2xl w-full rounded-3xl p-6" style={{ backgroundColor: "rgba(255,255,255,0.85)" }}>
             <div
               className={`rounded-2xl p-8 text-center ${
-                risk.level === "alto"
-                  ? "bg-gradient-to-br from-destructive to-[#ee5a5a] text-white"
-                  : risk.level === "moderado"
-                  ? "bg-gradient-to-br from-warning to-[#FFB74D] text-white"
-                  : "bg-gradient-to-br from-success to-[#66BB6A] text-white"
-              }`}
+  risk.level === "alto"
+    ? "bg-red-500 text-white"
+    : risk.level === "moderado"
+    ? "bg-orange-400 text-white"
+    : "bg-green-500 text-white"
+}`}
             >
               <div className="text-6xl mb-4">{risk.icon}</div>
               <h2 className="text-3xl font-bold mb-4">{risk.title}</h2>
