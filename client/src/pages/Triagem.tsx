@@ -105,33 +105,33 @@ export default function Triagem() {
   if (showResult) {
     return (
       <div className="min-h-screen flex flex-col" style={{ backgroundImage: `url(${imgtriagem})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <header className="bg-[#6ADE8A] p-6 shadow-lg relative">
-          <div className="container max-w-4xl mx-auto">
-            <div className="flex items-center">
-              <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-90 transition absolute left-6">
-                ←
-              </button>
-              <div className="flex-1 text-center">
-                <h1 className="text-2xl font-bold text-white">Resultado da Triagem</h1>
-                <p className="text-xl text-white opacity-90">Baseado nas suas respostas</p>
-              </div>
-            </div>
-          </div>
-        </header>
+        <header className="bg-[#6ADE8A] p-4 sm:p-6 shadow-lg relative">
+  <div className="container max-w-4xl mx-auto">
+    <div className="flex items-center">
+      <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-90 transition absolute left-4 sm:left-6 min-w-[48px] min-h-[48px] flex items-center justify-center">
+        ←
+      </button>
+      <div className="flex-1 text-center px-12">
+        <h1 className="text-xl sm:text-2xl font-bold text-white">Resultado da Triagem</h1>
+        <p className="text-sm sm:text-xl text-white opacity-90">Baseado nas suas respostas</p>
+      </div>
+    </div>
+  </div>
+</header>
 
-        <div className="flex-1 container py-12 flex items-center justify-center">
-          <div className="max-w-2xl w-full rounded-3xl p-6" style={{ backgroundColor: "rgba(255,255,255,0.85)" }}>
-            <div
-              className={`rounded-2xl p-8 text-center ${
-  risk.level === "alto"
-    ? "bg-red-500 text-white"
-    : risk.level === "moderado"
-    ? "bg-orange-400 text-white"
-    : "bg-green-500 text-white"
-}`}
-            >
-              <div className="text-6xl mb-4">{risk.icon}</div>
-              <h2 className="text-3xl font-bold mb-4">{risk.title}</h2>
+        <div className="flex-1 container py-6 sm:py-12 px-4 sm:px-6 flex items-center justify-center">
+  <div className="max-w-2xl w-full rounded-3xl p-4 sm:p-6" style={{ backgroundColor: "rgba(255,255,255,0.85)" }}>
+    <div
+      className={`rounded-2xl p-4 sm:p-8 text-center ${
+        risk.level === "alto"
+          ? "bg-red-500 text-white"
+          : risk.level === "moderado"
+          ? "bg-orange-400 text-white"
+          : "bg-green-500 text-white"
+      }`}
+    >
+      <div className="text-4xl sm:text-6xl mb-3 sm:mb-4">{risk.icon}</div>
+      <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">{risk.title}</h2>
 
               {risk.level === "alto" && (
   <div className="space-y-4 text-left">
@@ -204,26 +204,26 @@ export default function Triagem() {
               </div>
             </div>
 
-            <div className="flex gap-4 mt-8">
-              <button
-                onClick={() => navigate("/mapa")}
-                className="flex-1 bg-[#6ADE8A] text-white py-3 rounded-full font-semibold text-lg hover:opacity-90 transition"
-              >
-                 Encontrar UBS
-              </button>
-              <button
-                onClick={() => { setShowResult(false); setCurrentStep(1); setAnswers({}); setRiskScore(0); }}
-                className="flex-1 bg-white text-[#6ADE8A] border-2 border-[#6ADE8A] py-3 rounded-full font-semibold text-lg hover:bg-[#6ADE8A] hover:text-white transition"
-              >
-                 Refazer Triagem
-              </button>
-              <button
-                onClick={() => navigate("/")}
-                className="flex-1 bg-white text-gray-600 border-2 border-gray-300 py-3 rounded-full font-semibold text-lg hover:bg-gray-100 transition"
-              >
-                 Voltar ao Início
-              </button>
-            </div>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 sm:mt-8">
+  <button
+    onClick={() => navigate("/mapa")}
+    className="flex-1 bg-[#6ADE8A] text-white py-3 rounded-full font-semibold text-base sm:text-lg min-h-[48px] hover:opacity-90 transition"
+  >
+     Encontrar UBS
+  </button>
+  <button
+    onClick={() => { setShowResult(false); setCurrentStep(1); setAnswers({}); setRiskScore(0); }}
+    className="flex-1 bg-white text-[#6ADE8A] border-2 border-[#6ADE8A] py-3 rounded-full font-semibold text-base sm:text-lg min-h-[48px] hover:bg-[#6ADE8A] hover:text-white transition"
+  >
+     Refazer Triagem
+  </button>
+  <button
+    onClick={() => navigate("/")}
+    className="flex-1 bg-white text-gray-600 border-2 border-gray-300 py-3 rounded-full font-semibold text-base sm:text-lg min-h-[48px] hover:bg-gray-100 transition"
+  >
+     Voltar ao Início
+  </button>
+</div>
           </div>
         </div>
       </div>
@@ -236,19 +236,19 @@ export default function Triagem() {
     <div className="min-h-screen flex flex-col" style={{ backgroundImage: `url(${imgtriagem})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
       <div>
         {/* Header */}
-        <header className="bg-[#6ADE8A] p-6 shadow-lg relative">
-          <div className="container max-w-4xl mx-auto">
-            <div className="flex items-center">
-              <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-6">
-                ←
-              </button>
-              <div className="flex-1 text-center">
-                <h1 className="text-2xl font-bold text-white">Triagem</h1>
-                <p className="text-2xl text-white opacity-90">Avalie seu risco para sífilis em algumas perguntas rápidas</p>
-              </div>
-            </div>
-          </div>
-        </header>
+        <header className="bg-[#6ADE8A] p-4 sm:p-6 shadow-lg relative">
+  <div className="container max-w-4xl mx-auto">
+    <div className="flex items-center">
+      <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-4 sm:left-6 min-w-[48px] min-h-[48px] flex items-center justify-center">
+        ←
+      </button>
+      <div className="flex-1 text-center px-12">
+        <h1 className="text-xl sm:text-2xl font-bold text-white">Triagem</h1>
+        <p className="text-sm sm:text-xl text-white opacity-90">Avalie seu risco para sífilis em algumas perguntas rápidas</p>
+      </div>
+    </div>
+  </div>
+</header>
 
         {/* Barra de progresso */}
         <div className="flex justify-center mt-4 px-8">
@@ -262,44 +262,43 @@ export default function Triagem() {
       </div>
 
       {/* Card de perguntas */}
-      <div className="flex-1 container max-w-4xl mx-auto py-10">
-        {currentQuestion && (
-<div className="rounded-2xl p-12 shadow-xl min-h-[500px] flex flex-col justify-center gap-8" style={{ backgroundColor: "rgba(255,255,255,0.80)" }}>
-           <p className="text-base font-bold text-gray-500 uppercase tracking-wide mb-2">
-  Pergunta {currentStep}
-</p>
-<h2 className="text-xl font-normal text-gray-700 mb-8">
-  {currentQuestion.question}
-</h2>
-
-            {/* Opções lado a lado */}
-            <div className="flex flex-wrap gap-3 mb-8">
-              {currentQuestion.options.map((option) => (
-                <button
-                  key={option.value}
-                  onClick={() => handleAnswer(option.value)}
-                  className={
-                    answers[currentStep] === option.value
-                      ? "px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-[#6ADE8A] bg-[#6ADE8A] text-white text-lg"
-                      : "px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-white bg-white text-gray-700 hover:border-[#6ADE8A] hover:bg-[#6ADE8A] hover:text-white text-lg"
-                  }
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
+      <div className="flex-1 container max-w-4xl mx-auto py-4 sm:py-10 px-4 sm:px-6">
+  {currentQuestion && (
+    <div className="rounded-2xl p-6 sm:p-12 shadow-xl min-h-[400px] sm:min-h-[500px] flex flex-col justify-center gap-4 sm:gap-8" style={{ backgroundColor: "rgba(255,255,255,0.80)" }}>
+      <p className="text-sm sm:text-base font-bold text-gray-500 uppercase tracking-wide mb-1 sm:mb-2">
+        Pergunta {currentStep}
+      </p>
+      <h2 className="text-base sm:text-xl font-normal text-gray-700 mb-4 sm:mb-8">
+        {currentQuestion.question}
+      </h2>
+      {/* Opções */}
+      <div className="flex flex-col sm:flex-wrap sm:flex-row gap-3 mb-4 sm:mb-8">
+        {currentQuestion.options.map((option) => (
+          <button
+            key={option.value}
+            onClick={() => handleAnswer(option.value)}
+            className={
+              answers[currentStep] === option.value
+                ? "w-full sm:w-auto px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-[#6ADE8A] bg-[#6ADE8A] text-white text-base sm:text-lg min-h-[48px]"
+                : "w-full sm:w-auto px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-white bg-white text-gray-700 hover:border-[#6ADE8A] hover:bg-[#6ADE8A] hover:text-white text-base sm:text-lg min-h-[48px]"
+            }
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
 
             {/* Botões Voltar e Próximo */}
-<div className="flex gap-4 mt-auto">
-              <button
-                onClick={handlePrev}
-                disabled={currentStep === 1}
-                className="flex-1 border-2 border-white bg-white text-gray-600 py-3 rounded-full font-semibold text-lg hover:bg-opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                Voltar
-              </button>
-              <button
-                onClick={async () => {
+<div className="flex gap-3 sm:gap-4 mt-auto">
+  <button
+    onClick={handlePrev}
+    disabled={currentStep === 1}
+    className="flex-1 border-2 border-white bg-white text-gray-600 py-3 rounded-full font-semibold text-base sm:text-lg min-h-[48px] hover:bg-opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed"
+  >
+    Voltar
+  </button>
+  <button
+    onClick={async () => {
   if (!answers[currentStep]) return;
   if (currentStep < totalSteps) {
     setCurrentStep(s => s + 1);
