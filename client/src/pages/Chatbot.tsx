@@ -105,8 +105,10 @@ export default function Chatbot() {
             Responda APENAS o que foi perguntado, de forma direta e objetiva.
             Não adicione informações extras além do que foi perguntado.
             Responda em português brasileiro, de forma clara e acolhedora.
+            Reconhença e entenda gírias e expressões regionais do Amazonas como "mano", "égua", "oexnte", "rapaz" e similares.
             Use no máximo 5 linhas na resposta.
             Base suas respostas nos protocolos do Ministério da Saúde e OMS.
+            Ao final de cada resposta, cite a fonte: Ministério da Saúde ou OMS.
             Não use markdown como ** ou * na resposta, use texto simples.`
           },
           { role: "user", content: input }
@@ -122,7 +124,7 @@ export default function Chatbot() {
         text: responseText,
         isUser: false,
         timestamp: new Date(),
-        source: "Gemini AI — Baseado em protocolos do Ministério da Saúde e OMS",
+        source: "Fonte: Ministério da Saúde e OMS",
       };
 
       setMessages(prev => [...prev, botMsg]);
