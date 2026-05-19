@@ -16,11 +16,20 @@ export default function Triagem() {
   const [showResult, setShowResult] = useState(false);
   const { salvarResultado } = useTriagemDB();
 
-  const totalSteps = 7;
+  const totalSteps = 8;
 
   const questions = [
+    {
+      step: 1,
+      question: "Qual é a sua faixa etária?",
+      options: [
+        { label: "Menos de 18 anos", value: "menor", points: 0 },
+        { label: "18 a 29 anos", value: "jovem", points: 0 },
+        { label: "30 anos ou mais", value: "adulto", points: 0 }
+      ],
+    },
   {
-    step: 1,
+    step: 2,
     question: "Você tem ou teve alguma ferida, úlcera ou bolha nos genitais, ânus ou boca?",
     options: [
       { label: "Sim, atualmente", value: "sim_atual", points: 3 },
@@ -29,7 +38,7 @@ export default function Triagem() {
     ],
   },
   {
-    step: 2,
+    step: 3,
     question: "Você teve relação sexual sem preservativo nos últimos 3 meses?",
     options: [
       { label: "Sim", value: "sim", points: 3 },
@@ -38,7 +47,7 @@ export default function Triagem() {
     ],
   },
   {
-    step: 3,
+    step: 4,
     question: "Você apresenta manchas avermelhadas na pele, febre ou mal-estar recente?",
     options: [
       { label: "Sim", value: "sim", points: 2 },
@@ -46,7 +55,7 @@ export default function Triagem() {
     ],
   },
   {
-    step: 4,
+    step: 5,
     question: "Você ou seu parceiro(a) foi diagnosticado(a) com alguma IST recentemente?",
     options: [
       { label: "Sim", value: "sim", points: 3 },
@@ -55,7 +64,7 @@ export default function Triagem() {
     ],
   },
   {
-    step: 5,
+    step: 6,
     question: "Você está grávida ou tentando engravidar?",
     options: [
       { label: "Sim, estou grávida", value: "gravida", points: 3 },
@@ -64,7 +73,7 @@ export default function Triagem() {
     ],
   },
   {
-    step: 6,
+    step: 7,
     question: "Você já realizou algum teste para sífilis?",
     options: [
       { label: "Sim, e deu negativo", value: "negativo", points: 0 },
@@ -73,7 +82,7 @@ export default function Triagem() {
     ],
   },
   {
-    step: 7,
+    step: 8,
     question: "Você tem múltiplos parceiros sexuais ou parceiro(a) com múltiplos parceiros?",
     options: [
       { label: "Sim", value: "sim", points: 2 },
@@ -94,11 +103,12 @@ export default function Triagem() {
   };
 
   const getRiskLevel = () => {
-    if (riskScore >= 7) return { level: "alto", icon: "🚨", title: "Risco Alto Detectado" };
-    if (riskScore >= 3) return { level: "moderado", icon: "⚠️", title: "Risco Moderado" };
-    return { level: "baixo", icon: "✅", title: "Baixo Risco" };
+    if (riskScore >= 7) return { level: "alto", title: "Risco Alto Detectado" };
+    if (riskScore >= 3) return { level: "moderado", title: "Risco Moderado" };
+    return { level: "baixo", title: "Baixo Risco" };
   };
 
+  const isMenor = answers[1] === "menor";
   const risk = getRiskLevel();
   const progress = (currentStep / totalSteps) * 100;
 
@@ -198,10 +208,16 @@ export default function Triagem() {
     </div>
   </div>
 )}
-              <div className="mt-8 bg-white bg-opacity-20 rounded-lg p-4 space-y-2 text-gray-800">
-                <p className="font-bold text-lg">Aviso importante:</p>
-                <p className="text-base">Esta triagem é apenas uma ferramenta de orientação inicial e não substitui o diagnóstico médico.</p>
-              </div>
+              <div className="mt-4 bg-white bg-opacity-40 rounded-lg p-4 text-gray-800">
+  <p className="font-bold text-lg mb-2"> Aviso importante:</p>
+  <p className="text-base">Esta triagem é apenas uma ferramenta de orientação inicial e não substitui o diagnóstico médico.</p>
+</div>
+{isMenor && risk.level === "alto" && (
+  <div className="mt-4 bg-yellow-400 rounded-lg p-4 text-gray-900">
+    <p className="font-bold text-lg mb-1"> Atenção — Menor de idade:</p>
+    <p className="text-base">Por ser menor de 18 anos e apresentar sintomas graves, você deve comparecer à UBS <strong>acompanhado(a) de um responsável maior de idade.</strong></p>
+  </div>
+)}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 sm:mt-8">
