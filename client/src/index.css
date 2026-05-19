@@ -1,24 +1,3 @@
-@font-face {
-  font-family: 'Panamera';
-  src: url('./assets/fonts/Panamera-Regular.woff2') format('woff2');
-  font-weight: 400;
-}
-@font-face {
-  font-family: 'Panamera';
-  src: url('./assets/fonts/Panamera-Medium.woff2') format('woff2');
-  font-weight: 500;
-}
-@font-face {
-  font-family: 'Panamera';
-  src: url('./assets/fonts/Panamera-Bold.woff2') format('woff2');
-  font-weight: 700;
-}
-@font-face {
-  font-family: 'Panamera';
-  src: url('./assets/fonts/Panamera-Light.woff2') format('woff2');
-  font-weight: 300;
-}
-
 @import "tailwindcss";
 @import "tw-animate-css";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
@@ -158,7 +137,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Panamera', 'Poppins', sans-serif;
+    font-family:'Poppins', sans-serif;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
