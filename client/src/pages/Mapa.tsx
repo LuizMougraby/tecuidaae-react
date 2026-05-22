@@ -191,6 +191,41 @@ function calcularDistancia(lat1: number, lng1: number, lat2: number, lng2: numbe
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 }
 
+function isAberta(ubs: UBS): boolean {
+  const agora = new Date();
+  const diaSemana = agora.getDay(); // 0=Dom, 1=Seg ... 6=Sáb
+  const hora = agora.getHours();
+  const minuto = agora.getMinutes();
+  const horaAtual = hora + minuto / 60;
+
+  // Domingo
+  if (diaSemana === 0) {
+    if (!ubs.hours.includes("Dom")) return false;
+    const match = ubs.hours.match(/(\d{2}):(\d{2})\s*-\s*(\d{2}):(\d{2})\s*\(Sáb-Dom\)/);
+    if (!match) return false;
+    const inicio = parseInt(match[1]) + parseInt(match[2]) / 60;
+    const fim = parseInt(match[3]) + parseInt(match[4]) / 60;
+    return horaAtual >= inicio && horaAtual < fim;
+  }
+
+  // Sábado
+  if (diaSemana === 6) {
+    if (!ubs.saturday) return false;
+    const sabMatch = ubs.hours.match(/(\d{2}):(\d{2})\s*-\s*(\d{2}):(\d{2})\s*\(Sáb/);
+    if (!sabMatch) return false;
+    const inicio = parseInt(sabMatch[1]) + parseInt(sabMatch[2]) / 60;
+    const fim = parseInt(sabMatch[3]) + parseInt(sabMatch[4]) / 60;
+    return horaAtual >= inicio && horaAtual < fim;
+  }
+
+  // Seg–Sex
+  const match = ubs.hours.match(/(\d{2}):(\d{2})\s*-\s*(\d{2}):(\d{2})\s*\(Seg-Sex\)/);
+  if (!match) return false;
+  const inicio = parseInt(match[1]) + parseInt(match[2]) / 60;
+  const fim = parseInt(match[3]) + parseInt(match[4]) / 60;
+  return horaAtual >= inicio && horaAtual < fim;
+}
+
 export default function Mapa() {
   const [, navigate] = useLocation();
   const [selectedRegion, setSelectedRegion] = useState("all");
@@ -296,9 +331,11 @@ export default function Mapa() {
                 </div>
                 {/* Status aberto */}
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#6ADE8A]"></span>
-                  <span className="text-xs font-medium text-[#6ADE8A]">Aberto agora</span>
-                </div>
+  <span className={`w-2 h-2 rounded-full ${isAberta(ubs) ? "bg-[#6ADE8A]" : "bg-red-500"}`}></span>
+  <span className={`text-xs font-medium ${isAberta(ubs) ? "text-[#6ADE8A]" : "text-red-500"}`}>
+    {isAberta(ubs) ? "Aberto agora" : "Fechado"}
+  </span>
+</div>
               </div>
             ))
           )}
