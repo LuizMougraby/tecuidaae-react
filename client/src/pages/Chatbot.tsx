@@ -47,7 +47,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Olá, sou o assistente virtual. Como osso te ajudar?",
+      text: "Olá, sou o assistente virtual. Como posso te ajudar?",
       isUser: false,
       timestamp: new Date(),
     },
@@ -108,7 +108,7 @@ export default function Chatbot() {
             Reconhença e entenda gírias e expressões regionais do Amazonas como "mano", "égua", "oexnte", "rapaz" e similares.
             Use no máximo 5 linhas na resposta.
             Base suas respostas nos protocolos do Ministério da Saúde e OMS.
-            Ao final de cada resposta, cite a fonte: Ministério da Saúde ou OMS.
+            Sempre termine sua resposta com uma linha assim: (Fonte: Ministério da Saúde e OMS).
             Não use markdown como ** ou * na resposta, use texto simples.`
           },
           { role: "user", content: input }
@@ -168,7 +168,7 @@ export default function Chatbot() {
 
       {/* Messages Container */}
       <div className="flex-1 w-full py-4 sm:p-6 overflow-y-auto px-2 sm:px-8">
-  <div className="rounded-3xl p-4 sm:p-8 w-full max-w-5xl mx-auto space-y-4 sm:space-y-6 min-h-[600px] flex flex-col justify-between" style={{ backgroundColor: "rgba(255,255,255,0.80)" }}>
+  <div className="rounded-3xl p-4 sm:p-8 w-full max-w-5xl mx-auto space-y-4 sm:space-y-6 min-h-[600px] flex flex-col justify-between border-2 border-[#6ADE8A]" style={{ backgroundColor: "rgba(255,255,255,0.70)" }}>
     {messages.map((msg) => (
       <div
         key={msg.id}
@@ -184,12 +184,12 @@ export default function Chatbot() {
         <div
   className={`px-4 py-3 sm:px-5 sm:py-4 rounded-2xl shadow ${
     msg.isUser
-      ? "bg-[#0059FF] text-white rounded-br-none max-w-[75vw] sm:max-w-xl"
-      : "bg-[#6ADE8A] text-white rounded-bl-none max-w-[75vw] sm:max-w-lg"
+      ? "bg-white text-black rounded-br-none max-w-[75vw] sm:max-w-xl border-2 border-[#0059FF]"
+      : "bg-white text-black rounded-bl-none max-w-[75vw] sm:max-w-lg border-2 border-[#6ADE8A]"
   }`}
 >
   {quickReplies.includes(msg.text) && msg.isUser ? (
-    <span className="px-3 py-1 sm:px-4 sm:py-2 rounded-full bg-white text-[#0059FF] text-base sm:text-lg font-semibold inline-block">
+    <span className="px-3 py-1 sm:px-4 sm:py-2 rounded-full bg-[#0059FF] text-white text-base sm:text-lg font-semibold inline-block">
       {msg.text}
     </span>
   ) : (
@@ -207,7 +207,7 @@ export default function Chatbot() {
                     setInput(reply);
                     setTimeout(() => handleSend(), 100);
                   }}
-                  className="px-4 py-2 rounded-full bg-white text-[#6ADE8A] text-base font-semibold hover:bg-opacity-90 transition"
+                  className="px-4 py-2 rounded-full bg-[#6ADE8A] text-white text-base font-semibold border-2 border-[#6ADE8A] hover:bg-opacity-90 transition min-h-[48px]"
                 >
                   {reply}
                 </button>
@@ -219,12 +219,12 @@ export default function Chatbot() {
               Fonte: {msg.source}
             </p>
           )}
-          <p className="text-xs opacity-60 mt-2">
-            {msg.timestamp.toLocaleTimeString("pt-BR", {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-          </p>
+          <p className="text-xs mt-2 opacity-60 text-black text-right">
+  {msg.timestamp.toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  })}
+</p>
         </div>
 
         {/* Bolinha do usuário */}
