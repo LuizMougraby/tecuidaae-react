@@ -115,7 +115,7 @@ export default function Triagem() {
   if (showResult) {
     return (
       <div className="min-h-screen flex flex-col" style={{ backgroundImage: `url(${imgtriagem})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <header className="bg-[#6ADE8A] p-4 sm:p-6 shadow-lg relative">
+        <header className="bg-[#51CA74] p-4 sm:p-6 shadow-lg relative">
   <div className="container max-w-4xl mx-auto">
     <div className="flex items-center">
       <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-90 transition absolute left-4 sm:left-6 min-w-[48px] min-h-[48px] flex items-center justify-center">
@@ -140,7 +140,7 @@ export default function Triagem() {
           : "bg-green-500 text-white"
       }`}
     >
-      <div className="text-4xl sm:text-6xl mb-3 sm:mb-4">{risk.icon}</div>
+      <div className="text-4xl sm:text-6xl mb-3 sm:mb-4"></div>
       <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">{risk.title}</h2>
 
               {risk.level === "alto" && (
@@ -223,13 +223,13 @@ export default function Triagem() {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 sm:mt-8">
   <button
     onClick={() => navigate("/mapa")}
-    className="flex-1 bg-[#6ADE8A] text-white py-3 rounded-full font-semibold text-base sm:text-lg min-h-[48px] hover:opacity-90 transition"
+    className="flex-1 bg-[#51CA74] text-white py-3 rounded-full font-semibold text-base sm:text-lg min-h-[48px] hover:opacity-90 transition"
   >
      Encontrar UBS
   </button>
   <button
     onClick={() => { setShowResult(false); setCurrentStep(1); setAnswers({}); setRiskScore(0); }}
-    className="flex-1 bg-white text-[#6ADE8A] border-2 border-[#6ADE8A] py-3 rounded-full font-semibold text-base sm:text-lg min-h-[48px] hover:bg-[#6ADE8A] hover:text-white transition"
+    className="flex-1 bg-white text-[#51CA74] border-2 border-[#51CA74] py-3 rounded-full font-semibold text-base sm:text-lg min-h-[48px] hover:bg-[#51CA74] hover:text-white transition"
   >
      Refazer Triagem
   </button>
@@ -252,7 +252,7 @@ export default function Triagem() {
     <div className="min-h-screen flex flex-col" style={{ backgroundImage: `url(${imgtriagem})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
       <div>
         {/* Header */}
-        <header className="bg-[#6ADE8A] p-4 sm:p-6 shadow-lg relative">
+        <header className="bg-[#51CA74] p-4 sm:p-6 shadow-lg relative">
   <div className="container max-w-4xl mx-auto">
     <div className="flex items-center">
       <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-4 sm:left-6 min-w-[48px] min-h-[48px] flex items-center justify-center">
@@ -270,7 +270,7 @@ export default function Triagem() {
         <div className="flex justify-center mt-4 px-8">
           <div className="w-full bg-gray-200 h-4 rounded-full overflow-hidden">
             <div
-              className="bg-[#6ADE8A] h-4 rounded-full transition-all duration-500"
+              className="bg-[#51CA74] h-4 rounded-full transition-all duration-500"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -295,8 +295,8 @@ export default function Triagem() {
             onClick={() => handleAnswer(option.value)}
             className={
               answers[currentStep] === option.value
-                ? "w-full sm:w-auto px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-[#6ADE8A] bg-[#6ADE8A] text-white text-base sm:text-lg min-h-[48px]"
-                : "w-full sm:w-auto px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-white bg-white text-gray-700 hover:border-[#6ADE8A] hover:bg-[#6ADE8A] hover:text-white text-base sm:text-lg min-h-[48px]"
+                ? "w-full sm:w-auto px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-[#51CA74] bg-[#51CA74] text-white text-base sm:text-lg min-h-[48px]"
+                : "w-full sm:w-auto px-6 py-3 rounded-full border-2 font-semibold transition-all duration-200 border-white bg-white text-gray-700 hover:border-[#51CA74] hover:bg-[#51CA74] hover:text-white text-base sm:text-lg min-h-[48px]"
             }
           >
             {option.label}
@@ -338,7 +338,7 @@ export default function Triagem() {
   }
 }}
                 disabled={!answers[currentStep]}
-                className="flex-1 bg-[#6ADE8A] text-white py-3 rounded-full font-semibold text-lg hover:opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed"
+                className="flex-1 bg-[#51CA74] text-white py-3 rounded-full font-semibold text-lg hover:opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 {currentStep === totalSteps ? "Ver Resultado" : "Próximo"}
               </button>

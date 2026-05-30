@@ -290,7 +290,7 @@ export default function Mapa() {
           placeholder="Buscar UBS..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full px-4 py-3 rounded-full bg-white border-2 border-white focus:border-[#6ADE8A] focus:outline-none text-gray-700 text-sm sm:text-base"
+          className="w-full px-4 py-3 rounded-full bg-white border-2 border-white focus:border-[#51CA74] focus:outline-none text-gray-700 text-sm sm:text-base"
         />
       </div>
       <div className="space-y-3 overflow-y-auto max-h-[400px] pr-2">
@@ -308,7 +308,7 @@ export default function Mapa() {
                   setTimeout(() => setMapCenter([ubs.lat, ubs.lng]), 100);
                 }}
                 className={`bg-white rounded-2xl p-3 sm:p-6 shadow-lg border-4 hover:shadow-xl transition cursor-pointer flex flex-col justify-between ${
-                  selectedUbs?.id === ubs.id ? "border-[#6ADE8A]" : "border-[#0059FF]"
+                  selectedUbs?.id === ubs.id ? "border-[#51CA74]" : "border-[#0059FF]"
                 }`}
               >
                 {/* Nome e distância */}
@@ -331,8 +331,8 @@ export default function Mapa() {
                 </div>
                 {/* Status aberto */}
                 <div className="flex items-center gap-2">
-  <span className={`w-2 h-2 rounded-full ${isAberta(ubs) ? "bg-[#6ADE8A]" : "bg-red-500"}`}></span>
-  <span className={`text-xs font-medium ${isAberta(ubs) ? "text-[#6ADE8A]" : "text-red-500"}`}>
+  <span className={`w-2 h-2 rounded-full ${isAberta(ubs) ? "bg-[#51CA74]" : "bg-red-500"}`}></span>
+  <span className={`text-xs font-medium ${isAberta(ubs) ? "text-[#51CA74]" : "text-red-500"}`}>
     {isAberta(ubs) ? "Aberto agora" : "Fechado"}
   </span>
 </div>

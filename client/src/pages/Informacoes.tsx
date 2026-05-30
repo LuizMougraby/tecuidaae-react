@@ -178,7 +178,7 @@ Como funciona:
 Uma pequena amostra de sangue é coletada da ponta do dedo. A amostra é colocada em um dispositivo de teste. Em 15 a 30 minutos o resultado fica disponível.
 
 Quem deve fazer o teste:
-Pessoas sexualmente ativas, especialmente sem uso regular de preservativo. Gestantes — obrigatoriamente no pré-natal. Pessoas com múltiplos parceiros. Parceiros de pessoas diagnosticadas com sífilis. Qualquer pessoa que queira conhecer sua situação sorológica.
+Pessoas sexualmente ativas, especialmente sem uso regular de preservativo. Gestantes obrigatoriamente no pré-natal. Pessoas com múltiplos parceiros. Parceiros de pessoas diagnosticadas com sífilis. Qualquer pessoa que queira conhecer sua situação sorológica.
 
 Onde fazer:
 O teste é gratuito em todas as Unidades Básicas de Saúde (UBSs). Não é necessário agendamento na maioria dos casos.
@@ -193,13 +193,13 @@ Pessoas sexualmente ativas devem fazer o teste pelo menos uma vez por ano. Gesta
 ];
 
 const categoryColors: Record<string, string> = {
-  "Gravidez": "bg-[#6ADE8A]",
-  "Conceitos Básicos": "bg-[#6ADE8A]",
-  "Tratamento": "bg-[#6ADE8A]",
-  "Prevenção": "bg-[#6ADE8A]",
-  "Mitos vs Fatos": "bg-[#6ADE8A]",
-  "Saúde Mental": "bg-[#6ADE8A]",
-  "Teste Rápido": "bg-[#6ADE8A]",
+  "Gravidez": "bg-[#51CA74]",
+  "Conceitos Básicos": "bg-[#51CA74]",
+  "Tratamento": "bg-[#51CA74]",
+  "Prevenção": "bg-[#51CA74]",
+  "Mitos vs Fatos": "bg-[#51CA74]",
+  "Saúde Mental": "bg-[#51CA74]",
+  "Teste Rápido": "bg-[#51CA74]",
 };
 
 export default function Informacoes() {
@@ -234,7 +234,7 @@ export default function Informacoes() {
 };
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <header className="bg-[#6ADE8A] p-4 sm:p-6 shadow-lg relative">
+      <header className="bg-[#51CA74] p-4 sm:p-6 shadow-lg relative">
   <div className="container max-w-4xl mx-auto">
     <div className="flex items-center">
       <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-4 sm:left-6 min-w-[48px] min-h-[48px] flex items-center justify-center">
@@ -252,7 +252,7 @@ export default function Informacoes() {
         <div className="flex-1 container max-w-4xl mx-auto py-8">
           <button
             onClick={() => setSelectedArticle(null)}
-            className="mb-6 text-[#6ADE8A] hover:underline font-medium"
+            className="mb-6 text-[#51CA74] hover:underline font-medium"
           >
             ← Voltar aos artigos
           </button>
@@ -274,7 +274,7 @@ export default function Informacoes() {
                   ))}
                 </div>
               ))}
-              <div className="mt-8 p-4 bg-[#6ADE8A] bg-opacity-10 border border-[#6ADE8A] rounded-xl">
+              <div className="mt-8 p-4 bg-[#51CA74] bg-opacity-10 border border-[#51CA74] rounded-xl">
                 <p className="text-sm">
                   <strong>Precisa de atendimento?</strong> Procure a UBS mais próxima ou ligue 192 em caso de emergência.
                 </p>
@@ -291,7 +291,7 @@ export default function Informacoes() {
       placeholder="Buscar artigos..."
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
-      className="w-full px-5 py-3 sm:px-8 sm:py-5 rounded-full border-2 border-gray-200 focus:border-[#6ADE8A] focus:outline-none text-gray-700 text-base sm:text-lg shadow-sm"
+      className="w-full px-5 py-3 sm:px-8 sm:py-5 rounded-full border-2 border-gray-200 focus:border-[#51CA74] focus:outline-none text-gray-700 text-base sm:text-lg shadow-sm"
     />
   </div>
 
@@ -304,8 +304,8 @@ export default function Informacoes() {
           onClick={() => setSelectedCategory(cat)}
           className={`flex-shrink-0 px-4 py-2 rounded-full font-semibold text-sm sm:text-base transition-all duration-200 min-h-[48px] ${
             selectedCategory === cat
-              ? "bg-[#6ADE8A] text-white border-2 border-[#6ADE8A]"
-              : "bg-white text-[#6ADE8A] border-2 border-[#6ADE8A] hover:bg-[#6ADE8A] hover:text-white"
+              ? "bg-[#51CA74] text-white border-2 border-[#51CA74]"
+              : "bg-white text-[#51CA74] border-2 border-[#51CA74] hover:bg-[#51CA74] hover:text-white"
           }`}
         >
           {cat === "all" ? "Todos" : cat}
@@ -318,17 +318,17 @@ export default function Informacoes() {
           {featured && (
             <button
   onClick={() => setSelectedArticle(featured)}
-  className="w-full text-left bg-white rounded-2xl shadow-lg border-2 border-[#6ADE8A] overflow-hidden mb-8 hover:shadow-xl transition"
+  className="w-full text-left bg-white rounded-2xl shadow-lg border-2 border-[#51CA74] overflow-hidden mb-8 hover:shadow-xl transition"
 >
   <div className="flex flex-col sm:flex-row">
     <div className="w-full sm:w-1/2 min-h-[200px] sm:min-h-[350px]" style={{ backgroundImage: `url(${articleImages[featured.category]})`, backgroundSize: 'cover', backgroundPosition: 'top' }} />
     <div className="w-full sm:w-1/2 p-6 sm:p-10 flex flex-col justify-center gap-3 sm:gap-4">
-      <span className="bg-[#6ADE8A] text-white px-4 py-1 sm:px-6 sm:py-2 rounded-full text-sm sm:text-base font-bold uppercase w-fit">
+      <span className="bg-[#51CA74] text-white px-4 py-1 sm:px-6 sm:py-2 rounded-full text-sm sm:text-base font-bold uppercase w-fit">
         DESTAQUE
       </span>
       <h2 className="text-xl sm:text-3xl font-bold text-gray-800 mt-2 mb-1 sm:mt-3 sm:mb-2">{featured.title}</h2>
       <p className="text-sm sm:text-lg text-gray-500 mb-2 sm:mb-4">{featured.excerpt}</p>
-      <span className="text-[#6ADE8A] font-semibold text-sm sm:text-base">Ler artigo completo →</span>
+      <span className="text-[#51CA74] font-semibold text-sm sm:text-base">Ler artigo completo →</span>
     </div>
   </div>
 </button>
@@ -340,7 +340,7 @@ export default function Informacoes() {
     <button
       key={article.id}
       onClick={() => setSelectedArticle(article)}
-      className="text-left bg-white rounded-2xl shadow border-2 border-[#6ADE8A] overflow-hidden hover:shadow-xl transition"
+      className="text-left bg-white rounded-2xl shadow border-2 border-[#51CA74] overflow-hidden hover:shadow-xl transition"
     >
       <div className="min-h-[180px] sm:min-h-[250px]" style={{ backgroundImage: `url(${articleImages[article.category]})`, backgroundSize: 'cover', backgroundPosition: article.category === 'Conceitos Básicos' ? 'center 10%' : 'center' }} />
       <div className="p-4 sm:p-8">
@@ -351,7 +351,7 @@ export default function Informacoes() {
         <p className="text-sm sm:text-lg text-gray-500 mb-3 sm:mb-4">{article.excerpt}</p>
         <div className="flex justify-between items-center">
           <span className="text-xs sm:text-sm text-gray-400">⏱ {article.readTime} min de leitura</span>
-          <span className="text-[#6ADE8A] font-semibold text-sm sm:text-base">Saiba mais →</span>
+          <span className="text-[#51CA74] font-semibold text-sm sm:text-base">Saiba mais →</span>
         </div>
       </div>
     </button>

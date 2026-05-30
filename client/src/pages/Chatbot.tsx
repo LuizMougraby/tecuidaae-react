@@ -152,7 +152,7 @@ export default function Chatbot() {
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundImage: `url(${imgChatbot})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
       {/* Header */}
-      <header className="bg-[#6ADE8A] p-4 sm:p-6 shadow-lg relative">
+      <header className="bg-[#51CA74] p-4 sm:p-6 shadow-lg relative">
   <div className="container max-w-4xl mx-auto">
     <div className="flex items-center">
       <button onClick={() => navigate("/")} className="text-2xl text-white hover:opacity-80 transition absolute left-4 sm:left-6 min-w-[48px] min-h-[48px] intems-center justify-center">
@@ -168,7 +168,7 @@ export default function Chatbot() {
 
       {/* Messages Container */}
       <div className="flex-1 w-full py-4 sm:p-6 overflow-y-auto px-2 sm:px-8">
-  <div className="rounded-3xl p-4 sm:p-8 w-full max-w-5xl mx-auto space-y-4 sm:space-y-6 min-h-[600px] flex flex-col justify-between border-2 border-[#6ADE8A]" style={{ backgroundColor: "rgba(255,255,255,0.70)" }}>
+  <div className="rounded-3xl p-4 sm:p-8 w-full max-w-5xl mx-auto space-y-4 sm:space-y-6 min-h-[600px] flex flex-col justify-between border-2 border-[#51CA74]" style={{ backgroundColor: "rgba(255,255,255,0.70)" }}>
     {messages.map((msg) => (
       <div
         key={msg.id}
@@ -176,7 +176,7 @@ export default function Chatbot() {
       >
         {/* Bolinha do bot */}
         {!msg.isUser && (
-          <div className="w-10 h-10 rounded-full bg-[#6ADE8A] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+          <div className="w-10 h-10 rounded-full bg-[#51CA74] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
             
           </div>
         )}
@@ -185,7 +185,7 @@ export default function Chatbot() {
   className={`px-4 py-3 sm:px-5 sm:py-4 rounded-2xl shadow ${
     msg.isUser
       ? "bg-white text-black rounded-br-none max-w-[75vw] sm:max-w-xl border-2 border-[#0059FF]"
-      : "bg-white text-black rounded-bl-none max-w-[75vw] sm:max-w-lg border-2 border-[#6ADE8A]"
+      : "bg-white text-black rounded-bl-none max-w-[75vw] sm:max-w-lg border-2 border-[#51CA74]"
   }`}
 >
   {quickReplies.includes(msg.text) && msg.isUser ? (
@@ -207,7 +207,7 @@ export default function Chatbot() {
                     setInput(reply);
                     setTimeout(() => handleSend(), 100);
                   }}
-                  className="px-4 py-2 rounded-full bg-[#6ADE8A] text-white text-base font-semibold border-2 border-[#6ADE8A] hover:bg-opacity-90 transition min-h-[48px]"
+                  className="px-4 py-2 rounded-full bg-[#51CA74] text-white text-base font-semibold border-2 border-[#51CA74] hover:bg-opacity-90 transition min-h-[48px]"
                 >
                   {reply}
                 </button>
@@ -258,12 +258,12 @@ export default function Chatbot() {
     onKeyPress={(e) => e.key === "Enter" && handleSend()}
     placeholder="Digite sua dúvida..."
     disabled={isTyping}
-    className="flex-1 px-4 py-3 sm:px-6 sm:py-4 rounded-full border-2 border-gray-200 focus:border-[#6ADE8A] focus:outline-none text-gray-700 text-sm sm:text-base placeholder-[#0059FF]"
+    className="flex-1 px-4 py-3 sm:px-6 sm:py-4 rounded-full border-2 border-gray-200 focus:border-[#51CA74] focus:outline-none text-gray-700 text-sm sm:text-base placeholder-[#0059FF]"
   />
             <button
               onClick={handleSend}
               disabled={isTyping || !input.trim()}
-              className="w-14 h-14 rounded-full bg-[#6ADE8A] text-white flex items-center justify-center hover:opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed text-2xl"
+              className="w-14 h-14 rounded-full bg-[#51CA74] text-white flex items-center justify-center hover:opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed text-2xl"
             >
               ➤
             </button>
