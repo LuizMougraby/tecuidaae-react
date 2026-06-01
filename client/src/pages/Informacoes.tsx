@@ -365,6 +365,31 @@ export default function Informacoes() {
           )}
         </div>
       )}
+      {/* Accessibility Bar */}
+<div className="fixed bottom-6 right-6 flex gap-2 z-40">
+  <button
+    onClick={() => {
+      const root = document.documentElement;
+      const current = parseInt(root.style.fontSize || '16');
+      root.style.fontSize = Math.min(24, current + 2) + 'px';
+    }}
+    className="w-12 h-12 rounded-full bg-primary text-white shadow-lg hover:scale-110 transition-transform font-bold"
+    title="Aumentar fonte"
+  >
+    A+
+  </button>
+  <button
+    onClick={() => {
+      const root = document.documentElement;
+      const current = parseInt(root.style.fontSize || '16');
+      root.style.fontSize = Math.max(12, current - 2) + 'px';
+    }}
+    className="w-12 h-12 rounded-full bg-primary text-white shadow-lg hover:scale-110 transition-transform font-bold"
+    title="Diminuir fonte"
+  >
+    A-
+  </button>
+</div>
     </div>
   );
 }

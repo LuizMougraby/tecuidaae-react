@@ -278,9 +278,9 @@ export default function Mapa() {
   </div>
 </header>
 
-      <div className="flex-1 w-full py-4 px-2 sm:px-4">
+      <div className="w-full py-4 px-2 sm:px-4">
   {/* Layout empilhado no mobile, lado a lado no desktop */}
-  <div className="flex flex-row flex-1 px-0 sm:px-2 gap-2 sm:gap-6 pb-8">
+  <div className="flex flex-row px-0 sm:px-2 gap-2 sm:gap-6 pb-4">
     {/* Lista de UBSs */}
     <div className="w-1/2 flex flex-col">
       <div className="bg-[#1A315B] rounded-2xl p-4 mb-4">
@@ -314,7 +314,7 @@ export default function Mapa() {
                 {/* Nome e distância */}
                 <div className="flex justify-between items-start mb-2 gap-2">
                   <h3 className="text-sm sm:text-xl font-bold text-[#0059FF] leading-tight">{ubs.name}</h3>
-                  <span className="text-xs sm:text-sm font-bold text-white bg-[#0059FF] px-2 py-1 rounded-full whitespace-nowrap">
+                  <span className="text-xs font-bold text-white bg-[#0059FF] px-2 py-1 rounded-full whitespace-nowrap">
                     {userLocation ? `${calcularDistancia(userLocation[0], userLocation[1], ubs.lat, ubs.lng).toFixed(1)} km` : "-- km"}
                   </span>
                 </div>
@@ -370,6 +370,31 @@ export default function Mapa() {
         </div>
         </div>
       </div>
+      {/* Accessibility Bar */}
+<div className="fixed bottom-6 right-6 flex gap-2 z-40">
+  <button
+    onClick={() => {
+      const root = document.documentElement;
+      const current = parseInt(root.style.fontSize || '16');
+      root.style.fontSize = Math.min(24, current + 2) + 'px';
+    }}
+    className="w-12 h-12 rounded-full bg-primary text-white shadow-lg hover:scale-110 transition-transform font-bold"
+    title="Aumentar fonte"
+  >
+    A+
+  </button>
+  <button
+    onClick={() => {
+      const root = document.documentElement;
+      const current = parseInt(root.style.fontSize || '16');
+      root.style.fontSize = Math.max(12, current - 2) + 'px';
+    }}
+    className="w-12 h-12 rounded-full bg-primary text-white shadow-lg hover:scale-110 transition-transform font-bold"
+    title="Diminuir fonte"
+  >
+    A-
+  </button>
+</div>
     </div>
   );
 }
