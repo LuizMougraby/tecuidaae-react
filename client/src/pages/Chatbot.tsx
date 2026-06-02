@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { useMemo } from "react";
 import { useChatbotDB } from "@/hooks/useChatbotDB";
 import imgChatbot from "@/assets/Encontre UBSs.jpg";
-import Groq from "groq-sdk";
+
 
 interface Message {
   id: string;
@@ -15,10 +15,6 @@ interface Message {
   source?: string;
 }
 
-const groq = new Groq({
-  apiKey: import.meta.env.VITE_GROQ_API_KEY,
-  dangerouslyAllowBrowser: true
-});
 const knowledgeBase: Record<string, { text: string; source: string }> = {
   "o que é sífilis": {
     text: "A sífilis é uma infecção sexualmente transmissível (IST) causada pela bactéria Treponema pallidum. Pode afetar várias partes do corpo e, se não tratada, pode causar sérios problemas de saúde.",
@@ -97,27 +93,14 @@ export default function Chatbot() {
     const processedText = input.toLowerCase();
 
     try {
-      const completion = await groq.chat.completions.create({
-        messages: [
-          {
-            role: "system",
-            content: `Você é um assistente virtual de saúde pública especializado em sífilis.
-            Responda APENAS o que foi perguntado, de forma direta e objetiva.
-            Não adicione informações extras além do que foi perguntado.
-            Responda em português brasileiro, de forma clara e acolhedora.
-            Reconhença e entenda gírias e expressões regionais do Amazonas como "mano", "égua", "oexnte", "rapaz" e similares.
-            Use no máximo 5 linhas na resposta.
-            Base suas respostas nos protocolos do Ministério da Saúde e OMS.
-            Sempre termine sua resposta com uma linha assim: (Fonte: Ministério da Saúde e OMS).
-            Não use markdown como ** ou * na resposta, use texto simples.`
-          },
-          { role: "user", content: input }
-        ],
-        model: "llama-3.3-70b-versatile",
-        max_tokens: 200,
+      const response = await fetch("/api/chatbot/groq", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pergunta: input }),
       });
 
-      const responseText = completion.choices[0]?.message?.content || "Não consegui gerar uma resposta.";
+      const data = await response.json();
+      const responseText = data.resposta || "Não consegui gerar uma resposta.";
 
       const botMsg: Message = {
         id: Date.now().toString(),
@@ -129,8 +112,8 @@ export default function Chatbot() {
 
       setMessages(prev => [...prev, botMsg]);
       salvarMensagem(userMsg.text, responseText);
-   } catch (error) {
-      console.error("Erro Gemini:", error);
+    } catch (error) {
+      console.error("Erro chatbot:", error);
       const botMsg: Message = {
         id: Date.now().toString(),
         text: "Desculpe, ocorreu um erro. Tente novamente em instantes.",

@@ -85,5 +85,46 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     `;
     return res.json(stats);
   }
+
+// POST /api/chatbot/groq
+  if (req.method === "POST" && path === "/chatbot/groq") {
+    const { pergunta } = req.body;
+
+    if (!pergunta) {
+      return res.status(400).json({ error: "Pergunta ausente." });
+    }
+
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        max_tokens: 200,
+        messages: [
+          {
+            role: "system",
+            content: `Você é um assistente virtual de saúde pública especializado em sífilis.
+            Responda APENAS o que foi perguntado, de forma direta e objetiva.
+            Não adicione informações extras além do que foi perguntado.
+            Responda em português brasileiro, de forma clara e acolhedora.
+            Reconhença e entenda gírias e expressões regionais do Amazonas como "mano", "égua", "oexnte", "rapaz" e similares.
+            Use no máximo 5 linhas na resposta.
+            Base suas respostas nos protocolos do Ministério da Saúde e OMS.
+            Sempre termine sua resposta com uma linha assim: (Fonte: Ministério da Saúde e OMS).
+            Não use markdown como ** ou * na resposta, use texto simples.`
+          },
+          { role: "user", content: pergunta }
+        ]
+      })
+    });
+
+    const data = await response.json();
+    const texto = data.choices[0]?.message?.content || "Não consegui gerar uma resposta.";
+    return res.status(200).json({ resposta: texto });
+  }
+
   return res.status(404).json({ error: "Rota não encontrada." });
 }
