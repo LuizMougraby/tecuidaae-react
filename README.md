@@ -136,7 +136,7 @@ Acesse http://localhost:3000 no navegador.
 |José Luis da Silva Almeida|[Jose-Luiz7](https://github.com/Jose-Luis7)|
 |Luiz Carlos da Silva Mougraby|[LuizMougraby](https://github.com/LuizMougraby)|
 |Ryan Martins de Sousa|[Ryan-Sous](https://github.com/Ryan-Sous)|
-|Samuel Cavalcante Mendes|-|
+|Samuel Cavalcante Mendes|[samu70x7](https://github.com/samu70x7)|
 
 ---
 
