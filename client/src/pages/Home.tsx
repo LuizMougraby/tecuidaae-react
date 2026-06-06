@@ -105,20 +105,19 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative bg-backgroundSectionHome text-white pt-10 pb-14 md:pt-16 md:pb-32 flex items-center justify-center" style={{borderRadius: "0 0 50% 50% / 0 0 60px 60px"}}>
+<section className="relative bg-backgroundSectionHome text-white pt-10 pb-14 md: md:pb-32 flex flex-col items-center justify-center overflow-hidden" style={{borderRadius: "0 0 50% 50% / 0 0 60px 60px"}}>
   <div className="container relative z-10 text-center">
     <div className="max-w-2xl mx-auto px-4">
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 text-center">
         Cuidando da sua saúde em Manaus
       </h1>
-      <p className="text-sm sm:text-base font-light md:text-xl mb-6">
+      <p className="text-sm sm:text-base font-light md:text-xl mb-0ac">
         Informações confiáveis sobre sífilis, localização de UBSs e triagem de sintomas com base nos protocolos do Ministério da Saúde
       </p>
-      {/* Emergency Banner */}
-      <section className="bg-backgroundAlert text-white py-4 px-4 font-medium text-sm sm:text-base rounded-lg mt-6">
-        <p>Em caso de emergência: procure uma UBS ou disque 192</p>
-      </section>
     </div>
+  </div>
+  <div className="absolute bottom-16 md:bottom-18 left-0 right-0 bg-backgroundAlert text-white py-2 font-medium text-sm sm:text-base animate-pulse text-center">
+    <p>Em caso de emergência: procure uma UBS ou disque 192</p>
   </div>
 </section>
 

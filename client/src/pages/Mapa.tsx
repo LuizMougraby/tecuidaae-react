@@ -262,7 +262,7 @@ export default function Mapa() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="flex flex-col bg-background">
       {/* Header */}
       <header className="bg-[#1A315B] p-4 sm:p-6 shadow-lg relative">
   <div className="container max-w-4xl mx-auto">
@@ -280,9 +280,9 @@ export default function Mapa() {
 
       <div className="w-full py-4 px-2 sm:px-4">
   {/* Layout empilhado no mobile, lado a lado no desktop */}
-  <div className="flex flex-row px-0 sm:px-2 gap-2 sm:gap-6 pb-4">
+  <div className="flex flex-row px-0 sm:px-2 gap-2 sm:gap-6 pb-0 items-stretch">
     {/* Lista de UBSs */}
-    <div className="w-1/2 flex flex-col">
+    <div className="w-1/2 flex flex-col" style={{ height: "calc(100vh - 120px)"}}>
       <div className="bg-[#1A315B] rounded-2xl p-4 mb-4">
         <p className="text-white font-medium mb-3 text-sm sm:text-base">Clique em uma UBS para ver mais detalhes!</p>
         <input
@@ -293,7 +293,7 @@ export default function Mapa() {
           className="w-full px-4 py-3 rounded-full bg-white border-2 border-white focus:border-[#51CA74] focus:outline-none text-gray-700 text-sm sm:text-base"
         />
       </div>
-      <div className="space-y-3 overflow-y-auto max-h-[400px] pr-2">
+      <div className="space-y-3 overflow-y-auto flex-1 pr-2">
           {filtered.length === 0 ? (
             <div className="bg-white rounded-2xl p-4 text-center shadow border border-gray-100">
               <p className="text-gray-400 text-sm">Nenhuma UBS encontrada com esses critérios.</p>
@@ -343,7 +343,7 @@ export default function Mapa() {
         </div>
 
         {/* Mapa — lado direito */}
-        <div className="w-1/2 rounded-2xl overflow-hidden shadow-lg border-2 border-[#1A315B]" style={{ height: "500px" }}>
+        <div className="w-1/2 rounded-2xl overflow-hidden shadow-lg border-2 border-[#1A315B]" style={{ minHeight: "300px", height: "calc(100vh - 120px)" }}>
           <MapContainer
             center={[-3.1019, -60.0250]}
             zoom={12}
@@ -371,7 +371,7 @@ export default function Mapa() {
         </div>
       </div>
       {/* Accessibility Bar */}
-<div className="fixed bottom-6 right-6 flex gap-2 z-40">
+<div className="fixed bottom-6 right-6 flex gap-2 z-[9999]">
   <button
     onClick={() => {
       const root = document.documentElement;
