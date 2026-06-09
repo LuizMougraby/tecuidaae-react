@@ -104,19 +104,20 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero Section */}
-<section className="relative bg-backgroundSectionHome text-white pt-10 pb-14 md: md:pb-32 flex flex-col items-center justify-center overflow-hidden" style={{borderRadius: "0 0 50% 50% / 0 0 60px 60px"}}>
+     {/* Hero Section */}
+<section className="relative bg-backgroundSectionHome text-white pt-10 pb-14 md:pt-16 md:pb-32 flex flex-col items-center justify-center overflow-hidden" style={{borderRadius: "0 0 50% 50% / 0 0 60px 60px"}}>
   <div className="container relative z-10 text-center">
     <div className="max-w-2xl mx-auto px-4">
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 text-center">
         Cuidando da sua saúde em Manaus
       </h1>
-      <p className="text-sm sm:text-base font-light md:text-xl mb-0ac">
+      <p className="text-sm sm:text-base font-light md:text-xl mb-6">
         Informações confiáveis sobre sífilis, localização de UBSs e triagem de sintomas com base nos protocolos do Ministério da Saúde
       </p>
-    </div>
+      </div>
   </div>
-  <div className="absolute bottom-16 md:bottom-18 left-0 right-0 bg-backgroundAlert text-white py-2 font-medium text-sm sm:text-base animate-pulse text-center">
+  {/* Alerta de emergência */}
+  <div className="w-auto px-20 md:px-32 bg-backgroundAlert text-white py-2 font-medium text-sm md:text-base text-center mt-2 md:mt-0 md:absolute md:bottom-20 md:left-1/2 md:-translate-x-1/2">
     <p>Em caso de emergência: procure uma UBS ou disque 192</p>
   </div>
 </section>
